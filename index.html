@@ -1,1 +1,487 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETHER TECH | Full-Stack Enterprise & AI Infrastructure Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #020617;
+            --card-dark: rgba(15, 23, 42, 0.75);
+            --border-dark: rgba(255, 255, 255, 0.12);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --cyan: #06b6d4;
+            --purple: #a855f7;
+            --blue: #3b82f6;
+            --green: #22c55e;
+        }
 
+        .light {
+            --bg-dark: #f8fafc;
+            --card-dark: rgba(255, 255, 255, 0.9);
+            --border-dark: rgba(0, 0, 0, 0.1);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Plus Jakarta Sans', sans-serif; transition: background 0.3s, color 0.3s; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg-dark); color: var(--text-main); overflow-x: hidden; position: relative; }
+        h1, h2, h3, h4 { font-family: 'Cinzel', serif; }
+        code { font-family: 'Fira Code', monospace; }
+
+        #bgCanvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
+
+        /* Top Bar */
+        .top-status-bar { background: rgba(3, 7, 18, 0.9); border-bottom: 1px solid var(--border-dark); padding: 8px 5%; font-size: 11px; display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-weight: 600; letter-spacing: 1px; }
+        .live-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; display: inline-block; margin-right: 6px; box-shadow: 0 0 10px var(--green); animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        /* Glass Header */
+        header { position: sticky; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 16px 5%; background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-dark); z-index: 1000; }
+        .logo-box { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--text-main); }
+        .logo-box img { width: 42px; height: 42px; border-radius: 10px; border: 1px solid var(--cyan); box-shadow: 0 0 15px rgba(6, 182, 212, 0.3); }
+        nav { display: flex; gap: 20px; }
+        nav a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        nav a:hover { color: var(--cyan); }
+
+        .btn { padding: 10px 24px; border-radius: 30px; border: none; font-weight: 700; cursor: pointer; text-decoration: none; font-size: 13px; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-grad { background: linear-gradient(135deg, var(--purple), var(--cyan)); color: white; box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
+        .btn-grad:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(6, 182, 212, 0.6); }
+        .btn-outline { border: 1px solid var(--border-dark); color: var(--text-main); background: rgba(255,255,255,0.03); }
+        .btn-outline:hover { border-color: var(--cyan); background: rgba(6, 182, 212, 0.15); }
+
+        /* Running Ticker */
+        .ticker { background: linear-gradient(90deg, #7c3aed, #0891b2); padding: 10px 0; overflow: hidden; white-space: nowrap; }
+        .ticker-text { display: inline-block; animation: moveTicker 25s linear infinite; font-size: 12px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: white; }
+        @keyframes moveTicker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Hero Section */
+        .hero { display: flex; flex-wrap: wrap; padding: 70px 5%; align-items: center; gap: 50px; min-height: 85vh; }
+        .hero-left { flex: 1.2; min-width: 320px; }
+        .badge { display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(168, 85, 247, 0.15); border: 1px solid var(--purple); color: var(--purple); font-size: 11px; font-weight: 700; letter-spacing: 2px; margin-bottom: 20px; }
+        .hero-left h1 { font-size: 50px; margin-bottom: 20px; line-height: 1.15; font-weight: 900; }
+        .hero-left h1 span { background: linear-gradient(135deg, var(--purple), var(--cyan), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-left p { color: var(--text-muted); line-height: 1.8; margin-bottom: 35px; font-size: 16px; max-width: 620px; }
+
+        /* Terminal Window Widget */
+        .hero-right { flex: 1; min-width: 320px; }
+        .terminal-box { background: #090d16; border: 1px solid var(--border-dark); border-radius: 16px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+        .terminal-header { background: #1e293b; padding: 10px 15px; display: flex; align-items: center; gap: 8px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot-red { background: #ef4444; } .dot-yellow { background: #eab308; } .dot-green { background: #22c55e; }
+        .terminal-body { padding: 20px; font-size: 13px; color: #38bdf8; line-height: 1.6; height: 260px; overflow-y: auto; }
+
+        /* Stats Grid */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 0 5% 60px 5%; }
+        .stat-card { background: var(--card-dark); border: 1px solid var(--border-dark); padding: 25px 20px; border-radius: 18px; text-align: center; backdrop-filter: blur(10px); }
+        .stat-card h3 { font-size: 36px; color: var(--cyan); margin-bottom: 5px; font-weight: 800; }
+        .stat-card p { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+
+        /* Section Layouts */
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 36px; margin-bottom: 10px; }
+        .section-header p { color: var(--text-muted); font-size: 15px; }
+
+        /* Services Grid */
+        .services-section { padding: 80px 5%; border-top: 1px solid var(--border-dark); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+        .service-card { background: var(--card-dark); border: 1px solid var(--border-dark); padding: 35px; border-radius: 20px; backdrop-filter: blur(10px); position: relative; }
+        .service-card:hover { border-color: var(--cyan); transform: translateY(-5px); }
+        .service-icon { font-size: 32px; margin-bottom: 20px; display: inline-block; padding: 12px; background: rgba(6, 182, 212, 0.1); border-radius: 12px; color: var(--cyan); }
+        .service-card h3 { color: var(--text-main); margin-bottom: 12px; font-size: 20px; }
+        .service-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+        /* Interactive Showcase Grid */
+        .portfolio-section { padding: 80px 5%; background: rgba(15, 23, 42, 0.3); border-top: 1px solid var(--border-dark); }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .portfolio-card { background: var(--card-dark); border: 1px solid var(--border-dark); border-radius: 20px; overflow: hidden; }
+        .portfolio-img { width: 100%; height: 200px; object-fit: cover; background: #1e293b; }
+        .portfolio-info { padding: 25px; }
+        .portfolio-info h4 { font-size: 20px; color: var(--cyan); margin-bottom: 8px; }
+        .portfolio-info p { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 15px; }
+        .tag { display: inline-block; padding: 4px 10px; border-radius: 12px; background: rgba(6, 182, 212, 0.1); color: var(--cyan); font-size: 11px; font-weight: 600; margin-right: 5px; }
+
+        /* Interactive Price Estimator Tool */
+        .calc-section { padding: 80px 5%; border-top: 1px solid var(--border-dark); }
+        .calc-box { background: var(--card-dark); border: 1px solid var(--border-dark); border-radius: 24px; padding: 40px; max-width: 800px; margin: 0 auto; backdrop-filter: blur(15px); }
+        .calc-option { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--border-dark); }
+        .calc-option label { font-size: 15px; font-weight: 600; cursor: pointer; }
+        .calc-option input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--cyan); cursor: pointer; }
+        .total-price { font-size: 32px; color: var(--cyan); font-weight: 800; text-align: center; margin-top: 30px; }
+
+        /* FAQ Accordion Section */
+        .faq-section { padding: 80px 5%; background: rgba(15, 23, 42, 0.3); border-top: 1px solid var(--border-dark); }
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: var(--card-dark); border: 1px solid var(--border-dark); border-radius: 14px; margin-bottom: 15px; overflow: hidden; }
+        .faq-question { padding: 20px; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { padding: 0 20px 20px 20px; color: var(--text-muted); font-size: 14px; line-height: 1.6; display: none; }
+        .faq-item.active .faq-answer { display: block; }
+
+        /* Social Media Grid */
+        .social-section { padding: 80px 5%; text-align: center; border-top: 1px solid var(--border-dark); }
+        .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+        .social-btn { padding: 14px 28px; border-radius: 14px; border: 1px solid var(--border-dark); color: var(--text-main); text-decoration: none; font-weight: 700; font-size: 14px; background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); display: flex; align-items: center; gap: 10px; }
+        .social-btn:hover { background: var(--cyan); color: #000; border-color: var(--cyan); transform: scale(1.05); }
+
+        /* Location Section */
+        .location-section { padding: 60px 5%; border-top: 1px solid var(--border-dark); }
+        .location-card { background: var(--card-dark); border: 1px solid var(--border-dark); padding: 40px; border-radius: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 30px; }
+        .location-info h3 { font-size: 26px; color: var(--cyan); margin-bottom: 10px; }
+        .location-info p { color: var(--text-muted); line-height: 1.6; font-size: 15px; }
+
+        /* Footer */
+        footer { padding: 40px 5% 20px 5%; border-top: 1px solid var(--border-dark); background: rgba(2, 6, 23, 0.95); font-size: 13px; color: var(--text-muted); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { color: var(--text-main); margin-bottom: 15px; font-size: 16px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: var(--text-muted); text-decoration: none; }
+        .footer-col ul li a:hover { color: var(--cyan); }
+        .footer-bottom { text-align: center; border-top: 1px solid var(--border-dark); padding-top: 20px; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- System Status Bar -->
+    <div class="top-status-bar">
+        <div><span class="live-dot"></span>SYSTEM STATUS: 100% OPERATIONAL | ACTIVE CLIENT NODES: 850+</div>
+        <div>HQ: SURAT, GUJARAT, INDIA</div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <a href="index.html" class="logo-box">
+            <img src="assets/logo.png" alt="AETHER TECH Logo">
+            <div>
+                <h3 style="font-size: 18px; font-weight: 800; letter-spacing: 1px;">AETHER TECH</h3>
+                <span style="font-size: 9px; color: var(--cyan); letter-spacing: 2px; font-weight: 700;">ENTERPRISE PLATFORM</span>
+            </div>
+        </a>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#showcase">Portfolio</a>
+            <a href="#estimator">Estimator</a>
+            <a href="#faq">FAQ</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div style="display:flex; align-items:center; gap:10px;">
+            <button class="btn btn-outline" id="themeBtn" style="padding: 8px 14px;">☀️ Light</button>
+            <a href="https://wa.me/919925527617" target="_blank" class="btn btn-grad">WhatsApp ↗</a>
+        </div>
+    </header>
+
+    <!-- Ticker -->
+    <div class="ticker">
+        <div class="ticker-text">
+            ✦ Web Development &nbsp;&bull;&nbsp; AI Solutions &nbsp;&bull;&nbsp; Custom Software Design &nbsp;&bull;&nbsp; Academic & Tech Coaching &nbsp;&bull;&nbsp; Enterprise Cloud Infrastructure &nbsp;&bull;&nbsp; Modern UI/UX Engineering
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-left">
+            <span class="badge">FULL-STACK ENTERPRISE CAPABILITIES</span>
+            <h1>Engineering <span>Tomorrow’s</span> Digital Products</h1>
+            <p>Aether Tech delivers modern web applications, high-performance artificial intelligence systems, scalable software architectures, and specialized coaching solutions for global clients.</p>
+            <div style="display:flex; gap:15px; flex-wrap:wrap;">
+                <a href="#showcase" class="btn btn-grad">View Live Portfolio 🚀</a>
+                <a href="#estimator" class="btn btn-outline">Estimate Project Cost ↗</a>
+            </div>
+        </div>
+        <div class="hero-right">
+            <div class="terminal-box">
+                <div class="terminal-header">
+                    <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
+                    <span style="font-size:11px; color:#94a3b8; font-weight:600; margin-left:10px;">aether-server-console -- bash</span>
+                </div>
+                <div class="terminal-body" id="terminalText">
+                    > Initializing Aether Tech Engine v4.2...<br>
+                    > Connecting to Surat Regional Hub... Connected.<br>
+                    > Loading Web Development Modules... [OK]<br>
+                    > Mounting Artificial Intelligence Pipeline... [OK]<br>
+                    > Loading Software Architecture Suites... [OK]<br>
+                    > Initializing Student Coaching Portal... [OK]<br>
+                    <span style="color:#22c55e;">> STATUS: All Enterprise Systems Online & Ready for Client Review.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Metrics Grid -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>1,240+</h3>
+            <p>Engineers & Specialists</p>
+        </div>
+        <div class="stat-card">
+            <h3>850+</h3>
+            <p>Active Enterprise Deployments</p>
+        </div>
+        <div class="stat-card">
+            <h3>99.998%</h3>
+            <p>Operational Uptime</p>
+        </div>
+        <div class="stat-card">
+            <h3>100%</h3>
+            <p>Client Satisfaction Rate</p>
+        </div>
+    </div>
+
+    <!-- Services Grid -->
+    <section class="services-section" id="services">
+        <div class="section-header">
+            <h2>Our Specialized Offerings</h2>
+            <p>End-to-end digital solutions tailored for startups and global enterprises.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🌐</div>
+                <h3>Web Development</h3>
+                <p>Ultra-responsive, lightning-fast web applications built with Modern JS frameworks, smooth animations, and glassmorphism UI.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🤖</div>
+                <h3>AI Solutions</h3>
+                <p>Smart conversational bots, predictive analytics engines, workflow automation, and custom neural model integrations.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3>Software Design</h3>
+                <p>Scalable desktop & mobile application designs, high-security databases, and custom enterprise admin dashboards.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📚</div>
+                <h3>Coaching Services</h3>
+                <p>Structured academic mentorship, secondary education concept building, and professional tech skill training modules.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Showcase Section -->
+    <section class="portfolio-section" id="showcase">
+        <div class="section-header">
+            <h2>Live Project Showcase</h2>
+            <p>Real demonstration of what we build for our clients.</p>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <img src="assets/hq.jpg" alt="Project Demo 1" class="portfolio-img">
+                <div class="portfolio-info">
+                    <h4>Next-Gen SaaS Analytics Dashboard</h4>
+                    <p>Real-time data telemetry platform built for tracking high-speed financial transactions.</p>
+                    <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">AI Engine</span>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <img src="assets/hq.jpg" alt="Project Demo 2" class="portfolio-img">
+                <div class="portfolio-info">
+                    <h4>Automated AI Customer Bot Ecosystem</h4>
+                    <p>Smart Telegram & WhatsApp webhooks handling 10,000+ client queries daily without delay.</p>
+                    <span class="tag">Python</span><span class="tag">Telegram API</span><span class="tag">NLP</span>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <img src="assets/hq.jpg" alt="Project Demo 3" class="portfolio-img">
+                <div class="portfolio-info">
+                    <h4>AnshKnowledgeBase Learning Portal</h4>
+                    <p>Interactive student testing, study sheet generator, and online curriculum platform.</p>
+                    <span class="tag">HTML5/CSS3</span><span class="tag">PDF Engine</span><span class="tag">JS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Price Estimator -->
+    <section class="calc-section" id="estimator">
+        <div class="section-header">
+            <h2>Interactive Project Cost Estimator</h2>
+            <p>Select your requirements below to calculate an estimated project valuation.</p>
+        </div>
+        <div class="calc-box">
+            <div class="calc-option">
+                <label for="opt1">Modern Responsive Website Development</label>
+                <input type="checkbox" id="opt1" value="15000" onchange="calculateCost()">
+            </div>
+            <div class="calc-option">
+                <label for="opt2">Custom AI Bot & Automation Integration</label>
+                <input type="checkbox" id="opt2" value="25000" onchange="calculateCost()">
+            </div>
+            <div class="calc-option">
+                <label for="opt3">Enterprise Software / Dashboard UI/UX Design</label>
+                <input type="checkbox" id="opt3" value="30000" onchange="calculateCost()">
+            </div>
+            <div class="calc-option">
+                <label for="opt4">Full-Year Maintenance & Academic Coaching Support</label>
+                <input type="checkbox" id="opt4" value="20000" onchange="calculateCost()">
+            </div>
+            <div class="total-price" id="totalDisplay">Estimated Valuation: ₹0</div>
+            <div style="text-align: center; margin-top: 25px;">
+                <a href="https://wa.me/919925527617" target="_blank" class="btn btn-grad">Lock In Quotation On WhatsApp ↗</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="section-header">
+            <h2>Frequently Asked Questions</h2>
+            <p>Everything clients need to know about working with Aether Tech.</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">What industries does Aether Tech build solutions for? <span>+</span></div>
+                <div class="faq-answer">We build tailored software, AI automation pipelines, and modern web platforms for tech startups, corporate enterprises, financial traders, and educational institutes.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">How long does it take to deploy a full-stack project? <span>+</span></div>
+                <div class="faq-answer">Standard corporate websites take 3 to 7 days, while custom AI platforms and complex web applications are typically delivered within 2 to 4 weeks.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Do you provide ongoing support after website launch? <span>+</span></div>
+                <div class="faq-answer">Yes, we provide 24/7 technical assistance, cloud infrastructure monitoring, and periodic feature updates for all our enterprise clients.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Links Section -->
+    <section class="social-section">
+        <div class="section-header">
+            <h2>Connect With Us Directly</h2>
+            <p>Reach out on our official communication channels.</p>
+        </div>
+        <div class="social-grid">
+            <a href="https://instagram.com/just_silent.hues" target="_blank" class="social-btn">📸 Instagram (@just_silent.hues)</a>
+            <a href="https://wa.me/919925527617" target="_blank" class="social-btn">💬 WhatsApp (+91 99255 27617)</a>
+            <a href="https://t.me/" target="_blank" class="social-btn">✈️ Telegram Channel</a>
+            <a href="https://youtube.com/" target="_blank" class="social-btn">▶️ YouTube Studio</a>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location-section">
+        <div class="location-card">
+            <div class="location-info">
+                <h3>Global Operations & Technology HQ</h3>
+                <p>Block C, Silicon Valley Commercial Hub, Near Majura Gate,<br>Ring Road, Surat, Gujarat - 395002, India</p>
+            </div>
+            <div>
+                <a href="contact.html" class="btn btn-grad">Schedule Consultation Visit ↗</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Corporate Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>AETHER TECH</h4>
+                <p style="font-size:13px; line-height:1.6;">Pioneering next-generation enterprise digital ecosystems, intelligent software platforms, and modern educational frameworks.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#services">Web Development</a></li>
+                    <li><a href="#services">AI Solutions</a></li>
+                    <li><a href="#services">Software Architecture</a></li>
+                    <li><a href="#services">Coaching Services</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Showcase</h4>
+                <ul>
+                    <li><a href="#showcase">Live Projects</a></li>
+                    <li><a href="#estimator">Cost Calculator</a></li>
+                    <li><a href="#faq">Client FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Direct Reach</h4>
+                <p style="font-size:13px; margin-bottom:8px;">WhatsApp: +91 99255 27617</p>
+                <p style="font-size:13px;">Instagram: @just_silent.hues</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Aether Tech Corporation. All Rights Reserved. Surat Operations Division Headquarters.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Animations Script -->
+    <script>
+        // Light / Dark Theme Toggle
+        const themeBtn = document.getElementById('themeBtn');
+        themeBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('light');
+            themeBtn.textContent = document.documentElement.classList.contains('light') ? '🌙 Dark' : '☀️ Light';
+        });
+
+        // FAQ Toggle
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            item.classList.toggle('active');
+        }
+
+        // Cost Calculator logic
+        function calculateCost() {
+            let total = 0;
+            const checkboxes = document.querySelectorAll('.calc-box input[type="checkbox"]');
+            checkboxes.forEach(cb => {
+                if(cb.checked) total += parseInt(cb.value);
+            });
+            document.getElementById('totalDisplay').innerText = "Estimated Valuation: ₹" + total.toLocaleString('en-IN');
+        }
+
+        // Background Canvas Nodes Animation
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 0.6 - 0.3;
+                this.speedY = Math.random() * 0.6 - 0.3;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(6, 182, 212, 0.4)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 50; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+    </script>
+</body>
+</html>
