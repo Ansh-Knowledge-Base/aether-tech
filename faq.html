@@ -1,1 +1,2588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FAQ | AETHER TECH</title>
+
+<meta name="description"
+content="Frequently Asked Questions about AETHER TECH services, websites, digital systems, pricing, development, infrastructure and support.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cinzel:wght@600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root{
+    --bg:#020617;
+    --card:rgba(15,23,42,.78);
+    --card2:rgba(7,17,31,.86);
+    --border:rgba(255,255,255,.09);
+
+    --text:#f8fafc;
+    --muted:#94a3b8;
+
+    --cyan:#06b6d4;
+    --blue:#3b82f6;
+    --purple:#a855f7;
+    --green:#22c55e;
+
+    --shadow:0 25px 70px rgba(0,0,0,.35);
+}
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Plus Jakarta Sans",sans-serif;
+    color:var(--text);
+    background:
+        radial-gradient(
+            circle at 8% 8%,
+            rgba(59,130,246,.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 92% 18%,
+            rgba(168,85,247,.10),
+            transparent 30%
+        ),
+        var(--bg);
+    line-height:1.6;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    pointer-events:none;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        );
+
+    background-size:52px 52px;
+}
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.top-bar{
+    padding:8px 5%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:#01040c;
+    border-bottom:1px solid var(--border);
+
+    color:var(--muted);
+
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.status-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+
+    background:var(--green);
+    box-shadow:0 0 12px var(--green);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    min-height:76px;
+    padding:13px 5%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+
+    background:rgba(2,6,23,.82);
+    backdrop-filter:blur(22px);
+
+    border-bottom:1px solid var(--border);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    text-decoration:none;
+    flex-shrink:0;
+}
+
+.logo img{
+    width:44px;
+    height:44px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+    border:1px solid var(--cyan);
+
+    box-shadow:
+        0 0 20px rgba(6,182,212,.25);
+}
+
+.logo-title{
+    color:white;
+
+    font-size:17px;
+    font-weight:800;
+
+    letter-spacing:1px;
+}
+
+.logo-sub{
+    display:block;
+
+    color:var(--cyan);
+
+    font-size:7px;
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+nav a{
+    position:relative;
+
+    color:var(--muted);
+
+    text-decoration:none;
+
+    font-size:10px;
+    font-weight:800;
+
+    letter-spacing:1px;
+    text-transform:uppercase;
+
+    transition:.3s;
+}
+
+nav a::after{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:-9px;
+
+    width:0;
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--purple),
+            var(--cyan)
+        );
+
+    transition:.3s;
+}
+
+nav a:hover,
+nav a.active{
+    color:var(--cyan);
+}
+
+nav a:hover::after,
+nav a.active::after{
+    width:100%;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+
+    padding:11px 18px;
+
+    border-radius:11px;
+
+    text-decoration:none;
+
+    font-size:10px;
+    font-weight:800;
+
+    transition:.3s;
+}
+
+.btn-primary{
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            var(--cyan)
+        );
+
+    box-shadow:
+        0 0 25px rgba(168,85,247,.22);
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 0 35px rgba(6,182,212,.35);
+}
+
+.btn-outline{
+    color:white;
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid var(--border);
+}
+
+.btn-outline:hover{
+    transform:translateY(-3px);
+
+    border-color:var(--cyan);
+}
+
+.menu-btn{
+    display:none;
+
+    width:42px;
+    height:42px;
+
+    border-radius:10px;
+
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,.03);
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+}
+
+/* =========================================================
+   TICKER
+========================================================= */
+
+.ticker{
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7c3aed,
+            #0891b2,
+            #2563eb
+        );
+}
+
+.ticker-content{
+    padding:9px 0;
+
+    text-align:center;
+
+    color:white;
+
+    font-size:8px;
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    position:relative;
+
+    min-height:540px;
+
+    padding:85px 5% 75px;
+
+    display:grid;
+
+    grid-template-columns:
+        1.05fr .95fr;
+
+    align-items:center;
+
+    gap:55px;
+
+    border-bottom:1px solid var(--border);
+
+    overflow:hidden;
+}
+
+.hero::after{
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    right:-180px;
+    top:-180px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(6,182,212,.15);
+
+    box-shadow:
+        0 0 100px rgba(6,182,212,.08);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.badge{
+    display:inline-flex;
+
+    padding:7px 14px;
+
+    border-radius:30px;
+
+    color:var(--cyan);
+
+    background:rgba(6,182,212,.07);
+
+    border:1px solid rgba(6,182,212,.35);
+
+    font-size:9px;
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+.hero h1{
+    margin:20px 0 15px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:clamp(42px,5.5vw,67px);
+
+    line-height:1.05;
+}
+
+.gradient{
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            var(--cyan),
+            var(--blue)
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+.hero p{
+    max-width:650px;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    line-height:1.9;
+}
+
+.hero-actions{
+    display:flex;
+
+    gap:10px;
+
+    margin-top:25px;
+
+    flex-wrap:wrap;
+}
+
+/* =========================================================
+   HERO IMAGE
+========================================================= */
+
+.hero-visual{
+    position:relative;
+
+    min-height:370px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-image{
+    position:relative;
+
+    width:min(100%,510px);
+    height:350px;
+
+    overflow:hidden;
+
+    border-radius:26px;
+
+    border:1px solid rgba(6,182,212,.30);
+
+    background:#07111f;
+
+    box-shadow:var(--shadow);
+
+    transform:perspective(1000px) rotateY(-5deg);
+}
+
+.hero-image img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+    opacity:.82;
+
+    transition:.5s;
+}
+
+.hero-image:hover img{
+    transform:scale(1.05);
+
+    opacity:1;
+}
+
+.hero-image::after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent 45%,
+            rgba(2,6,23,.88)
+        );
+}
+
+.image-label{
+    position:absolute;
+
+    left:20px;
+    bottom:20px;
+
+    z-index:2;
+
+    padding:12px 15px;
+
+    border-radius:12px;
+
+    background:rgba(2,6,23,.78);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(12px);
+}
+
+.image-label small{
+    display:block;
+
+    color:var(--cyan);
+
+    font-family:"Fira Code",monospace;
+
+    font-size:8px;
+    letter-spacing:1px;
+}
+
+.image-label strong{
+    display:block;
+
+    margin-top:3px;
+
+    font-size:12px;
+}
+
+/* =========================================================
+   QUICK FAQ NAV
+========================================================= */
+
+.category-section{
+    padding:65px 5% 35px;
+}
+
+.section-heading{
+    max-width:750px;
+
+    margin:0 auto 35px;
+
+    text-align:center;
+}
+
+.section-heading .label{
+    color:var(--cyan);
+
+    font-size:8px;
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+.section-heading h2{
+    margin-top:8px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:32px;
+}
+
+.section-heading p{
+    margin-top:8px;
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+.category-grid{
+    max-width:1050px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:13px;
+}
+
+.category-card{
+    padding:19px;
+
+    border-radius:16px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    text-decoration:none;
+
+    transition:.3s;
+}
+
+.category-card:hover{
+    transform:translateY(-5px);
+
+    border-color:var(--cyan);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.22);
+}
+
+.category-icon{
+    width:39px;
+    height:39px;
+
+    display:grid;
+    place-items:center;
+
+    margin-bottom:10px;
+
+    border-radius:10px;
+
+    color:var(--cyan);
+
+    background:rgba(6,182,212,.07);
+
+    border:1px solid rgba(6,182,212,.18);
+
+    font-family:"Fira Code",monospace;
+
+    font-size:9px;
+}
+
+.category-card h3{
+    color:white;
+
+    font-family:"Cinzel",serif;
+
+    font-size:14px;
+}
+
+.category-card p{
+    margin-top:4px;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    line-height:1.7;
+}
+
+/* =========================================================
+   FAQ MAIN
+========================================================= */
+
+.faq-section{
+    padding:60px 5% 90px;
+}
+
+.faq-layout{
+    max-width:1180px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        .75fr 1.65fr;
+
+    gap:45px;
+
+    align-items:start;
+}
+
+.faq-sidebar{
+    position:sticky;
+
+    top:110px;
+
+    padding:27px;
+
+    border-radius:21px;
+
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(6,182,212,.11),
+            transparent 38%
+        ),
+        var(--card);
+
+    border:1px solid var(--border);
+}
+
+.sidebar-image{
+    height:190px;
+
+    overflow:hidden;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.sidebar-image img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.5s;
+}
+
+.sidebar-image:hover img{
+    transform:scale(1.05);
+}
+
+.faq-sidebar h3{
+    font-family:"Cinzel",serif;
+
+    font-size:21px;
+
+    margin-bottom:7px;
+}
+
+.faq-sidebar p{
+    color:var(--muted);
+
+    font-size:9px;
+
+    line-height:1.8;
+
+    margin-bottom:18px;
+}
+
+.help-box{
+    padding:15px;
+
+    border-radius:13px;
+
+    background:rgba(255,255,255,.025);
+
+    border:1px solid var(--border);
+}
+
+.help-box span{
+    display:block;
+
+    color:var(--cyan);
+
+    font-family:"Fira Code",monospace;
+
+    font-size:8px;
+}
+
+.help-box strong{
+    display:block;
+
+    margin-top:4px;
+
+    font-size:10px;
+}
+
+/* =========================================================
+   FAQ GROUPS
+========================================================= */
+
+.faq-group{
+    margin-bottom:35px;
+}
+
+.group-title{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:14px;
+
+    color:var(--cyan);
+
+    font-family:"Fira Code",monospace;
+
+    font-size:9px;
+
+    letter-spacing:1px;
+}
+
+.group-title::after{
+    content:"";
+
+    flex:1;
+
+    height:1px;
+
+    background:var(--border);
+}
+
+details{
+    margin-bottom:10px;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    background:var(--card2);
+
+    overflow:hidden;
+
+    transition:.3s;
+}
+
+details:hover{
+    border-color:rgba(6,182,212,.25);
+}
+
+details[open]{
+    border-color:rgba(6,182,212,.40);
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.20);
+}
+
+summary{
+    position:relative;
+
+    padding:17px 47px 17px 19px;
+
+    cursor:pointer;
+
+    color:#e2e8f0;
+
+    font-size:10px;
+    font-weight:700;
+
+    list-style:none;
+}
+
+summary::-webkit-details-marker{
+    display:none;
+}
+
+summary::before{
+    content:"Q";
+
+    position:absolute;
+
+    left:-1px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:3px;
+    height:28px;
+
+    border-radius:0 4px 4px 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--purple),
+            var(--cyan)
+        );
+
+    color:transparent;
+}
+
+summary::after{
+    content:"+";
+
+    position:absolute;
+
+    right:18px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:var(--cyan);
+
+    font-size:17px;
+
+    font-weight:400;
+}
+
+details[open] summary::after{
+    content:"−";
+}
+
+details p{
+    padding:0 20px 19px;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    line-height:1.9;
+}
+
+/* =========================================================
+   IMAGE SHOWCASE
+========================================================= */
+
+.showcase-section{
+    padding:75px 5%;
+
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+}
+
+.showcase-heading{
+    max-width:700px;
+
+    margin:0 auto 35px;
+
+    text-align:center;
+}
+
+.showcase-heading .label{
+    color:var(--purple);
+
+    font-size:8px;
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+.showcase-heading h2{
+    margin-top:8px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:31px;
+}
+
+.showcase-heading p{
+    margin-top:8px;
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+.image-grid{
+    max-width:1180px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        1.25fr .75fr .75fr;
+
+    grid-template-rows:
+        190px 190px;
+
+    gap:13px;
+}
+
+.gallery-image{
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:17px;
+
+    border:1px solid var(--border);
+
+    background:#07111f;
+}
+
+.gallery-image:first-child{
+    grid-row:1 / 3;
+}
+
+.gallery-image img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.5s;
+}
+
+.gallery-image:hover img{
+    transform:scale(1.07);
+}
+
+.gallery-overlay{
+    position:absolute;
+
+    inset:auto 0 0;
+
+    padding:16px;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(2,6,23,.92)
+        );
+}
+
+.gallery-overlay span{
+    color:var(--cyan);
+
+    font-family:"Fira Code",monospace;
+
+    font-size:7px;
+}
+
+.gallery-overlay strong{
+    display:block;
+
+    margin-top:2px;
+
+    color:white;
+
+    font-size:10px;
+}
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta-section{
+    padding:80px 5%;
+}
+
+.cta{
+    max-width:1180px;
+
+    margin:auto;
+
+    padding:45px;
+
+    border-radius:24px;
+
+    border:1px solid rgba(6,182,212,.30);
+
+    background:
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(6,182,212,.13),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(168,85,247,.13),
+            transparent 30%
+        ),
+        var(--card);
+}
+
+.cta h2{
+    margin:8px 0 10px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:40px;
+}
+
+.cta-label{
+    color:var(--cyan);
+
+    font-size:8px;
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+.cta p{
+    max-width:700px;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    margin-bottom:20px;
+}
+
+.cta-buttons{
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    padding:55px 5% 25px;
+
+    border-top:1px solid var(--border);
+
+    background:#01040c;
+}
+
+.footer-grid{
+    max-width:1180px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        1.5fr 1fr 1fr 1fr;
+
+    gap:30px;
+
+    padding-bottom:35px;
+}
+
+.footer-column h4{
+    margin-bottom:14px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:13px;
+}
+
+.footer-column p,
+.footer-column a{
+    display:block;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:1.8;
+
+    margin-bottom:8px;
+
+    text-decoration:none;
+}
+
+.footer-column a:hover{
+    color:var(--cyan);
+}
+
+.footer-bottom{
+    max-width:1180px;
+
+    margin:auto;
+
+    padding-top:20px;
+
+    border-top:1px solid var(--border);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    color:#64748b;
+
+    font-size:9px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1050px){
+
+    nav{
+        gap:14px;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+    }
+
+    .hero-content{
+        text-align:center;
+    }
+
+    .hero p{
+        margin:auto;
+    }
+
+    .hero-actions{
+        justify-content:center;
+    }
+
+    .hero-visual{
+        min-height:330px;
+    }
+
+    .faq-layout{
+        grid-template-columns:1fr;
+    }
+
+    .faq-sidebar{
+        position:relative;
+        top:auto;
+    }
+
+    .category-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:820px){
+
+    .top-bar{
+        display:none;
+    }
+
+    .header-actions .btn{
+        display:none;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    nav{
+        position:absolute;
+
+        top:73px;
+
+        left:5%;
+        right:5%;
+
+        display:none;
+
+        flex-direction:column;
+
+        gap:0;
+
+        padding:12px;
+
+        border-radius:16px;
+
+        border:1px solid var(--border);
+
+        background:rgba(2,6,23,.97);
+
+        backdrop-filter:blur(20px);
+    }
+
+    nav.open{
+        display:flex;
+    }
+
+    nav a{
+        padding:12px 10px;
+    }
+
+    nav a::after{
+        display:none;
+    }
+
+    .image-grid{
+        grid-template-columns:1fr 1fr;
+
+        grid-template-rows:
+            230px 170px;
+    }
+
+    .gallery-image:first-child{
+        grid-column:1 / 3;
+
+        grid-row:auto;
+    }
+}
+
+@media(max-width:560px){
+
+    .logo-title{
+        font-size:14px;
+    }
+
+    .logo img{
+        width:40px;
+        height:40px;
+    }
+
+    .hero{
+        padding:60px 5%;
+    }
+
+    .hero h1{
+        font-size:43px;
+    }
+
+    .hero p{
+        font-size:11px;
+    }
+
+    .hero-image{
+        height:280px;
+
+        transform:none;
+    }
+
+    .category-grid{
+        grid-template-columns:1fr;
+    }
+
+    .faq-section{
+        padding-top:45px;
+    }
+
+    .faq-sidebar{
+        padding:20px;
+    }
+
+    .sidebar-image{
+        height:170px;
+    }
+
+    .section-heading h2,
+    .showcase-heading h2{
+        font-size:27px;
+    }
+
+    .image-grid{
+        grid-template-columns:1fr;
+
+        grid-template-rows:
+            repeat(3,200px);
+    }
+
+    .gallery-image:first-child{
+        grid-column:auto;
+    }
+
+    .cta{
+        padding:30px 23px;
+    }
+
+    .cta h2{
+        font-size:30px;
+    }
+
+    .cta-buttons{
+        flex-direction:column;
+    }
+
+    .cta-buttons .btn{
+        width:100%;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+
+        text-align:center;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =========================================================
+     TOP STATUS
+========================================================= -->
+
+<div class="top-bar">
+
+    <div class="status">
+        <span class="status-dot"></span>
+        SYSTEM STATUS: 100% OPERATIONAL
+    </div>
+
+    <div>
+        AETHER TECH • KNOWLEDGE CENTER
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header>
+
+<a href="index.html" class="logo">
+
+    <img
+        src="assets/logo.png"
+        alt="AETHER TECH Logo"
+    >
+
+    <div>
+
+        <div class="logo-title">
+            AETHER TECH
+        </div>
+
+        <span class="logo-sub">
+            ENTERPRISE PLATFORM
+        </span>
+
+    </div>
+
+</a>
+
+
+<nav id="mainNav">
+
+    <a href="index.html">
+        Home
+    </a>
+
+    <a href="services.html">
+        Services
+    </a>
+
+    <a href="about.html">
+        About Us
+    </a>
+
+    <a href="infrastructure.html">
+        Infrastructure
+    </a>
+
+    <a href="pricing.html">
+        Pricing
+    </a>
+
+    <a
+        href="faq.html"
+        class="active"
+    >
+        FAQ
+    </a>
+
+    <a href="contact.html">
+        Contact
+    </a>
+
+</nav>
+
+
+<div class="header-actions">
+
+    <a
+        href="contact.html"
+        class="btn btn-primary"
+    >
+        Start a Project ↗
+    </a>
+
+    <button
+        class="menu-btn"
+        id="menuBtn"
+        aria-label="Open Menu"
+    >
+        ☰
+    </button>
+
+</div>
+
+</header>
+
+
+<!-- =========================================================
+     TICKER
+========================================================= -->
+
+<div class="ticker">
+
+    <div class="ticker-content">
+        ✦ FREQUENTLY ASKED QUESTIONS • CLEAR ANSWERS • TRANSPARENT PROCESS • PROFESSIONAL SUPPORT ✦
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+
+    <div class="hero-content">
+
+        <span class="badge">
+            KNOWLEDGE CENTER / FAQ
+        </span>
+
+        <h1>
+            Answers before
+            <span class="gradient">
+                you ask.
+            </span>
+        </h1>
+
+        <p>
+            Find clear answers about AETHER TECH's services,
+            development process, pricing, technology,
+            infrastructure, support and project requirements.
+        </p>
+
+
+        <div class="hero-actions">
+
+            <a
+                href="#faq"
+                class="btn btn-primary"
+            >
+                Browse Questions ↓
+            </a>
+
+            <a
+                href="contact.html"
+                class="btn btn-outline"
+            >
+                Ask Us Directly →
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+        <div class="hero-image">
+
+            <!-- Replace with your actual image filename if needed -->
+
+            <img
+                src="assets/faq.jpg"
+                alt="AETHER TECH Technology and Support"
+                onerror="this.src='assets/infrastructure.jpg'"
+            >
+
+            <div class="image-label">
+
+                <small>
+                    AETHER TECH / SUPPORT
+                </small>
+
+                <strong>
+                    Technology • Solutions • Support
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CATEGORIES
+========================================================= -->
+
+<section class="category-section">
+
+    <div class="section-heading">
+
+        <span class="label">
+            FIND YOUR ANSWER
+        </span>
+
+        <h2>
+            Explore by category.
+        </h2>
+
+        <p>
+            Jump directly to the questions that matter most
+            to your project.
+        </p>
+
+    </div>
+
+
+    <div class="category-grid">
+
+        <a
+            href="#general"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                GEN
+            </div>
+
+            <h3>
+                General
+            </h3>
+
+            <p>
+                About AETHER TECH and our approach.
+            </p>
+
+        </a>
+
+
+        <a
+            href="#services"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                DEV
+            </div>
+
+            <h3>
+                Services
+            </h3>
+
+            <p>
+                Websites, systems, automation and more.
+            </p>
+
+        </a>
+
+
+        <a
+            href="#pricing"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                ₹
+            </div>
+
+            <h3>
+                Pricing
+            </h3>
+
+            <p>
+                Plans, quotes and project costs.
+            </p>
+
+        </a>
+
+
+        <a
+            href="#process"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                FLOW
+            </div>
+
+            <h3>
+                Process
+            </h3>
+
+            <p>
+                From initial discussion to deployment.
+            </p>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FAQ
+========================================================= -->
+
+<section
+    class="faq-section"
+    id="faq"
+>
+
+<div class="faq-layout">
+
+
+<!-- SIDEBAR -->
+
+<aside class="faq-sidebar">
+
+    <div class="sidebar-image">
+
+        <img
+            src="assets/technology.jpg"
+            alt="AETHER TECH Technology"
+            onerror="this.src='assets/infrastructure.jpg'"
+        >
+
+    </div>
+
+
+    <h3>
+        Still have questions?
+    </h3>
+
+    <p>
+        If your question isn't covered here,
+        contact our team directly. Share your
+        requirements and we'll guide you through
+        the next step.
+    </p>
+
+
+    <a
+        href="contact.html"
+        class="btn btn-primary"
+        style="width:100%;"
+    >
+        Contact AETHER TECH →
+    </a>
+
+
+    <div
+        class="help-box"
+        style="margin-top:14px;"
+    >
+
+        <span>
+            RESPONSE
+        </span>
+
+        <strong>
+            Clear communication. Practical solutions.
+        </strong>
+
+    </div>
+
+</aside>
+
+
+<!-- QUESTIONS -->
+
+<div class="faq-content">
+
+
+<!-- GENERAL -->
+
+<div
+    class="faq-group"
+    id="general"
+>
+
+    <div class="group-title">
+        01 / GENERAL
+    </div>
+
+
+    <details open>
+
+        <summary>
+            What is AETHER TECH?
+        </summary>
+
+        <p>
+            AETHER TECH is a technology-focused digital
+            solutions platform providing professional
+            websites, digital systems, software solutions,
+            automation and technology infrastructure for
+            businesses and organizations.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            What type of clients can work with AETHER TECH?
+        </summary>
+
+        <p>
+            We can work with individuals, startups,
+            small businesses, educational organizations
+            and growing enterprises depending on the
+            project requirements.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Do you only create websites?
+        </summary>
+
+        <p>
+            No. Websites are one part of our services.
+            Depending on the project, solutions can also
+            include digital systems, automation,
+            integrations, dashboards and custom
+            technology solutions.
+        </p>
+
+    </details>
+
+</div>
+
+
+<!-- SERVICES -->
+
+<div
+    class="faq-group"
+    id="services"
+>
+
+    <div class="group-title">
+        02 / SERVICES
+    </div>
+
+
+    <details>
+
+        <summary>
+            What services do you provide?
+        </summary>
+
+        <p>
+            Services can include professional website
+            development, responsive UI/UX, digital systems,
+            automation, backend development, integrations,
+            infrastructure planning and custom solutions.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Can you build a completely custom website?
+        </summary>
+
+        <p>
+            Yes. Custom projects can be planned according
+            to the required design, pages, functionality,
+            integrations and business requirements.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Will the website work on mobile phones?
+        </summary>
+
+        <p>
+            Responsive design can be implemented so that
+            the website adapts to desktop, tablet and
+            mobile screen sizes.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Can you add new features later?
+        </summary>
+
+        <p>
+            Yes. A properly structured project can be
+            expanded later with additional pages,
+            features, integrations or other functionality.
+        </p>
+
+    </details>
+
+</div>
+
+
+<!-- TECHNOLOGY -->
+
+<div class="faq-group">
+
+    <div class="group-title">
+        03 / TECHNOLOGY
+    </div>
+
+
+    <details>
+
+        <summary>
+            What technologies do you use?
+        </summary>
+
+        <p>
+            Technology selection depends on the project.
+            Frontend, backend, database, hosting and
+            integration technologies are selected according
+            to functionality, scalability and maintenance
+            requirements.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Can you integrate third-party services?
+        </summary>
+
+        <p>
+            Third-party integrations can be implemented
+            when the required service provides suitable
+            APIs or integration options.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Can you create admin dashboards?
+        </summary>
+
+        <p>
+            Yes. Custom administrative interfaces and
+            dashboards can be developed when required by
+            the project.
+        </p>
+
+    </details>
+
+</div>
+
+
+<!-- PRICING -->
+
+<div
+    class="faq-group"
+    id="pricing"
+>
+
+    <div class="group-title">
+        04 / PRICING
+    </div>
+
+
+    <details>
+
+        <summary>
+            How much does a website cost?
+        </summary>
+
+        <p>
+            Pricing depends on the number of pages,
+            design complexity, functionality,
+            integrations, backend requirements and
+            overall project scope. Visit the Pricing
+            page for starting packages.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Is the price shown on the Pricing page final?
+        </summary>
+
+        <p>
+            Pricing shown on the website should be treated
+            as a starting estimate. A final quote is based
+            on the actual requirements of the project.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Can I request a custom quote?
+        </summary>
+
+        <p>
+            Yes. If your requirements don't fit one of
+            the standard packages, you can request a
+            custom quote through the Contact page.
+        </p>
+
+    </details>
+
+</div>
+
+
+<!-- PROCESS -->
+
+<div
+    class="faq-group"
+    id="process"
+>
+
+    <div class="group-title">
+        05 / PROCESS
+    </div>
+
+
+    <details>
+
+        <summary>
+            What happens after I contact you?
+        </summary>
+
+        <p>
+            We first understand your requirements,
+            objectives and expected functionality.
+            Based on the scope, the project can then
+            be planned and discussed in detail.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Do you discuss the project before development?
+        </summary>
+
+        <p>
+            Yes. Understanding the project before
+            development helps establish the required
+            features, structure, technology and scope.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Do you test the project before launch?
+        </summary>
+
+        <p>
+            Project testing can include checking
+            responsiveness, functionality, navigation,
+            forms and other important components before
+            deployment.
+        </p>
+
+    </details>
+
+</div>
+
+
+<!-- SUPPORT -->
+
+<div class="faq-group">
+
+    <div class="group-title">
+        06 / SUPPORT
+    </div>
+
+
+    <details>
+
+        <summary>
+            Do you provide maintenance and support?
+        </summary>
+
+        <p>
+            Maintenance and ongoing support can be
+            discussed according to the project's
+            requirements and selected service arrangement.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Can you help after the website goes live?
+        </summary>
+
+        <p>
+            Yes. Post-launch assistance and future
+            improvements can be discussed depending on
+            the project and support requirements.
+        </p>
+
+    </details>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     IMAGE SHOWCASE
+========================================================= -->
+
+<section class="showcase-section">
+
+
+<div class="showcase-heading">
+
+    <span class="label">
+        OUR DIGITAL ENVIRONMENT
+    </span>
+
+    <h2>
+        Technology built around your goals.
+    </h2>
+
+    <p>
+        A visual look at the digital environment behind
+        our services and solutions.
+    </p>
+
+</div>
+
+
+<div class="image-grid">
+
+
+    <div class="gallery-image">
+
+        <img
+            src="assets/infrastructure.jpg"
+            alt="AETHER TECH Infrastructure"
+            onerror="this.src='assets/technology.jpg'"
+        >
+
+        <div class="gallery-overlay">
+
+            <span>
+                01 / INFRASTRUCTURE
+            </span>
+
+            <strong>
+                Reliable Digital Foundations
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="gallery-image">
+
+        <img
+            src="assets/services.jpg"
+            alt="AETHER TECH Services"
+            onerror="this.src='assets/technology.jpg'"
+        >
+
+        <div class="gallery-overlay">
+
+            <span>
+                02 / SERVICES
+            </span>
+
+            <strong>
+                Digital Solutions
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="gallery-image">
+
+        <img
+            src="assets/about.jpg"
+            alt="AETHER TECH Team"
+            onerror="this.src='assets/technology.jpg'"
+        >
+
+        <div class="gallery-overlay">
+
+            <span>
+                03 / PEOPLE
+            </span>
+
+            <strong>
+                Human-Centered Technology
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="gallery-image">
+
+        <img
+            src="assets/technology.jpg"
+            alt="AETHER TECH Technology"
+            onerror="this.src='assets/infrastructure.jpg'"
+        >
+
+        <div class="gallery-overlay">
+
+            <span>
+                04 / TECHNOLOGY
+            </span>
+
+            <strong>
+                Modern Technology Stack
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="gallery-image">
+
+        <img
+            src="assets/workspace.jpg"
+            alt="AETHER TECH Workspace"
+            onerror="this.src='assets/infrastructure.jpg'"
+        >
+
+        <div class="gallery-overlay">
+
+            <span>
+                05 / WORKSPACE
+            </span>
+
+            <strong>
+                Focused Digital Operations
+            </strong>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<section class="cta-section">
+
+
+<div class="cta">
+
+    <span class="cta-label">
+        DIDN'T FIND YOUR ANSWER?
+    </span>
+
+    <h2>
+        Let's talk about your project.
+    </h2>
+
+    <p>
+        Every project is different. Tell us what you are
+        trying to build and we'll help you understand the
+        right approach, technology and next steps.
+    </p>
+
+
+    <div class="cta-buttons">
+
+        <a
+            href="contact.html"
+            class="btn btn-primary"
+        >
+            Start a Project →
+        </a>
+
+        <a
+            href="pricing.html"
+            class="btn btn-outline"
+        >
+            View Pricing ↗
+        </a>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+
+<div class="footer-grid">
+
+
+    <div class="footer-column">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+
+            <img
+                src="assets/logo.png"
+                alt="AETHER TECH Logo"
+            >
+
+            <div>
+
+                <div class="logo-title">
+                    AETHER TECH
+                </div>
+
+                <span class="logo-sub">
+                    ENTERPRISE PLATFORM
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <p style="margin-top:14px;">
+            Next-generation enterprise digital ecosystems,
+            software automation systems and academic
+            technology frameworks.
+        </p>
+
+    </div>
+
+
+    <div class="footer-column">
+
+        <h4>
+            Navigation
+        </h4>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="services.html">
+            Services
+        </a>
+
+        <a href="about.html">
+            About Us
+        </a>
+
+        <a href="infrastructure.html">
+            Infrastructure
+        </a>
+
+        <a href="pricing.html">
+            Pricing
+        </a>
+
+        <a href="faq.html">
+            FAQ
+        </a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+    </div>
+
+
+    <div class="footer-column">
+
+        <h4>
+            Solutions
+        </h4>
+
+        <a href="services.html">
+            Web Development
+        </a>
+
+        <a href="services.html">
+            Digital Systems
+        </a>
+
+        <a href="services.html">
+            Automation
+        </a>
+
+        <a href="infrastructure.html">
+            Infrastructure
+        </a>
+
+    </div>
+
+
+    <div class="footer-column">
+
+        <h4>
+            Direct Reach
+        </h4>
+
+        <a
+            href="https://wa.me/919925527617"
+            target="_blank"
+        >
+            WhatsApp: +91 99255 27617
+        </a>
+
+        <a
+            href="https://instagram.com/just_silent.hues"
+            target="_blank"
+        >
+            Instagram: @just_silent.hues
+        </a>
+
+        <a href="contact.html">
+            Start a Project
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<div class="footer-bottom">
+
+    <span>
+        © 2026 AETHER TECH. All Rights Reserved.
+    </span>
+
+    <span>
+        Surat Operations Headquarters • Gujarat, India
+    </span>
+
+</div>
+
+
+</footer>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+/* MOBILE MENU */
+
+const menuBtn =
+document.getElementById("menuBtn");
+
+const mainNav =
+document.getElementById("mainNav");
+
+menuBtn.addEventListener("click",function(){
+
+    mainNav.classList.toggle("open");
+
+    menuBtn.textContent =
+        mainNav.classList.contains("open")
+        ? "×"
+        : "☰";
+
+});
+
+
+/* CLOSE MOBILE MENU */
+
+document
+.querySelectorAll("#mainNav a")
+.forEach(function(link){
+
+    link.addEventListener("click",function(){
+
+        mainNav.classList.remove("open");
+
+        menuBtn.textContent="☰";
+
+    });
+
+});
+
+
+/* =========================================================
+   FAQ ACCORDION
+   Only one question stays open at a time
+========================================================= */
+
+const allDetails =
+document.querySelectorAll("details");
+
+allDetails.forEach(function(item){
+
+    item.addEventListener("toggle",function(){
+
+        if(item.open){
+
+            allDetails.forEach(function(other){
+
+                if(other !== item){
+                    other.removeAttribute("open");
+                }
+
+            });
+
+        }
+
+    });
+
+});
+
+</script>
+
+
+</body>
+</html>
