@@ -1,3611 +1,1227 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>AETHER TECH | Digital Engineering & AI Solutions</title>
-
-<meta name="description"
-content="Aether Tech delivers modern web applications, AI automation, UI/UX systems, cloud solutions and technology platforms.">
-
-<meta name="theme-color" content="#07111f">
-
+<title>AETHER TECH | Enterprise Software & AI Infrastructure</title>
+<meta name="description" content="Aether Tech builds scalable web systems, AI automation workflows, modern software interfaces and structured digital technology solutions.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cinzel:wght@600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
-    --bg:#050912;
-    --bg-soft:#09111f;
-    --card:rgba(14,24,40,.72);
-    --card-solid:#0c1727;
-
-    --text:#f5f7fb;
+    --bg:#020617;
+    --bg2:#01040d;
+    --card:rgba(15,23,42,.72);
+    --card2:rgba(30,41,59,.82);
+    --border:rgba(255,255,255,.09);
+    --highlight:rgba(6,182,212,.42);
+    --text:#f8fafc;
     --muted:#94a3b8;
     --dim:#64748b;
-
-    --primary:#22d3ee;
-    --secondary:#6366f1;
-    --accent:#a855f7;
-
-    --border:rgba(255,255,255,.09);
-    --border-hover:rgba(34,211,238,.45);
-
-    --shadow:0 25px 70px rgba(0,0,0,.35);
-
-    --radius:22px;
+    --cyan:#06b6d4;
+    --cyanGlow:rgba(6,182,212,.32);
+    --purple:#a855f7;
+    --purpleGlow:rgba(168,85,247,.3);
+    --blue:#3b82f6;
+    --green:#22c55e;
 }
-
 .light{
-    --bg:#f7f9fc;
-    --bg-soft:#eef3f8;
-    --card:rgba(255,255,255,.82);
-    --card-solid:#ffffff;
-
+    --bg:#f8fafc;
+    --bg2:#eef2f7;
+    --card:rgba(255,255,255,.88);
+    --card2:rgba(241,245,249,.96);
+    --border:rgba(15,23,42,.1);
+    --highlight:rgba(6,182,212,.48);
     --text:#0f172a;
     --muted:#475569;
     --dim:#64748b;
-
-    --border:rgba(15,23,42,.09);
-    --border-hover:rgba(14,165,233,.45);
-
-    --shadow:0 20px 50px rgba(15,23,42,.10);
 }
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
     background:
-        radial-gradient(circle at 10% 10%, rgba(99,102,241,.12), transparent 30%),
-        radial-gradient(circle at 90% 20%, rgba(34,211,238,.10), transparent 30%),
-        var(--bg);
-
+      radial-gradient(circle at 12% 12%,rgba(59,130,246,.10),transparent 26%),
+      radial-gradient(circle at 88% 20%,rgba(168,85,247,.10),transparent 25%),
+      var(--bg);
     color:var(--text);
-    font-family:'Inter',sans-serif;
+    font-family:'Plus Jakarta Sans',sans-serif;
     overflow-x:hidden;
-    transition:.3s ease;
+    line-height:1.6;
 }
-
-body::before{
+body:before{
     content:"";
     position:fixed;
     inset:0;
     pointer-events:none;
     z-index:-2;
-
     background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:52px 52px;
+    mask-image:linear-gradient(to bottom,#000,transparent 85%);
+}
+h1,h2,h3,h4{font-family:'Cinzel',serif}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+img{display:block;max-width:100%}
 
-    background-size:50px 50px;
-
-    mask-image:linear-gradient(to bottom, black, transparent 85%);
+#bgCanvas{
+    position:fixed;
+    inset:0;
+    width:100vw;
+    height:100vh;
+    pointer-events:none;
+    z-index:-1;
 }
 
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
-button{
-    font-family:inherit;
-}
-
-img{
-    display:block;
-    max-width:100%;
-}
-
-/* =========================
-   TOP BAR
-========================= */
-
-.topbar{
-    height:38px;
-    padding:0 5%;
-
+/* TOP STATUS */
+.top-status{
+    padding:8px 5%;
     display:flex;
-    align-items:center;
     justify-content:space-between;
-
+    align-items:center;
+    gap:20px;
+    background:rgba(2,6,23,.94);
     border-bottom:1px solid var(--border);
-
-    background:rgba(4,9,18,.72);
-    backdrop-filter:blur(20px);
-
     color:var(--muted);
-
-    font-size:11px;
+    font-size:10px;
     font-weight:700;
-    letter-spacing:.7px;
-
-    position:relative;
-    z-index:1000;
+    letter-spacing:1px;
 }
-
-.status{
+.live{
     display:flex;
     align-items:center;
-    gap:8px;
 }
-
-.status-dot{
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:#22c55e;
-
-    box-shadow:0 0 12px #22c55e;
-
-    animation:pulse 1.8s infinite;
+.live-dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--green);
+    margin-right:7px;
+    box-shadow:0 0 12px var(--green);
+    animation:pulse 1.5s infinite;
 }
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(1.2)}}
 
-@keyframes pulse{
-    0%,100%{opacity:1;transform:scale(1)}
-    50%{opacity:.5;transform:scale(.8)}
-}
-
-/* =========================
-   HEADER
-========================= */
-
+/* HEADER */
 header{
     position:sticky;
     top:0;
-    z-index:999;
-
-    min-height:78px;
-
+    z-index:1000;
     display:flex;
     align-items:center;
     justify-content:space-between;
-
+    gap:25px;
     padding:14px 5%;
-
-    background:rgba(5,9,18,.72);
+    min-height:76px;
+    background:rgba(2,6,23,.78);
     backdrop-filter:blur(22px);
-
     border-bottom:1px solid var(--border);
 }
-
-.light header{
-    background:rgba(255,255,255,.75);
-}
+.light header{background:rgba(255,255,255,.82)}
 
 .logo{
     display:flex;
     align-items:center;
     gap:12px;
+    flex-shrink:0;
 }
-
 .logo img{
-    width:43px;
-    height:43px;
-
+    width:44px;height:44px;
     object-fit:cover;
-
-    border-radius:12px;
-
-    border:1px solid var(--border-hover);
-
-    box-shadow:
-        0 0 20px rgba(34,211,238,.18);
+    border-radius:10px;
+    border:1px solid var(--cyan);
+    box-shadow:0 0 18px var(--cyanGlow);
 }
-
-.logo-text strong{
-    display:block;
-
-    font-family:'Space Grotesk',sans-serif;
-
+.logo-name{
     font-size:18px;
-    font-weight:700;
-    letter-spacing:.5px;
+    font-weight:800;
+    letter-spacing:1px;
 }
-
-.logo-text span{
+.logo-sub{
     display:block;
-
-    margin-top:2px;
-
-    color:var(--primary);
-
+    color:var(--cyan);
     font-size:8px;
     font-weight:800;
-
     letter-spacing:2px;
 }
-
 nav{
     display:flex;
     align-items:center;
-    gap:25px;
+    gap:22px;
 }
-
 nav a{
     position:relative;
-
     color:var(--muted);
-
-    font-size:12px;
-    font-weight:700;
-
-    transition:.25s ease;
+    font-size:10px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:1.1px;
+    transition:.25s;
 }
-
-nav a::after{
+nav a:after{
     content:"";
-
     position:absolute;
-
     left:0;
-    bottom:-8px;
-
+    bottom:-9px;
     width:0;
     height:2px;
-
-    border-radius:10px;
-
-    background:linear-gradient(
-        90deg,
-        var(--primary),
-        var(--secondary)
-    );
-
-    transition:.25s ease;
+    background:linear-gradient(90deg,var(--purple),var(--cyan));
+    transition:.25s;
 }
-
-nav a:hover,
-nav a.active{
-    color:var(--text);
-}
-
-nav a:hover::after,
-nav a.active::after{
-    width:100%;
-}
+nav a:hover,nav a.active{color:var(--cyan)}
+nav a:hover:after,nav a.active:after{width:100%}
 
 .header-actions{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:8px;
 }
-
 .btn{
     display:inline-flex;
     align-items:center;
     justify-content:center;
     gap:8px;
-
-    padding:12px 19px;
-
-    border-radius:12px;
-
+    min-height:42px;
+    padding:11px 18px;
+    border-radius:11px;
     border:1px solid transparent;
-
-    font-size:12px;
+    font-size:10px;
     font-weight:800;
-
+    letter-spacing:.5px;
     cursor:pointer;
-
-    transition:.3s ease;
+    transition:.28s;
 }
-
-.btn-primary{
+.btn-grad{
     color:white;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--secondary),
-            var(--primary)
-        );
-
-    box-shadow:
-        0 10px 30px rgba(34,211,238,.13);
+    background:linear-gradient(135deg,var(--purple),var(--cyan));
+    box-shadow:0 0 22px var(--purpleGlow);
 }
-
-.btn-primary:hover{
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 15px 35px rgba(34,211,238,.22);
-}
-
+.btn-grad:hover{transform:translateY(-3px);box-shadow:0 0 32px var(--cyanGlow)}
 .btn-outline{
     color:var(--text);
-
     background:rgba(255,255,255,.035);
-
     border-color:var(--border);
 }
-
-.btn-outline:hover{
-    border-color:var(--border-hover);
-
-    background:rgba(34,211,238,.08);
-
-    transform:translateY(-3px);
-}
-
-.theme-btn{
-    width:40px;
-    height:40px;
-
-    border-radius:12px;
-
+.btn-outline:hover{border-color:var(--cyan);background:rgba(6,182,212,.09);transform:translateY(-3px)}
+.theme-btn,.menu-btn{
+    width:42px;height:42px;
+    display:grid;place-items:center;
     border:1px solid var(--border);
-
-    background:rgba(255,255,255,.04);
-
+    border-radius:11px;
+    background:rgba(255,255,255,.035);
     color:var(--text);
-
-    cursor:pointer;
-
-    transition:.3s ease;
-}
-
-.theme-btn:hover{
-    border-color:var(--border-hover);
-}
-
-.menu-btn{
-    display:none;
-
-    width:42px;
-    height:42px;
-
-    border:1px solid var(--border);
-    border-radius:12px;
-
-    background:rgba(255,255,255,.04);
-
-    color:var(--text);
-
-    font-size:20px;
-
     cursor:pointer;
 }
+.menu-btn{display:none;font-size:20px}
 
-/* =========================
-   HERO
-========================= */
-
-.hero{
-    min-height:calc(100vh - 116px);
-
-    max-width:1400px;
-
-    margin:auto;
-
-    padding:90px 5% 80px;
-
-    display:grid;
-    grid-template-columns:1.05fr .95fr;
-
-    align-items:center;
-
-    gap:65px;
+/* TICKER */
+.ticker{
+    overflow:hidden;
+    white-space:nowrap;
+    background:linear-gradient(90deg,#7c3aed,#0891b2,#2563eb);
+    border-bottom:1px solid var(--border);
 }
-
-.hero-content{
-    animation:heroIn .8s ease both;
-}
-
-@keyframes heroIn{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-.eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-
-    padding:8px 13px;
-
-    border-radius:100px;
-
-    border:1px solid rgba(34,211,238,.2);
-
-    background:rgba(34,211,238,.07);
-
-    color:var(--primary);
-
-    font-size:10px;
+.ticker-track{
+    display:inline-block;
+    min-width:200%;
+    padding:10px 0;
+    color:white;
+    font-size:9px;
     font-weight:800;
-
-    letter-spacing:1.5px;
+    letter-spacing:2.5px;
     text-transform:uppercase;
-
-    margin-bottom:22px;
+    animation:ticker 32s linear infinite;
 }
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-.eyebrow::before{
-    content:"";
-    width:6px;
-    height:6px;
-
-    border-radius:50%;
-
-    background:var(--primary);
-
-    box-shadow:0 0 10px var(--primary);
+/* HERO */
+.hero{
+    min-height:calc(100vh - 130px);
+    display:grid;
+    grid-template-columns:1.02fr .98fr;
+    align-items:center;
+    gap:55px;
+    padding:80px 5%;
 }
-
+.badge{
+    display:inline-flex;
+    padding:7px 14px;
+    border:1px solid rgba(168,85,247,.45);
+    border-radius:30px;
+    color:#c084fc;
+    background:rgba(168,85,247,.08);
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1.7px;
+}
 .hero h1{
-    font-family:'Space Grotesk',sans-serif;
-
-    font-size:clamp(43px,5.5vw,76px);
-
-    line-height:1.02;
-
-    letter-spacing:-3px;
-
-    margin-bottom:24px;
+    margin:21px 0 22px;
+    max-width:760px;
+    font-size:clamp(43px,5.2vw,67px);
+    line-height:1.08;
+    letter-spacing:-1.5px;
 }
-
 .gradient-text{
-    background:
-        linear-gradient(
-            100deg,
-            var(--primary),
-            #818cf8,
-            var(--accent)
-        );
-
+    background:linear-gradient(135deg,var(--purple),var(--cyan),var(--blue));
     -webkit-background-clip:text;
     background-clip:text;
-
     color:transparent;
 }
-
-.hero-description{
-    max-width:650px;
-
+.hero-copy{
+    max-width:640px;
     color:var(--muted);
-
-    font-size:16px;
-
-    line-height:1.85;
-
-    margin-bottom:30px;
+    font-size:14px;
+    line-height:1.9;
+    margin-bottom:28px;
 }
-
-.hero-buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-
-    margin-bottom:32px;
-}
-
-.hero-tags{
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.hero-points{
     display:flex;
     flex-wrap:wrap;
     gap:8px;
+    margin-top:22px;
 }
-
-.hero-tags span{
-    padding:7px 11px;
-
+.hero-points span{
+    padding:6px 9px;
+    border:1px solid var(--border);
     border-radius:8px;
-
-    background:rgba(255,255,255,.035);
-
-    border:1px solid var(--border);
-
+    background:rgba(255,255,255,.025);
     color:var(--muted);
-
-    font-size:10px;
-    font-weight:700;
+    font-size:8px;
+    font-weight:800;
+    letter-spacing:.8px;
 }
 
-/* =========================
-   HERO SLIDER
-========================= */
-
-.hero-visual{
-    position:relative;
-}
-
+/* CAROUSEL */
 .slider{
-    height:510px;
-
     position:relative;
-
+    height:460px;
     overflow:hidden;
-
-    border-radius:28px;
-
-    border:1px solid var(--border);
-
-    background:#07101d;
-
-    box-shadow:var(--shadow);
+    border-radius:25px;
+    border:1px solid var(--highlight);
+    box-shadow:0 28px 70px rgba(0,0,0,.65);
 }
-
 .slide{
     position:absolute;
     inset:0;
-
     opacity:0;
-
-    pointer-events:none;
-
-    transition:opacity .8s ease;
-}
-
-.slide.active{
-    opacity:1;
-    pointer-events:auto;
-}
-
-.slide img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-}
-
-.slide::after{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:
-        linear-gradient(
-            to top,
-            rgba(3,8,18,.97),
-            rgba(3,8,18,.1) 60%,
-            rgba(3,8,18,.15)
-        );
-}
-
-.slide-content{
-    position:absolute;
-
-    z-index:2;
-
-    left:30px;
-    right:30px;
-    bottom:30px;
-}
-
-.slide-number{
-    color:var(--primary);
-
-    font-family:'Space Grotesk',sans-serif;
-
-    font-size:11px;
-    font-weight:800;
-
-    letter-spacing:2px;
-}
-
-.slide-content h3{
-    font-family:'Space Grotesk',sans-serif;
-
-    font-size:27px;
-
-    margin:8px 0;
-
-    letter-spacing:-.5px;
-}
-
-.slide-content p{
-    color:#cbd5e1;
-
-    max-width:500px;
-
-    font-size:13px;
-
-    line-height:1.7;
-}
-
-.slider-controls{
-    position:absolute;
-
-    z-index:10;
-
-    right:25px;
-    bottom:27px;
-
-    display:flex;
-    gap:7px;
-}
-
-.slider-dot{
-    width:25px;
-    height:5px;
-
-    border:0;
-
-    border-radius:20px;
-
-    background:rgba(255,255,255,.3);
-
-    cursor:pointer;
-
-    transition:.3s ease;
-}
-
-.slider-dot.active{
-    width:45px;
-
-    background:var(--primary);
-
-    box-shadow:0 0 15px rgba(34,211,238,.5);
-}
-
-.visual-badge{
-    position:absolute;
-
-    z-index:20;
-
-    top:-15px;
-    right:-15px;
-
-    width:105px;
-    height:105px;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(99,102,241,.95),
-            rgba(34,211,238,.95)
-        );
-
-    border:5px solid var(--bg);
-
-    box-shadow:0 15px 40px rgba(0,0,0,.35);
-
-    color:white;
-}
-
-.visual-badge strong{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:22px;
-}
-
-.visual-badge span{
-    font-size:8px;
-    font-weight:800;
-    letter-spacing:1px;
-}
-
-/* =========================
-   TRUST STRIP
-========================= */
-
-.trust-strip{
-    max-width:1300px;
-
-    margin:0 auto;
-
-    padding:0 5% 70px;
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:15px;
-}
-
-.trust-card{
-    padding:22px;
-
-    border:1px solid var(--border);
-
-    border-radius:16px;
-
-    background:var(--card);
-
-    backdrop-filter:blur(15px);
-
-    transition:.3s ease;
-}
-
-.trust-card:hover{
-    transform:translateY(-4px);
-
-    border-color:var(--border-hover);
-}
-
-.trust-card span{
-    display:block;
-
-    color:var(--primary);
-
-    font-family:'Space Grotesk',sans-serif;
-
-    font-size:13px;
-    font-weight:800;
-
-    letter-spacing:1px;
-
-    margin-bottom:7px;
-}
-
-.trust-card strong{
-    font-size:14px;
-}
-
-/* =========================
-   SECTION
-========================= */
-
-section{
-    padding:105px 5%;
-
-    border-top:1px solid var(--border);
-}
-
-.section-container{
-    max-width:1300px;
-
-    margin:auto;
-}
-
-.section-heading{
-    max-width:720px;
-
-    margin:0 auto 55px;
-
-    text-align:center;
-}
-
-.section-label{
-    display:inline-block;
-
-    color:var(--primary);
-
-    font-size:10px;
-    font-weight:800;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-    margin-bottom:13px;
-}
-
-.section-heading h2{
-    font-family:'Space Grotesk',sans-serif;
-
-    font-size:clamp(31px,4vw,48px);
-
-    line-height:1.1;
-
-    letter-spacing:-1.5px;
-
-    margin-bottom:15px;
-}
-
-.section-heading p{
-    color:var(--muted);
-
-    font-size:14px;
-
-    line-height:1.8;
-}
-
-/* =========================
-   SERVICES
-========================= */
-
-.services-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:20px;
-}
-
-.service-card{
-    position:relative;
-
-    padding:30px;
-
-    border:1px solid var(--border);
-
-    border-radius:var(--radius);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.045),
-            rgba(255,255,255,.015)
-        );
-
-    backdrop-filter:blur(16px);
-
-    overflow:hidden;
-
-    transition:.35s ease;
-}
-
-.service-card::before{
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:0;
-
-    width:100%;
-    height:2px;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--primary),
-            var(--secondary),
-            var(--accent)
-        );
-
-    transform:scaleX(0);
-
-    transform-origin:left;
-
-    transition:.4s ease;
-}
-
-.service-card:hover{
-    transform:translateY(-7px);
-
-    border-color:var(--border-hover);
-
-    box-shadow:var(--shadow);
-}
-
-.service-card:hover::before{
-    transform:scaleX(1);
-}
-
-.service-number{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    width:43px;
-    height:43px;
-
-    margin-bottom:22px;
-
-    border-radius:13px;
-
-    background:rgba(34,211,238,.08);
-
-    border:1px solid rgba(34,211,238,.15);
-
-    color:var(--primary);
-
-    font-family:'Space Grotesk',sans-serif;
-
-    font-weight:800;
-
-    font-size:12px;
-}
-
-.service-card h3{
-    font-family:'Space Grotesk',sans-serif;
-
-    font-size:20px;
-
-    margin-bottom:12px;
-}
-
-.service-card p{
-    color:var(--muted);
-
-    font-size:13px;
-
-    line-height:1.75;
-
-    margin-bottom:20px;
-}
-
-.tags{
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
-}
-
-.tags span{
-    padding:5px 9px;
-
-    border-radius:7px;
-
-    border:1px solid var(--border);
-
-    background:rgba(255,255,255,.03);
-
-    color:var(--dim);
-
-    font-size:9px;
-    font-weight:800;
-}
-
-/* =========================
-   SHOWCASE
-========================= */
-
-.showcase{
-    background:
-        linear-gradient(
-            180deg,
-            transparent,
-            rgba(34,211,238,.025),
-            transparent
-        );
-}
-
-.showcase-grid{
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:25px;
-}
-
-.showcase-card{
-    position:relative;
-
-    min-height:360px;
-
-    overflow:hidden;
-
-    border-radius:24px;
-
-    border:1px solid var(--border);
-
-    background:var(--card);
-
-    transition:.35s ease;
-}
-
-.showcase-card:hover{
-    transform:translateY(-5px);
-
-    border-color:var(--border-hover);
-
-    box-shadow:var(--shadow);
-}
-
-.showcase-card img{
-    width:100%;
-    height:100%;
-
-    min-height:360px;
-
-    object-fit:cover;
-
-    transition:transform .7s ease;
-}
-
-.showcase-card:hover img{
-    transform:scale(1.05);
-}
-
-.showcase-overlay{
-    position:absolute;
-    inset:0;
-
+    background-size:cover;
+    background-position:center;
     display:flex;
     align-items:flex-end;
-
     padding:30px;
-
-    background:
-        linear-gradient(
-            to top,
-            rgba(2,7,15,.95),
-            rgba(2,7,15,.05) 75%
-        );
+    transition:opacity .8s ease;
 }
-
-.showcase-overlay h3{
-    font-family:'Space Grotesk',sans-serif;
-
-    font-size:22px;
-
-    margin-bottom:7px;
-}
-
-.showcase-overlay p{
-    color:#cbd5e1;
-
-    font-size:12px;
-
-    line-height:1.6;
-}
-
-/* =========================
-   WHY US
-========================= */
-
-.why-grid{
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:50px;
-
-    align-items:center;
-}
-
-.why-image{
-    position:relative;
-
-    border-radius:28px;
-
-    overflow:hidden;
-
-    border:1px solid var(--border);
-
-    min-height:500px;
-}
-
-.why-image img{
-    width:100%;
-    height:100%;
-
-    min-height:500px;
-
-    object-fit:cover;
-}
-
-.why-image::after{
+.slide.active{opacity:1}
+.slide:after{
     content:"";
-
     position:absolute;
     inset:0;
-
-    background:
-        linear-gradient(
-            to top,
-            rgba(2,7,15,.8),
-            transparent 70%
-        );
+    background:linear-gradient(to top,rgba(2,6,23,.96),rgba(2,6,23,.08) 65%);
 }
-
-.why-content .section-label{
-    margin-bottom:12px;
+.s1{background-image:url('assets/servers.jpg')}
+.s2{background-image:url('assets/lab.jpg')}
+.s3{background-image:url('assets/ui.jpg')}
+.s4{background-image:url('assets/team.jpg')}
+.slide-content{position:relative;z-index:2}
+.slide-number{
+    color:var(--cyan);
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1.8px;
 }
-
-.why-content h2{
-    font-family:'Space Grotesk',sans-serif;
-
-    font-size:42px;
-
-    line-height:1.1;
-
-    letter-spacing:-1.5px;
-
-    margin-bottom:18px;
+.slide h3{font-size:25px;margin:7px 0}
+.slide p{max-width:510px;color:#e2e8f0;font-size:11px;line-height:1.7}
+.dots{
+    position:absolute;
+    z-index:5;
+    right:24px;
+    bottom:24px;
+    display:flex;
+    gap:8px;
 }
-
-.why-content > p{
-    color:var(--muted);
-
-    line-height:1.8;
-
-    font-size:14px;
-
-    margin-bottom:30px;
+.dot{
+    width:9px;height:9px;
+    border:0;
+    border-radius:50%;
+    background:rgba(255,255,255,.32);
+    cursor:pointer;
+    transition:.3s;
 }
+.dot.active{width:28px;border-radius:8px;background:var(--cyan);box-shadow:0 0 12px var(--cyanGlow)}
 
-.features{
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:15px;
+/* SECTIONS */
+.section{
+    padding:95px 5%;
+    border-top:1px solid var(--border);
 }
-
-.feature{
-    padding:18px;
-
-    border:1px solid var(--border);
-
-    border-radius:15px;
-
-    background:rgba(255,255,255,.025);
-}
-
-.feature strong{
-    display:block;
-
-    font-size:13px;
-
-    margin-bottom:6px;
-}
-
-.feature span{
-    color:var(--muted);
-
-    font-size:11px;
-
-    line-height:1.6;
-}
-
-/* =========================
-   PROCESS
-========================= */
-
-.process-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:15px;
-}
-
-.process-card{
-    position:relative;
-
-    padding:28px 22px;
-
-    border:1px solid var(--border);
-
-    border-radius:18px;
-
-    background:var(--card);
-
+.section-head{
+    max-width:760px;
+    margin:0 auto 48px;
     text-align:center;
 }
-
-.process-number{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    width:48px;
-    height:48px;
-
-    margin:0 auto 18px;
-
-    border-radius:50%;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--secondary),
-            var(--primary)
-        );
-
-    color:white;
-
-    font-family:'Space Grotesk',sans-serif;
-
+.section-label{
+    color:var(--cyan);
+    font-size:9px;
     font-weight:800;
+    letter-spacing:2px;
+    text-transform:uppercase;
 }
-
-.process-card h3{
-    font-family:'Space Grotesk',sans-serif;
-
-    font-size:17px;
-
-    margin-bottom:9px;
+.section-head h2{
+    margin:11px 0 13px;
+    font-size:clamp(30px,4vw,44px);
+    line-height:1.15;
 }
-
-.process-card p{
+.section-head p{
     color:var(--muted);
-
-    font-size:11px;
-
-    line-height:1.7;
+    font-size:12px;
+    line-height:1.8;
 }
 
-/* =========================
-   ESTIMATOR
-========================= */
-
-.estimator{
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(99,102,241,.12),
-            transparent 50%
-        );
+/* METRICS */
+.metrics{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    padding:0 5% 80px;
 }
-
-.calculator{
-    max-width:850px;
-
-    margin:auto;
-
-    padding:40px;
-
-    border:1px solid var(--border-hover);
-
-    border-radius:26px;
-
+.metric{
+    padding:27px 20px;
+    text-align:center;
     background:var(--card);
-
-    backdrop-filter:blur(20px);
-
-    box-shadow:var(--shadow);
+    border:1px solid var(--border);
+    border-radius:18px;
+    backdrop-filter:blur(12px);
+    transition:.3s;
+}
+.metric:hover{transform:translateY(-5px);border-color:var(--cyan)}
+.metric strong{
+    display:block;
+    color:var(--cyan);
+    font:800 34px 'Cinzel',serif;
+    text-shadow:0 0 20px var(--cyanGlow);
+}
+.metric span{
+    color:var(--muted);
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
 }
 
-.calc-row{
-    display:flex;
+/* HOME CAPABILITIES */
+.capability-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+.capability{
+    padding:30px 27px;
+    min-height:220px;
+    position:relative;
+    overflow:hidden;
+    border:1px solid var(--border);
+    border-radius:21px;
+    background:var(--card);
+    backdrop-filter:blur(12px);
+    transition:.3s;
+}
+.capability:before{
+    content:"";
+    position:absolute;
+    top:0;left:0;
+    width:100%;height:3px;
+    background:linear-gradient(90deg,var(--cyan),var(--purple));
+}
+.capability:hover{transform:translateY(-6px);border-color:var(--cyan);box-shadow:0 20px 45px rgba(0,0,0,.3)}
+.cap-icon{
+    width:42px;height:42px;
+    display:grid;place-items:center;
+    border-radius:12px;
+    border:1px solid rgba(6,182,212,.2);
+    background:rgba(6,182,212,.07);
+    font-size:19px;
+    margin-bottom:17px;
+}
+.capability h3{font-size:18px;margin-bottom:9px}
+.capability p{color:var(--muted);font-size:11px;line-height:1.75}
+.cap-link{display:inline-block;margin-top:15px;color:var(--cyan);font-size:9px;font-weight:800;letter-spacing:.8px}
 
+/* PLATFORM */
+.platform{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+}
+.platform-card{
+    position:relative;
+    height:360px;
+    overflow:hidden;
+    border-radius:22px;
+    border:1px solid var(--border);
+    background:var(--card);
+}
+.platform-card img{
+    width:100%;height:100%;
+    object-fit:cover;
+    transition:.55s;
+}
+.platform-card:hover img{transform:scale(1.045)}
+.platform-card:after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,rgba(2,6,23,.95),rgba(2,6,23,.05) 65%);
+}
+.platform-info{
+    position:absolute;
+    left:26px;right:26px;bottom:25px;
+    z-index:2;
+}
+.platform-info small{
+    color:var(--cyan);
+    font-size:8px;
+    font-weight:800;
+    letter-spacing:1.5px;
+}
+.platform-info h3{font-size:24px;margin:6px 0}
+.platform-info p{color:#cbd5e1;font-size:10px;line-height:1.7;max-width:500px}
+
+/* ARCHITECTURE */
+.arch-grid{
+    display:grid;
+    grid-template-columns:.85fr 1.15fr;
+    gap:30px;
     align-items:center;
-
-    justify-content:space-between;
-
-    gap:20px;
-
-    padding:19px 0;
-
-    border-bottom:1px solid var(--border);
 }
-
-.calc-row:last-of-type{
-    border-bottom:0;
+.arch-copy h2{font-size:39px;line-height:1.15;margin:11px 0 15px}
+.arch-copy p{color:var(--muted);font-size:12px;line-height:1.8}
+.arch-list{
+    display:grid;
+    gap:9px;
+    margin-top:23px;
 }
-
-.calc-label{
+.arch-item{
     display:flex;
     align-items:center;
     gap:12px;
-
-    font-size:13px;
-    font-weight:600;
-
-    cursor:pointer;
-}
-
-.calc-label input{
-    width:19px;
-    height:19px;
-
-    accent-color:var(--primary);
-
-    cursor:pointer;
-}
-
-.calc-price{
-    color:var(--primary);
-
-    white-space:nowrap;
-
-    font-size:13px;
-    font-weight:800;
-}
-
-.total{
-    margin-top:25px;
-
-    padding:22px;
-
-    text-align:center;
-
-    border-radius:15px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(99,102,241,.12),
-            rgba(34,211,238,.08)
-        );
-
+    padding:13px 14px;
     border:1px solid var(--border);
-
-    color:var(--muted);
-
-    font-size:12px;
-    font-weight:700;
-}
-
-.total strong{
-    display:block;
-
-    margin-top:7px;
-
-    color:var(--primary);
-
-    font-family:'Space Grotesk',sans-serif;
-
-    font-size:34px;
-}
-
-/* =========================
-   FAQ
-========================= */
-
-.faq{
-    max-width:850px;
-
-    margin:auto;
-}
-
-.faq-item{
-    margin-bottom:12px;
-
-    border:1px solid var(--border);
-
-    border-radius:15px;
-
-    overflow:hidden;
-
+    border-radius:12px;
     background:var(--card);
 }
-
-.faq-question{
-    width:100%;
-
-    padding:20px 22px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    gap:20px;
-
-    background:none;
-    border:0;
-
-    color:var(--text);
-
-    text-align:left;
-
-    font-size:13px;
-    font-weight:700;
-
-    cursor:pointer;
-}
-
-.faq-question span{
-    color:var(--primary);
-
-    font-size:20px;
-
-    transition:.3s ease;
-}
-
-.faq-item.active .faq-question span{
-    transform:rotate(45deg);
-}
-
-.faq-answer{
-    max-height:0;
-
+.arch-item b{font-size:10px}
+.arch-item span{margin-left:auto;color:var(--cyan);font-size:9px;font-weight:800}
+.terminal{
     overflow:hidden;
-
-    padding:0 22px;
-
-    color:var(--muted);
-
-    font-size:12px;
-
-    line-height:1.8;
-
-    transition:max-height .35s ease,
-               padding .35s ease;
-}
-
-.faq-item.active .faq-answer{
-    max-height:300px;
-
-    padding:0 22px 20px;
-}
-
-/* =========================
-   CONTACT CTA
-========================= */
-
-.contact-box{
-    max-width:1100px;
-
-    margin:auto;
-
-    padding:55px;
-
-    position:relative;
-
-    overflow:hidden;
-
-    border-radius:28px;
-
-    border:1px solid var(--border-hover);
-
-    background:
-        radial-gradient(
-            circle at 80% 10%,
-            rgba(34,211,238,.14),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 10% 90%,
-            rgba(99,102,241,.15),
-            transparent 35%
-        ),
-        var(--card);
-}
-
-.contact-box::before{
-    content:"";
-
-    position:absolute;
-
-    width:220px;
-    height:220px;
-
-    right:-100px;
-    top:-100px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(34,211,238,.2);
-}
-
-.contact-box h2{
-    font-family:'Space Grotesk',sans-serif;
-
-    font-size:clamp(30px,4vw,48px);
-
-    letter-spacing:-1.5px;
-
-    margin-bottom:15px;
-}
-
-.contact-box p{
-    max-width:650px;
-
-    color:var(--muted);
-
-    line-height:1.8;
-
-    font-size:14px;
-
-    margin-bottom:25px;
-}
-
-.contact-actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-    padding:65px 5% 25px;
-
-    border-top:1px solid var(--border);
-
-    background:rgba(2,7,15,.65);
-}
-
-.footer-grid{
-    max-width:1300px;
-
-    margin:auto;
-
-    display:grid;
-
-    grid-template-columns:
-        1.5fr 1fr 1fr 1fr;
-
-    gap:45px;
-
-    padding-bottom:45px;
-}
-
-.footer-brand p{
-    max-width:350px;
-
-    margin-top:15px;
-
-    color:var(--muted);
-
-    font-size:12px;
-
-    line-height:1.8;
-}
-
-.footer-col h4{
-    margin-bottom:17px;
-
-    font-family:'Space Grotesk',sans-serif;
-
-    font-size:14px;
-}
-
-.footer-col a{
-    display:block;
-
-    color:var(--muted);
-
-    font-size:12px;
-
-    margin-bottom:11px;
-
-    transition:.2s ease;
-}
-
-.footer-col a:hover{
-    color:var(--primary);
-
-    transform:translateX(3px);
-}
-
-.footer-bottom{
-    max-width:1300px;
-
-    margin:auto;
-
-    padding-top:25px;
-
-    border-top:1px solid var(--border);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:20px;
-
-    color:var(--dim);
-
-    font-size:10px;
-}
-
-/* =========================
-   BACK TO TOP
-========================= */
-
-.back-top{
-    position:fixed;
-
-    right:22px;
-    bottom:22px;
-
-    width:45px;
-    height:45px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:13px;
-
+    border-radius:17px;
     border:1px solid var(--border);
+    background:#080d1a;
+    box-shadow:0 25px 55px rgba(0,0,0,.55);
+    font-family:'Fira Code',monospace;
+}
+.terminal-head{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:12px 17px;
+    background:#0f172a;
+    border-bottom:1px solid var(--border);
+}
+.tdot{width:10px;height:10px;border-radius:50%}
+.red{background:#ef4444}.yellow{background:#f59e0b}.green{background:#10b981}
+.terminal-title{margin-left:7px;color:#94a3b8;font-size:9px}
+.terminal-body{
+    padding:24px;
+    color:#a5f3fc;
+    font-size:11px;
+    line-height:1.95;
+    overflow:auto;
+}
+.kw{color:#c084fc;font-weight:700}
+.str{color:#86efac}
+.comment{color:#64748b;font-style:italic}
 
-    background:rgba(8,16,29,.85);
+/* PROCESS */
+.process{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:12px;
+}
+.process-card{
+    padding:22px 16px;
+    text-align:center;
+    border:1px solid var(--border);
+    border-radius:16px;
+    background:var(--card);
+}
+.process-number{
+    width:38px;height:38px;
+    margin:0 auto 12px;
+    display:grid;place-items:center;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--purple),var(--cyan));
+    color:#fff;
+    font:800 10px 'Cinzel',serif;
+}
+.process-card h3{font-size:14px;margin-bottom:6px}
+.process-card p{color:var(--muted);font-size:9px;line-height:1.7}
 
-    backdrop-filter:blur(12px);
+/* CTA */
+.cta{padding:85px 5%}
+.cta-box{
+    max-width:1150px;
+    margin:auto;
+    padding:54px;
+    border:1px solid var(--highlight);
+    border-radius:26px;
+    background:
+      radial-gradient(circle at 85% 15%,rgba(6,182,212,.14),transparent 30%),
+      radial-gradient(circle at 15% 90%,rgba(168,85,247,.14),transparent 30%),
+      var(--card);
+}
+.cta-box h2{font-size:clamp(30px,4vw,46px);margin:9px 0 12px}
+.cta-box p{max-width:690px;color:var(--muted);font-size:12px;line-height:1.8;margin-bottom:24px}
+.cta-actions{display:flex;gap:10px;flex-wrap:wrap}
 
-    color:var(--primary);
-
-    cursor:pointer;
-
-    opacity:0;
-    visibility:hidden;
-
-    transform:translateY(10px);
-
-    transition:.3s ease;
-
-    z-index:500;
+/* FOOTER */
+footer{
+    padding:58px 5% 25px;
+    border-top:1px solid var(--border);
+    background:rgba(2,6,23,.92);
+}
+.footer-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr 1fr;
+    gap:35px;
+    padding-bottom:40px;
+}
+.footer-col h4{font-size:13px;margin-bottom:15px}
+.footer-col a,.footer-col p{
+    display:block;
+    color:var(--muted);
+    font-size:10px;
+    margin-bottom:9px;
+    line-height:1.7;
+}
+.footer-col a:hover{color:var(--cyan)}
+.footer-brand p{max-width:330px}
+.footer-bottom{
+    padding-top:22px;
+    border-top:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    color:var(--dim);
+    font-size:9px;
 }
 
-.back-top.show{
-    opacity:1;
-    visibility:visible;
-
-    transform:translateY(0);
-}
-
-/* =========================
-   SCROLL REVEAL
-========================= */
-
+/* REVEAL */
 .reveal{
     opacity:0;
-
-    transform:translateY(25px);
-
-    transition:
-        opacity .7s ease,
-        transform .7s ease;
+    transform:translateY(22px);
+    transition:opacity .7s ease,transform .7s ease;
 }
+.reveal.visible{opacity:1;transform:none}
 
-.reveal.visible{
-    opacity:1;
-
-    transform:translateY(0);
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
+/* RESPONSIVE */
 @media(max-width:1100px){
-
-    nav{
-        gap:16px;
-    }
-
-    .hero{
-        gap:35px;
-    }
-
-    .services-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .footer-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
+    nav{gap:14px}
+    .hero{grid-template-columns:1fr;min-height:auto;padding-top:65px}
+    .hero h1{max-width:850px}
+    .slider{height:430px}
+    .metrics{grid-template-columns:repeat(2,1fr)}
+    .capability-grid{grid-template-columns:repeat(2,1fr)}
+    .process{grid-template-columns:repeat(3,1fr)}
+    .footer-grid{grid-template-columns:repeat(2,1fr)}
 }
-
-@media(max-width:850px){
-
-    .topbar{
-        display:none;
-    }
-
-    header{
-        top:0;
-    }
-
+@media(max-width:820px){
+    .top-status{display:none}
     nav{
         position:absolute;
-
-        top:76px;
+        top:73px;
         left:5%;
         right:5%;
-
         display:none;
         flex-direction:column;
         align-items:stretch;
-
-        padding:18px;
-
+        gap:0;
+        padding:14px;
         border:1px solid var(--border);
-
-        border-radius:18px;
-
-        background:
-            rgba(7,14,26,.96);
-
-        backdrop-filter:blur(25px);
-
-        box-shadow:var(--shadow);
+        border-radius:17px;
+        background:rgba(4,10,22,.97);
+        backdrop-filter:blur(20px);
+        box-shadow:0 25px 60px rgba(0,0,0,.45);
     }
-
-    .light nav{
-        background:rgba(255,255,255,.96);
-    }
-
-    nav.open{
-        display:flex;
-    }
-
-    nav a{
-        padding:12px;
-    }
-
-    nav a::after{
-        display:none;
-    }
-
-    .header-actions .btn{
-        display:none;
-    }
-
-    .menu-btn{
-        display:block;
-    }
-
-    .hero{
-        grid-template-columns:1fr;
-
-        min-height:auto;
-
-        padding-top:65px;
-    }
-
-    .hero h1{
-        letter-spacing:-2px;
-    }
-
-    .hero-visual{
-        max-width:750px;
-
-        width:100%;
-
-        margin:auto;
-    }
-
-    .slider{
-        height:450px;
-    }
-
-    .trust-strip{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .why-grid{
-        grid-template-columns:1fr;
-    }
-
-    .process-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
+    .light nav{background:rgba(255,255,255,.97)}
+    nav.open{display:flex}
+    nav a{padding:12px 10px}
+    nav a:after{display:none}
+    .header-actions .btn{display:none}
+    .menu-btn{display:grid}
+    .platform,.arch-grid{grid-template-columns:1fr}
+    .platform-card{height:330px}
+    .arch-copy{order:1}
+    .terminal{order:2}
 }
-
-@media(max-width:600px){
-
-    section{
-        padding:75px 5%;
-    }
-
-    .hero{
-        padding:50px 5% 65px;
-    }
-
-    .hero h1{
-        font-size:43px;
-
-        line-height:1.04;
-    }
-
-    .hero-description{
-        font-size:14px;
-    }
-
-    .hero-buttons{
-        flex-direction:column;
-    }
-
-    .hero-buttons .btn{
-        width:100%;
-    }
-
-    .slider{
-        height:390px;
-
-        border-radius:20px;
-    }
-
-    .slide-content{
-        left:20px;
-        right:20px;
-        bottom:20px;
-    }
-
-    .slide-content h3{
-        font-size:21px;
-    }
-
-    .visual-badge{
-        width:80px;
-        height:80px;
-
-        right:-7px;
-        top:-8px;
-    }
-
-    .visual-badge strong{
-        font-size:17px;
-    }
-
-    .trust-strip{
-        grid-template-columns:1fr;
-
-        padding-bottom:50px;
-    }
-
-    .services-grid{
-        grid-template-columns:1fr;
-    }
-
-    .showcase-grid{
-        grid-template-columns:1fr;
-    }
-
-    .showcase-card,
-    .showcase-card img{
-        min-height:300px;
-    }
-
-    .features{
-        grid-template-columns:1fr;
-    }
-
-    .process-grid{
-        grid-template-columns:1fr;
-    }
-
-    .calculator{
-        padding:25px 18px;
-    }
-
-    .calc-row{
-        align-items:flex-start;
-    }
-
-    .calc-label{
-        font-size:12px;
-    }
-
-    .contact-box{
-        padding:32px 24px;
-    }
-
-    .contact-actions{
-        flex-direction:column;
-    }
-
-    .contact-actions .btn{
-        width:100%;
-    }
-
-    .footer-grid{
-        grid-template-columns:1fr;
-    }
-
-    .footer-bottom{
-        flex-direction:column;
-        text-align:center;
-    }
-
+@media(max-width:560px){
+    .logo-name{font-size:15px}
+    .logo-sub{font-size:7px}
+    .logo img{width:40px;height:40px}
+    .hero{padding:50px 5% 65px;gap:32px}
+    .hero h1{font-size:43px;letter-spacing:-1.5px}
+    .hero-copy{font-size:12px}
+    .hero-actions{flex-direction:column}
+    .hero-actions .btn,.cta-actions .btn{width:100%}
+    .slider{height:370px;border-radius:20px}
+    .slide{padding:23px}
+    .slide h3{font-size:21px}
+    .metrics,.capability-grid,.process{grid-template-columns:1fr}
+    .section{padding:70px 5%}
+    .platform-card{height:290px}
+    .arch-copy h2{font-size:32px}
+    .cta{padding:60px 5%}
+    .cta-box{padding:32px 24px}
+    .footer-grid{grid-template-columns:1fr}
+    .footer-bottom{flex-direction:column;text-align:center}
 }
-
+@media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*:before,*:after{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+}
 </style>
 </head>
 
 <body>
+<canvas id="bgCanvas"></canvas>
 
-<!-- =========================
-     TOP BAR
-========================= -->
-
-<div class="topbar">
-
-    <div class="status">
-        <span class="status-dot"></span>
-        DIGITAL SYSTEMS • AI • WEB ENGINEERING
-    </div>
-
-    <div>
-        SURAT • GUJARAT • INDIA
-    </div>
-
+<!-- OPERATIONAL STATUS -->
+<div class="top-status">
+    <div class="live"><span class="live-dot"></span>SYSTEM STATUS: 100% OPERATIONAL</div>
+    <div>SURAT OPERATIONS HQ • GUJARAT, INDIA</div>
 </div>
 
-
-<!-- =========================
-     HEADER
-========================= -->
-
+<!-- HEADER -->
 <header>
-
-    <a href="#home" class="logo">
-
-        <img src="assets/logo.png"
-             alt="Aether Tech Logo">
-
-        <div class="logo-text">
-            <strong>AETHER TECH</strong>
-            <span>ENTERPRISE DIGITAL SYSTEMS</span>
+    <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="Aether Tech Official Logo">
+        <div>
+            <div class="logo-name">AETHER TECH</div>
+            <span class="logo-sub">ENTERPRISE PLATFORM</span>
         </div>
-
     </a>
 
-
     <nav id="mainNav">
-
-        <a href="#home" class="active">Home</a>
-
-        <a href="#services">Services</a>
-
-        <a href="#showcase">Showcase</a>
-
-        <a href="#process">Process</a>
-
-        <a href="#estimator">Pricing</a>
-
-        <a href="#faq">FAQ</a>
-
-        <a href="#contact">Contact</a>
-
+        <a href="index.html" class="active">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About Us</a>
+        <a href="infrastructure.html">Infrastructure</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
     </nav>
 
-
     <div class="header-actions">
-
-        <button
-            class="theme-btn"
-            id="themeBtn"
-            aria-label="Toggle theme">
-            ☼
-        </button>
-
-        <a
-            href="https://wa.me/919925527617"
-            target="_blank"
-            class="btn btn-primary">
-            WhatsApp ↗
-        </a>
-
-        <button
-            class="menu-btn"
-            id="menuBtn"
-            aria-label="Open menu">
-            ☰
-        </button>
-
+        <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">☼</button>
+        <a href="https://wa.me/919925527617" target="_blank" rel="noopener" class="btn btn-grad">WhatsApp ↗</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
     </div>
-
 </header>
 
+<!-- MOVING TICKER -->
+<div class="ticker">
+    <div class="ticker-track">
+        ✦ Web Application Engineering &nbsp; • &nbsp;
+        Artificial Intelligence Integrations &nbsp; • &nbsp;
+        Enterprise Cloud Networks &nbsp; • &nbsp;
+        Custom UI/UX Design &nbsp; • &nbsp;
+        Academic & Tech Coaching Frameworks &nbsp; • &nbsp;
+        High-Performance API Pipelines &nbsp; • &nbsp;
+        ✦ Web Application Engineering &nbsp; • &nbsp;
+        Artificial Intelligence Integrations &nbsp; • &nbsp;
+        Enterprise Cloud Networks &nbsp; • &nbsp;
+        Custom UI/UX Design
+    </div>
+</div>
 
-<!-- =========================
-     HERO
-========================= -->
+<main>
 
-<main id="home">
-
+<!-- HERO -->
 <section class="hero">
-
-    <div class="hero-content">
-
-        <div class="eyebrow">
-            Enterprise Software & AI Infrastructure
-        </div>
-
+    <div class="hero-left reveal">
+        <span class="badge">ENTERPRISE SOFTWARE & AI INFRASTRUCTURE</span>
 
         <h1>
-            Engineering
-            <span class="gradient-text">
-                Tomorrow's
-            </span>
-            Digital Platforms.
+            Engineering <span class="gradient-text">Tomorrow's</span>
+            Digital Platforms
         </h1>
 
-
-        <p class="hero-description">
-            Aether Tech builds modern web applications,
-            intelligent automation workflows, high-performance
-            interfaces and structured technology solutions
-            designed for ambitious businesses and organizations.
+        <p class="hero-copy">
+            Aether Tech builds scalable web systems, integrates high-performance
+            artificial intelligence workflows, designs intuitive software interfaces,
+            and delivers structured academic technology solutions.
         </p>
 
-
-        <div class="hero-buttons">
-
-            <a
-                href="#services"
-                class="btn btn-primary">
-                Explore Services →
-            </a>
-
-            <a
-                href="#contact"
-                class="btn btn-outline">
-                Start a Project
-            </a>
-
+        <div class="hero-actions">
+            <a href="services.html" class="btn btn-grad">Explore Services 🚀</a>
+            <a href="contact.html" class="btn btn-outline">Schedule Consultation ↗</a>
         </div>
 
-
-        <div class="hero-tags">
-
-            <span>Web Development</span>
-            <span>AI Automation</span>
-            <span>UI/UX</span>
-            <span>Cloud Systems</span>
-            <span>EdTech</span>
-
+        <div class="hero-points">
+            <span>WEB APPLICATIONS</span>
+            <span>AI AUTOMATION</span>
+            <span>UI / UX</span>
+            <span>CLOUD SYSTEMS</span>
+            <span>EDTECH</span>
         </div>
-
     </div>
 
-
-    <!-- HERO IMAGE SLIDER -->
-
-    <div class="hero-visual">
-
-        <div class="visual-badge">
-            <strong>01</strong>
-            <span>TECH CORE</span>
-        </div>
-
-
-        <div class="slider" id="slider">
-
-
-            <!-- SERVER IMAGE -->
-
-            <div class="slide active">
-
-                <img
-                    src="assets/servers.jpg"
-                    alt="High performance server infrastructure">
-
+    <div class="reveal">
+        <div class="slider" id="heroSlider">
+            <div class="slide s1 active">
                 <div class="slide-content">
-
-                    <div class="slide-number">
-                        01 / INFRASTRUCTURE
-                    </div>
-
-                    <h3>
-                        High-Performance Server Systems
-                    </h3>
-
-                    <p>
-                        Scalable infrastructure concepts
-                        designed for reliable digital platforms,
-                        applications and backend operations.
-                    </p>
-
+                    <div class="slide-number">01 / CLOUD INFRASTRUCTURE</div>
+                    <h3>High-Speed Cloud Server Nodes</h3>
+                    <p>Enterprise cloud backend and database cluster deployment.</p>
                 </div>
-
             </div>
 
-
-            <!-- LAB IMAGE -->
-
-            <div class="slide">
-
-                <img
-                    src="assets/lab.jpg"
-                    alt="Technology and AI laboratory">
-
+            <div class="slide s2">
                 <div class="slide-content">
-
-                    <div class="slide-number">
-                        02 / AI & RESEARCH
-                    </div>
-
-                    <h3>
-                        AI Automation & Research
-                    </h3>
-
-                    <p>
-                        Intelligent workflows, automation,
-                        APIs and technology-driven solutions
-                        for modern business operations.
-                    </p>
-
+                    <div class="slide-number">02 / AI & RESEARCH</div>
+                    <h3>AI & Research Laboratory</h3>
+                    <p>Automated bot workflows, webhooks and intelligent technology systems.</p>
                 </div>
-
             </div>
 
-
-            <!-- UI IMAGE -->
-
-            <div class="slide">
-
-                <img
-                    src="assets/ui.jpg"
-                    alt="Modern user interface design">
-
+            <div class="slide s3">
                 <div class="slide-content">
-
-                    <div class="slide-number">
-                        03 / UI ENGINEERING
-                    </div>
-
-                    <h3>
-                        Modern UI / UX Systems
-                    </h3>
-
-                    <p>
-                        Clean, responsive and conversion-focused
-                        interfaces built for websites,
-                        dashboards and digital products.
-                    </p>
-
+                    <div class="slide-number">03 / PRODUCT ENGINEERING</div>
+                    <h3>Modern UI/UX Engineering</h3>
+                    <p>Enterprise dashboards and responsive web application interfaces.</p>
                 </div>
-
             </div>
 
-
-            <!-- TEAM IMAGE -->
-
-            <div class="slide">
-
-                <img
-                    src="assets/team.jpg"
-                    alt="Technology development team">
-
+            <div class="slide s4">
                 <div class="slide-content">
-
-                    <div class="slide-number">
-                        04 / DEVELOPMENT
-                    </div>
-
-                    <h3>
-                        Development & Support
-                    </h3>
-
-                    <p>
-                        Structured development workflows,
-                        maintenance and continuous technical
-                        improvement for digital projects.
-                    </p>
-
+                    <div class="slide-number">04 / DEVELOPMENT OPERATIONS</div>
+                    <h3>Development & Support Operations</h3>
+                    <p>Dedicated software development, maintenance and technical support workflows.</p>
                 </div>
-
             </div>
 
-
-            <div class="slider-controls">
-
-                <button
-                    class="slider-dot active"
-                    onclick="showSlide(0)"
-                    aria-label="Slide 1">
-                </button>
-
-                <button
-                    class="slider-dot"
-                    onclick="showSlide(1)"
-                    aria-label="Slide 2">
-                </button>
-
-                <button
-                    class="slider-dot"
-                    onclick="showSlide(2)"
-                    aria-label="Slide 3">
-                </button>
-
-                <button
-                    class="slider-dot"
-                    onclick="showSlide(3)"
-                    aria-label="Slide 4">
-                </button>
-
+            <div class="dots">
+                <button class="dot active" onclick="showSlide(0)" aria-label="Slide 1"></button>
+                <button class="dot" onclick="showSlide(1)" aria-label="Slide 2"></button>
+                <button class="dot" onclick="showSlide(2)" aria-label="Slide 3"></button>
+                <button class="dot" onclick="showSlide(3)" aria-label="Slide 4"></button>
             </div>
-
         </div>
-
     </div>
-
 </section>
 
-
-<!-- =========================
-     TRUST / VALUE STRIP
-========================= -->
-
-<div class="trust-strip reveal">
-
-    <div class="trust-card">
-        <span>01</span>
-        <strong>Full-Stack Development</strong>
+<!-- METRICS / POSITIONING -->
+<section class="metrics">
+    <div class="metric reveal">
+        <strong>01</strong>
+        <span>Technology First</span>
     </div>
-
-    <div class="trust-card">
-        <span>02</span>
-        <strong>AI & Automation</strong>
+    <div class="metric reveal">
+        <strong>24/7</strong>
+        <span>Digital Availability</span>
     </div>
-
-    <div class="trust-card">
-        <span>03</span>
-        <strong>Modern UI / UX</strong>
+    <div class="metric reveal">
+        <strong>07</strong>
+        <span>Core Asset Images</span>
     </div>
-
-    <div class="trust-card">
-        <span>04</span>
-        <strong>Technical Support</strong>
+    <div class="metric reveal">
+        <strong>360°</strong>
+        <span>Digital Approach</span>
     </div>
+</section>
 
-</div>
-
-
-<!-- =========================
-     SERVICES
-========================= -->
-
-<section id="services">
-
-<div class="section-container">
-
-    <div class="section-heading reveal">
-
-        <span class="section-label">
-            Capabilities
-        </span>
-
-        <h2>
-            Technology built around
-            real business needs.
-        </h2>
-
+<!-- HOME OVERVIEW — SERVICES ARE ON SERVICES.HTML -->
+<section class="section">
+    <div class="section-head reveal">
+        <span class="section-label">What We Build</span>
+        <h2>Technology capabilities, presented with clarity.</h2>
         <p>
-            From websites and web applications to automation,
-            interfaces and technology platforms, our solutions
-            are designed to be practical, scalable and easy to use.
+            Aether Tech brings software engineering, automation, interface design,
+            academic technology and infrastructure thinking into one digital ecosystem.
+            Explore the dedicated Services page for complete details.
         </p>
-
     </div>
 
+    <div class="capability-grid">
+        <article class="capability reveal">
+            <div class="cap-icon">⌘</div>
+            <h3>Software Engineering</h3>
+            <p>Responsive websites, custom web applications, backend systems and API-ready digital products.</p>
+            <a href="services.html" class="cap-link">VIEW SERVICES →</a>
+        </article>
 
-    <div class="services-grid">
+        <article class="capability reveal">
+            <div class="cap-icon">AI</div>
+            <h3>AI & Automation</h3>
+            <p>Bot workflows, webhooks, APIs and automation systems designed to streamline repetitive digital processes.</p>
+            <a href="services.html" class="cap-link">VIEW SERVICES →</a>
+        </article>
 
+        <article class="capability reveal">
+            <div class="cap-icon">◈</div>
+            <h3>Product Experience</h3>
+            <p>Modern UI/UX systems, SaaS dashboards and responsive interfaces designed around usability.</p>
+            <a href="services.html" class="cap-link">VIEW SERVICES →</a>
+        </article>
 
-        <div class="service-card reveal">
+        <article class="capability reveal">
+            <div class="cap-icon">⌁</div>
+            <h3>Cloud & Infrastructure</h3>
+            <p>Server environments, database systems, network configuration and security-focused infrastructure planning.</p>
+            <a href="infrastructure.html" class="cap-link">VIEW INFRASTRUCTURE →</a>
+        </article>
 
-            <div class="service-number">01</div>
+        <article class="capability reveal">
+            <div class="cap-icon">ED</div>
+            <h3>Academic Technology</h3>
+            <p>Structured study modules, evaluation templates, revision resources and digital tracking workflows.</p>
+            <a href="services.html" class="cap-link">VIEW SERVICES →</a>
+        </article>
 
-            <h3>
-                Full-Stack Web Development
-            </h3>
-
-            <p>
-                Responsive websites and web applications
-                built with clean frontend architecture and
-                scalable backend systems.
-            </p>
-
-            <div class="tags">
-                <span>HTML5</span>
-                <span>CSS3</span>
-                <span>JavaScript</span>
-                <span>React</span>
-                <span>Node</span>
-            </div>
-
-        </div>
-
-
-        <div class="service-card reveal">
-
-            <div class="service-number">02</div>
-
-            <h3>
-                AI & Webhook Automation
-            </h3>
-
-            <p>
-                Automated workflows, bots, API integrations
-                and intelligent systems that reduce repetitive
-                work and improve digital operations.
-            </p>
-
-            <div class="tags">
-                <span>Python</span>
-                <span>APIs</span>
-                <span>Webhooks</span>
-                <span>Bots</span>
-                <span>Automation</span>
-            </div>
-
-        </div>
-
-
-        <div class="service-card reveal">
-
-            <div class="service-number">03</div>
-
-            <h3>
-                UI / UX Engineering
-            </h3>
-
-            <p>
-                Premium user interfaces with clear navigation,
-                responsive layouts, modern visual systems and
-                strong usability.
-            </p>
-
-            <div class="tags">
-                <span>Figma</span>
-                <span>UI Systems</span>
-                <span>SaaS</span>
-                <span>Responsive</span>
-            </div>
-
-        </div>
-
-
-        <div class="service-card reveal">
-
-            <div class="service-number">04</div>
-
-            <h3>
-                Academic Technology
-            </h3>
-
-            <p>
-                Structured academic platforms, learning modules,
-                worksheets, evaluation systems and technology
-                solutions for education.
-            </p>
-
-            <div class="tags">
-                <span>EdTech</span>
-                <span>Learning</span>
-                <span>Worksheets</span>
-                <span>Tracking</span>
-            </div>
-
-        </div>
-
-
-        <div class="service-card reveal">
-
-            <div class="service-number">05</div>
-
-            <h3>
-                Cloud & Infrastructure
-            </h3>
-
-            <p>
-                Technology infrastructure planning, backend
-                architecture, server management and performance
-                focused digital systems.
-            </p>
-
-            <div class="tags">
-                <span>Cloud</span>
-                <span>Servers</span>
-                <span>Security</span>
-                <span>Backend</span>
-            </div>
-
-        </div>
-
-
-        <div class="service-card reveal">
-
-            <div class="service-number">06</div>
-
-            <h3>
-                Business Tools & Ledgers
-            </h3>
-
-            <p>
-                Digital tools for tracking, structured data,
-                financial workflows, spreadsheets and internal
-                business operations.
-            </p>
-
-            <div class="tags">
-                <span>Google Sheets</span>
-                <span>Automation</span>
-                <span>Data</span>
-                <span>Dashboards</span>
-            </div>
-
-        </div>
-
+        <article class="capability reveal">
+            <div class="cap-icon">₹</div>
+            <h3>Digital Business Tools</h3>
+            <p>Expense tracking, payroll logic, ledgers and data visualizers for structured business workflows.</p>
+            <a href="services.html" class="cap-link">VIEW SERVICES →</a>
+        </article>
     </div>
-
-</div>
-
 </section>
 
-
-<!-- =========================
-     SHOWCASE
-========================= -->
-
-<section id="showcase" class="showcase">
-
-<div class="section-container">
-
-    <div class="section-heading reveal">
-
-        <span class="section-label">
-            Visual Showcase
-        </span>
-
-        <h2>
-            Built for modern
-            digital environments.
-        </h2>
-
+<!-- PLATFORM / IMAGE SHOWCASE -->
+<section class="section">
+    <div class="section-head reveal">
+        <span class="section-label">Inside Aether Tech</span>
+        <h2>Where ideas become digital systems.</h2>
         <p>
-            A visual look at the technology environments,
-            development spaces and infrastructure represented
-            across the Aether Tech platform.
+            A visual overview of the environments and technology-focused assets
+            represented throughout the platform.
         </p>
-
     </div>
 
-
-    <div class="showcase-grid">
-
-
-        <div class="showcase-card reveal">
-
-            <img
-                src="assets/hq.jpg"
-                alt="Aether Tech headquarters"
-                loading="lazy">
-
-            <div class="showcase-overlay">
-
-                <div>
-
-                    <h3>
-                        Corporate Headquarters
-                    </h3>
-
-                    <p>
-                        Central operations and client execution
-                        environment.
-                    </p>
-
-                </div>
-
+    <div class="platform">
+        <article class="platform-card reveal">
+            <img src="assets/hq.jpg" alt="Aether Tech Corporate Headquarters" loading="lazy">
+            <div class="platform-info">
+                <small>01 / CORPORATE OPERATIONS</small>
+                <h3>Surat Corporate Headquarters</h3>
+                <p>Operations and client execution environment represented within the Aether Tech platform.</p>
             </div>
+        </article>
 
-        </div>
-
-
-        <div class="showcase-card reveal">
-
-            <img
-                src="assets/room.jpg"
-                alt="Development and research studio"
-                loading="lazy">
-
-            <div class="showcase-overlay">
-
-                <div>
-
-                    <h3>
-                        Development & R&D Studio
-                    </h3>
-
-                    <p>
-                        A focused environment for development,
-                        testing and technical workflows.
-                    </p>
-
-                </div>
-
+        <article class="platform-card reveal">
+            <img src="assets/room.jpg" alt="Aether Tech Development and R&D Studio" loading="lazy">
+            <div class="platform-info">
+                <small>02 / DEVELOPMENT ENVIRONMENT</small>
+                <h3>Development & R&D Studio</h3>
+                <p>A technology-focused workspace for software development, testing and product execution.</p>
             </div>
-
-        </div>
-
+        </article>
     </div>
 
-</div>
-
+    <div style="text-align:center;margin-top:25px">
+        <a href="infrastructure.html" class="btn btn-outline">Explore Infrastructure ↗</a>
+    </div>
 </section>
 
-
-<!-- =========================
-     WHY AETHER
-========================= -->
-
-<section>
-
-<div class="section-container">
-
-    <div class="why-grid">
-
-        <div class="why-image reveal">
-
-            <img
-                src="assets/team.jpg"
-                alt="Aether Tech development team"
-                loading="lazy">
-
-        </div>
-
-
-        <div class="why-content reveal">
-
-            <span class="section-label">
-                Why Aether Tech
-            </span>
-
-            <h2>
-                Technology that looks
-                premium and works reliably.
-            </h2>
-
+<!-- ARCHITECTURE -->
+<section class="section">
+    <div class="arch-grid">
+        <div class="arch-copy reveal">
+            <span class="section-label">System Architecture</span>
+            <h2>Clean. Modular. Production-minded.</h2>
             <p>
-                Every digital experience should be easy to
-                understand, visually strong and technically
-                structured. Our approach combines design,
-                development and automation into one workflow.
+                The Aether Tech approach connects interface, application logic,
+                APIs, data workflows and infrastructure into a structured digital system.
             </p>
 
-
-            <div class="features">
-
-                <div class="feature">
-                    <strong>Clean Architecture</strong>
-                    <span>
-                        Structured and maintainable development
-                        for long-term improvements.
-                    </span>
-                </div>
-
-                <div class="feature">
-                    <strong>Responsive by Design</strong>
-                    <span>
-                        Interfaces designed for desktop,
-                        tablet and mobile users.
-                    </span>
-                </div>
-
-                <div class="feature">
-                    <strong>Automation Ready</strong>
-                    <span>
-                        APIs, workflows and automation can be
-                        integrated into digital systems.
-                    </span>
-                </div>
-
-                <div class="feature">
-                    <strong>Client Focused</strong>
-                    <span>
-                        Clear interfaces and practical solutions
-                        designed around actual requirements.
-                    </span>
-                </div>
-
+            <div class="arch-list">
+                <div class="arch-item"><b>Frontend Experience</b><span>READY</span></div>
+                <div class="arch-item"><b>Backend & API Layer</b><span>READY</span></div>
+                <div class="arch-item"><b>Automation Workflows</b><span>READY</span></div>
+                <div class="arch-item"><b>Cloud Infrastructure</b><span>READY</span></div>
             </div>
-
         </div>
 
+        <div class="terminal reveal">
+            <div class="terminal-head">
+                <span class="tdot red"></span>
+                <span class="tdot yellow"></span>
+                <span class="tdot green"></span>
+                <span class="terminal-title">aether-tech-platform.js — Architecture Overview</span>
+            </div>
+
+            <div class="terminal-body">
+                <span class="comment">// Aether Tech digital platform initialization</span><br>
+                <span class="kw">const</span> Platform = <span class="kw">require</span>(<span class="str">'@aether/digital-system'</span>);<br><br>
+
+                <span class="kw">const</span> AetherTech = <span class="kw">new</span> Platform({<br>
+                &nbsp;&nbsp;region: <span class="str">'IN-WEST-SURAT'</span>,<br>
+                &nbsp;&nbsp;mode: <span class="str">'PRODUCTION'</span>,<br>
+                &nbsp;&nbsp;architecture: <span class="str">'MODULAR'</span><br>
+                });<br><br>
+
+                AetherTech.enable({<br>
+                &nbsp;&nbsp;web: <span class="str">true</span>,<br>
+                &nbsp;&nbsp;automation: <span class="str">true</span>,<br>
+                &nbsp;&nbsp;apiLayer: <span class="str">true</span>,<br>
+                &nbsp;&nbsp;infrastructure: <span class="str">true</span><br>
+                });<br><br>
+
+                console.log(<span class="str">'[READY] Aether Tech platform online.'</span>);
+            </div>
+        </div>
     </div>
-
-</div>
-
 </section>
 
-
-<!-- =========================
-     PROCESS
-========================= -->
-
-<section id="process">
-
-<div class="section-container">
-
-    <div class="section-heading reveal">
-
-        <span class="section-label">
-            Our Process
-        </span>
-
-        <h2>
-            From idea to digital product.
-        </h2>
-
-        <p>
-            A simple and transparent workflow keeps every
-            project organized from initial discussion to launch.
-        </p>
-
+<!-- PROCESS -->
+<section class="section">
+    <div class="section-head reveal">
+        <span class="section-label">How We Work</span>
+        <h2>From requirement to a structured digital solution.</h2>
+        <p>A clear workflow keeps the project understandable, focused and easier to execute.</p>
     </div>
 
-
-    <div class="process-grid">
-
+    <div class="process">
         <div class="process-card reveal">
-
-            <div class="process-number">
-                01
-            </div>
-
-            <h3>
-                Discover
-            </h3>
-
-            <p>
-                Understand the requirement, goals and
-                expected outcome.
-            </p>
-
+            <div class="process-number">01</div>
+            <h3>Discover</h3>
+            <p>Understand the requirement, users and intended outcome.</p>
         </div>
-
-
         <div class="process-card reveal">
-
-            <div class="process-number">
-                02
-            </div>
-
-            <h3>
-                Design
-            </h3>
-
-            <p>
-                Create the visual direction, structure and
-                user experience.
-            </p>
-
+            <div class="process-number">02</div>
+            <h3>Plan</h3>
+            <p>Define features, structure, assets and technology direction.</p>
         </div>
-
-
         <div class="process-card reveal">
-
-            <div class="process-number">
-                03
-            </div>
-
-            <h3>
-                Develop
-            </h3>
-
-            <p>
-                Build the frontend, backend and required
-                integrations.
-            </p>
-
+            <div class="process-number">03</div>
+            <h3>Design</h3>
+            <p>Create the interface hierarchy and user experience.</p>
         </div>
-
-
         <div class="process-card reveal">
-
-            <div class="process-number">
-                04
-            </div>
-
-            <h3>
-                Launch
-            </h3>
-
-            <p>
-                Test, optimize and prepare the final digital
-                experience for deployment.
-            </p>
-
+            <div class="process-number">04</div>
+            <h3>Develop</h3>
+            <p>Build the required frontend, backend and integrations.</p>
         </div>
-
+        <div class="process-card reveal">
+            <div class="process-number">05</div>
+            <h3>Launch</h3>
+            <p>Prepare the final system for deployment and future updates.</p>
+        </div>
     </div>
-
-</div>
-
 </section>
 
-
-<!-- =========================
-     ESTIMATOR
-========================= -->
-
-<section id="estimator" class="estimator">
-
-<div class="section-container">
-
-    <div class="section-heading reveal">
-
-        <span class="section-label">
-            Interactive Estimator
-        </span>
-
-        <h2>
-            Build your required solution.
-        </h2>
-
+<!-- CTA -->
+<section class="cta">
+    <div class="cta-box reveal">
+        <span class="section-label">Start a Conversation</span>
+        <h2>Have a digital system in mind?</h2>
         <p>
-            Select the services you need and instantly view
-            the estimated investment.
+            Tell us what you want to build. Explore our services, review the infrastructure,
+            check pricing or contact Aether Tech directly to discuss the requirement.
         </p>
 
+        <div class="cta-actions">
+            <a href="services.html" class="btn btn-grad">Explore Services →</a>
+            <a href="pricing.html" class="btn btn-outline">View Pricing ↗</a>
+            <a href="contact.html" class="btn btn-outline">Contact Aether Tech ↗</a>
+        </div>
     </div>
-
-
-    <div class="calculator reveal">
-
-
-        <div class="calc-row">
-
-            <label class="calc-label">
-
-                <input
-                    type="checkbox"
-                    value="15000"
-                    class="service-check">
-
-                Full-Stack Web Application
-
-            </label>
-
-            <span class="calc-price">
-                ₹15,000
-            </span>
-
-        </div>
-
-
-        <div class="calc-row">
-
-            <label class="calc-label">
-
-                <input
-                    type="checkbox"
-                    value="25000"
-                    class="service-check">
-
-                Custom AI Bot & Automation
-
-            </label>
-
-            <span class="calc-price">
-                ₹25,000
-            </span>
-
-        </div>
-
-
-        <div class="calc-row">
-
-            <label class="calc-label">
-
-                <input
-                    type="checkbox"
-                    value="30000"
-                    class="service-check">
-
-                SaaS Dashboard UI / UX
-
-            </label>
-
-            <span class="calc-price">
-                ₹30,000
-            </span>
-
-        </div>
-
-
-        <div class="calc-row">
-
-            <label class="calc-label">
-
-                <input
-                    type="checkbox"
-                    value="20000"
-                    class="service-check">
-
-                Academic Platform
-
-            </label>
-
-            <span class="calc-price">
-                ₹20,000
-            </span>
-
-        </div>
-
-
-        <div class="calc-row">
-
-            <label class="calc-label">
-
-                <input
-                    type="checkbox"
-                    value="10000"
-                    class="service-check">
-
-                Cloud Maintenance & Support
-
-            </label>
-
-            <span class="calc-price">
-                ₹10,000
-            </span>
-
-        </div>
-
-
-        <div class="total">
-
-            Estimated Investment
-
-            <strong id="total">
-                ₹0
-            </strong>
-
-        </div>
-
-
-        <div style="text-align:center;margin-top:25px;">
-
-            <a
-                href="https://wa.me/919925527617"
-                target="_blank"
-                class="btn btn-primary">
-
-                Discuss This Requirement ↗
-
-            </a>
-
-        </div>
-
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- =========================
-     FAQ
-========================= -->
-
-<section id="faq">
-
-<div class="section-container">
-
-    <div class="section-heading reveal">
-
-        <span class="section-label">
-            FAQ
-        </span>
-
-        <h2>
-            Frequently asked questions.
-        </h2>
-
-        <p>
-            Quick answers to common questions about our
-            digital solutions and workflow.
-        </p>
-
-    </div>
-
-
-    <div class="faq reveal">
-
-
-        <div class="faq-item">
-
-            <button class="faq-question">
-
-                What services does Aether Tech provide?
-
-                <span>+</span>
-
-            </button>
-
-            <div class="faq-answer">
-
-                Aether Tech focuses on modern websites,
-                web applications, AI automation, UI/UX,
-                academic technology platforms, cloud
-                infrastructure and business tools.
-
-            </div>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <button class="faq-question">
-
-                Are the website images locally hosted?
-
-                <span>+</span>
-
-            </button>
-
-            <div class="faq-answer">
-
-                Yes. The visual assets used by this website
-                are referenced from the local assets folder,
-                including logo.png, servers.jpg, lab.jpg,
-                ui.jpg, team.jpg, hq.jpg and room.jpg.
-
-            </div>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <button class="faq-question">
-
-                Is the website mobile responsive?
-
-                <span>+</span>
-
-            </button>
-
-            <div class="faq-answer">
-
-                Yes. The layout automatically adapts for
-                desktop, tablet and mobile screen sizes,
-                including a dedicated mobile navigation menu.
-
-            </div>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <button class="faq-question">
-
-                Can additional features be integrated later?
-
-                <span>+</span>
-
-            </button>
-
-            <div class="faq-answer">
-
-                Yes. The structure is designed so additional
-                pages, APIs, dashboards, automation workflows,
-                forms and backend functionality can be added
-                later.
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- =========================
-     CONTACT
-========================= -->
-
-<section id="contact">
-
-<div class="section-container">
-
-    <div class="contact-box reveal">
-
-        <span class="section-label">
-            Start a Conversation
-        </span>
-
-        <h2>
-            Have a project in mind?
-        </h2>
-
-        <p>
-            Let's discuss your requirement and find the right
-            digital solution for your business, organization
-            or technology project.
-        </p>
-
-
-        <div class="contact-actions">
-
-            <a
-                href="https://wa.me/919925527617"
-                target="_blank"
-                class="btn btn-primary">
-
-                Chat on WhatsApp ↗
-
-            </a>
-
-
-            <a
-                href="https://instagram.com/just_silent.hues"
-                target="_blank"
-                class="btn btn-outline">
-
-                Instagram ↗
-
-            </a>
-
-        </div>
-
-    </div>
-
-</div>
-
 </section>
 
 </main>
 
-
-<!-- =========================
-     FOOTER
-========================= -->
-
+<!-- FOOTER -->
 <footer>
+    <div class="footer-grid">
 
-<div class="footer-grid">
+        <div class="footer-col">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Aether Tech logo">
+                <div>
+                    <div class="logo-name">AETHER TECH</div>
+                    <span class="logo-sub">ENTERPRISE PLATFORM</span>
+                </div>
+            </a>
+            <p style="margin-top:14px">
+                Next-generation enterprise digital ecosystems, software automation systems,
+                and academic technology frameworks engineered around practical requirements.
+            </p>
+        </div>
 
+        <div class="footer-col">
+            <h4>Navigation</h4>
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About Us</a>
+            <a href="infrastructure.html">Infrastructure</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+        </div>
 
-    <div class="footer-brand">
+        <div class="footer-col">
+            <h4>Solutions</h4>
+            <a href="services.html">Web Development</a>
+            <a href="services.html">AI Automation</a>
+            <a href="services.html">UI / UX Design</a>
+            <a href="services.html">Academic Technology</a>
+            <a href="infrastructure.html">Cloud Infrastructure</a>
+        </div>
 
-        <a href="#home" class="logo">
-
-            <img
-                src="assets/logo.png"
-                alt="Aether Tech Logo">
-
-            <div class="logo-text">
-
-                <strong>
-                    AETHER TECH
-                </strong>
-
-                <span>
-                    DIGITAL ENGINEERING
-                </span>
-
-            </div>
-
-        </a>
-
-
-        <p>
-            Next-generation digital solutions combining
-            web engineering, automation, interface design
-            and technology-driven systems.
-        </p>
-
-    </div>
-
-
-    <div class="footer-col">
-
-        <h4>
-            Navigation
-        </h4>
-
-        <a href="#home">
-            Home
-        </a>
-
-        <a href="#services">
-            Services
-        </a>
-
-        <a href="#showcase">
-            Showcase
-        </a>
-
-        <a href="#process">
-            Process
-        </a>
+        <div class="footer-col">
+            <h4>Direct Reach</h4>
+            <a href="https://wa.me/919925527617" target="_blank" rel="noopener">WhatsApp: +91 99255 27617</a>
+            <a href="https://instagram.com/just_silent.hues" target="_blank" rel="noopener">Instagram: @just_silent.hues</a>
+            <a href="contact.html">Start a Project</a>
+        </div>
 
     </div>
 
-
-    <div class="footer-col">
-
-        <h4>
-            Solutions
-        </h4>
-
-        <a href="#services">
-            Web Development
-        </a>
-
-        <a href="#services">
-            AI Automation
-        </a>
-
-        <a href="#services">
-            UI / UX
-        </a>
-
-        <a href="#estimator">
-            Pricing
-        </a>
-
+    <div class="footer-bottom">
+        <span>© 2026 Aether Tech. All Rights Reserved.</span>
+        <span>Surat Operations Headquarters • Gujarat, India</span>
     </div>
-
-
-    <div class="footer-col">
-
-        <h4>
-            Connect
-        </h4>
-
-        <a
-            href="https://wa.me/919925527617"
-            target="_blank">
-
-            WhatsApp
-        </a>
-
-        <a
-            href="https://instagram.com/just_silent.hues"
-            target="_blank">
-
-            Instagram
-        </a>
-
-        <a href="#contact">
-            Start a Project
-        </a>
-
-    </div>
-
-
-</div>
-
-
-<div class="footer-bottom">
-
-    <span>
-        © 2026 Aether Tech. All Rights Reserved.
-    </span>
-
-    <span>
-        Surat, Gujarat, India
-    </span>
-
-</div>
-
 </footer>
 
-
-<!-- BACK TO TOP -->
-
-<button
-    class="back-top"
-    id="backTop"
-    aria-label="Back to top">
-
-    ↑
-
-</button>
-
-
 <script>
+/* MOBILE NAV */
+const menuBtn = document.getElementById('menuBtn');
+const mainNav = document.getElementById('mainNav');
 
-/* =========================
-   MOBILE MENU
-========================= */
-
-const menuBtn = document.getElementById("menuBtn");
-const mainNav = document.getElementById("mainNav");
-
-menuBtn.addEventListener("click", () => {
-
-    mainNav.classList.toggle("open");
-
-    menuBtn.textContent =
-        mainNav.classList.contains("open")
-        ? "×"
-        : "☰";
-
+menuBtn.addEventListener('click', () => {
+    mainNav.classList.toggle('open');
+    menuBtn.textContent = mainNav.classList.contains('open') ? '×' : '☰';
 });
 
-
-document.querySelectorAll("#mainNav a").forEach(link => {
-
-    link.addEventListener("click", () => {
-
-        mainNav.classList.remove("open");
-
-        menuBtn.textContent = "☰";
-
+document.querySelectorAll('#mainNav a').forEach(link => {
+    link.addEventListener('click', () => {
+        mainNav.classList.remove('open');
+        menuBtn.textContent = '☰';
     });
-
 });
 
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+const savedTheme = localStorage.getItem('aether-theme');
 
-/* =========================
-   THEME SWITCHER
-========================= */
-
-const themeBtn =
-    document.getElementById("themeBtn");
-
-themeBtn.addEventListener("click", () => {
-
-    document.documentElement.classList.toggle("light");
-
-    const light =
-        document.documentElement.classList.contains("light");
-
-    themeBtn.textContent =
-        light ? "☾" : "☼";
-
-    localStorage.setItem(
-        "aether-theme",
-        light ? "light" : "dark"
-    );
-
-});
-
-
-/* LOAD SAVED THEME */
-
-if(
-    localStorage.getItem("aether-theme")
-    === "light"
-){
-
-    document.documentElement.classList.add("light");
-
-    themeBtn.textContent = "☾";
-
+if(savedTheme === 'light'){
+    document.documentElement.classList.add('light');
+    themeBtn.textContent = '☾';
 }
 
+themeBtn.addEventListener('click', () => {
+    document.documentElement.classList.toggle('light');
+    const isLight = document.documentElement.classList.contains('light');
+    themeBtn.textContent = isLight ? '☾' : '☼';
+    localStorage.setItem('aether-theme', isLight ? 'light' : 'dark');
+});
 
-/* =========================
-   HERO SLIDER
-========================= */
-
-const slides =
-    document.querySelectorAll(".slide");
-
-const dots =
-    document.querySelectorAll(".slider-dot");
-
+/* HERO CAROUSEL */
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
 let currentSlide = 0;
-
-let sliderTimer;
-
+let carouselTimer;
 
 function showSlide(index){
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
 
-    slides.forEach(slide => {
-
-        slide.classList.remove("active");
-
-    });
-
-    dots.forEach(dot => {
-
-        dot.classList.remove("active");
-
-    });
-
-
-    slides[index].classList.add("active");
-
-    dots[index].classList.add("active");
-
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
     currentSlide = index;
-
 }
-
 
 function nextSlide(){
-
-    currentSlide =
-        (currentSlide + 1) % slides.length;
-
-    showSlide(currentSlide);
-
+    showSlide((currentSlide + 1) % slides.length);
 }
 
-
-function startSlider(){
-
-    clearInterval(sliderTimer);
-
-    sliderTimer =
-        setInterval(nextSlide,5000);
-
+function restartCarousel(){
+    clearInterval(carouselTimer);
+    carouselTimer = setInterval(nextSlide, 4500);
 }
 
+restartCarousel();
 
-startSlider();
+/* REVEAL ANIMATIONS */
+const revealItems = document.querySelectorAll('.reveal');
 
-
-const slider =
-    document.getElementById("slider");
-
-
-slider.addEventListener(
-    "mouseenter",
-    () => clearInterval(sliderTimer)
-);
-
-
-slider.addEventListener(
-    "mouseleave",
-    startSlider
-);
-
-
-/* =========================
-   TOUCH SWIPE
-========================= */
-
-let touchStartX = 0;
-
-let touchEndX = 0;
-
-
-slider.addEventListener(
-    "touchstart",
-    event => {
-
-        touchStartX =
-            event.changedTouches[0].screenX;
-
-    },
-    {passive:true}
-);
-
-
-slider.addEventListener(
-    "touchend",
-    event => {
-
-        touchEndX =
-            event.changedTouches[0].screenX;
-
-        const difference =
-            touchStartX - touchEndX;
-
-
-        if(Math.abs(difference) > 50){
-
-            if(difference > 0){
-
-                nextSlide();
-
-            }else{
-
-                currentSlide =
-                    (currentSlide - 1 + slides.length)
-                    % slides.length;
-
-                showSlide(currentSlide);
-
-            }
-
+const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
         }
+    });
+},{threshold:.12});
 
-    },
-    {passive:true}
-);
+revealItems.forEach(item => revealObserver.observe(item));
 
+/* PARTICLE BACKGROUND */
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
 
-/* =========================
-   PRICING CALCULATOR
-========================= */
+function resizeCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
 
-const checkboxes =
-    document.querySelectorAll(".service-check");
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
 
-const total =
-    document.getElementById("total");
+class Particle{
+    constructor(){
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2.2 + .4;
+        this.speedX = Math.random() * .5 - .25;
+        this.speedY = Math.random() * .5 - .25;
+    }
 
+    update(){
+        this.x += this.speedX;
+        this.y += this.speedY;
 
-function calculateTotal(){
+        if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    }
 
-    let amount = 0;
+    draw(){
+        ctx.fillStyle = 'rgba(6,182,212,.35)';
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+        ctx.fill();
+    }
+}
 
+for(let i=0;i<55;i++){
+    particles.push(new Particle());
+}
 
-    checkboxes.forEach(box => {
+function animateParticles(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 
-        if(box.checked){
-
-            amount +=
-                Number(box.value);
-
-        }
-
+    particles.forEach(p => {
+        p.update();
+        p.draw();
     });
 
-
-    total.textContent =
-        "₹" + amount.toLocaleString("en-IN");
-
+    requestAnimationFrame(animateParticles);
 }
 
-
-checkboxes.forEach(box => {
-
-    box.addEventListener(
-        "change",
-        calculateTotal
-    );
-
-});
-
-
-/* =========================
-   FAQ
-========================= */
-
-const faqItems =
-    document.querySelectorAll(".faq-item");
-
-
-faqItems.forEach(item => {
-
-    const question =
-        item.querySelector(".faq-question");
-
-
-    question.addEventListener("click", () => {
-
-        const alreadyOpen =
-            item.classList.contains("active");
-
-
-        faqItems.forEach(other => {
-
-            other.classList.remove("active");
-
-        });
-
-
-        if(!alreadyOpen){
-
-            item.classList.add("active");
-
-        }
-
-    });
-
-});
-
-
-/* =========================
-   SCROLL REVEAL
-========================= */
-
-const revealElements =
-    document.querySelectorAll(".reveal");
-
-
-const revealObserver =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(entry => {
-
-                if(entry.isIntersecting){
-
-                    entry.target.classList.add("visible");
-
-                    revealObserver.unobserve(
-                        entry.target
-                    );
-
-                }
-
-            });
-
-        },
-        {
-            threshold:.12
-        }
-    );
-
-
-revealElements.forEach(element => {
-
-    revealObserver.observe(element);
-
-});
-
-
-/* =========================
-   ACTIVE NAVIGATION
-========================= */
-
-const sections =
-    document.querySelectorAll("main section[id]");
-
-const navLinks =
-    document.querySelectorAll("nav a");
-
-
-const navObserver =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(entry => {
-
-                if(entry.isIntersecting){
-
-                    navLinks.forEach(link => {
-
-                        link.classList.remove("active");
-
-                        if(
-                            link.getAttribute("href")
-                            === "#" + entry.target.id
-                        ){
-
-                            link.classList.add("active");
-
-                        }
-
-                    });
-
-                }
-
-            });
-
-        },
-        {
-            rootMargin:"-35% 0px -55% 0px"
-        }
-    );
-
-
-sections.forEach(section => {
-
-    navObserver.observe(section);
-
-});
-
-
-/* =========================
-   BACK TO TOP
-========================= */
-
-const backTop =
-    document.getElementById("backTop");
-
-
-window.addEventListener(
-    "scroll",
-    () => {
-
-        if(window.scrollY > 600){
-
-            backTop.classList.add("show");
-
-        }else{
-
-            backTop.classList.remove("show");
-
-        }
-
-    }
-);
-
-
-backTop.addEventListener(
-    "click",
-    () => {
-
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
-
-    }
-);
-
+animateParticles();
 </script>
 
 </body>
