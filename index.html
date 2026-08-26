@@ -3,70 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | AETHER TECH</title>
+    <title>AETHER TECH | Full-Stack Enterprise Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Cinzel:wght@600;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-dark: #020617; --card-dark: rgba(15, 23, 42, 0.75); --border-dark: rgba(255, 255, 255, 0.12); --text-main: #f8fafc; --text-muted: #94a3b8; --cyan: #06b6d4; --purple: #a855f7; }
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Plus Jakarta Sans', sans-serif; }
-        body { background: var(--bg-dark); color: var(--text-main); }
+        :root {
+            --bg-dark: #020617;
+            --card-dark: rgba(15, 23, 42, 0.75);
+            --border-dark: rgba(255, 255, 255, 0.12);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --cyan: #06b6d4;
+            --purple: #a855f7;
+            --green: #22c55e;
+        }
+
+        .light {
+            --bg-dark: #f8fafc;
+            --card-dark: rgba(255, 255, 255, 0.9);
+            --border-dark: rgba(0, 0, 0, 0.1);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Plus Jakarta Sans', sans-serif; transition: background 0.3s, color 0.3s; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg-dark); color: var(--text-main); overflow-x: hidden; }
         h1, h2, h3 { font-family: 'Cinzel', serif; }
 
-        header { display: flex; justify-content: space-between; align-items: center; padding: 16px 5%; background: rgba(2, 6, 23, 0.85); border-bottom: 1px solid var(--border-dark); }
+        .top-status-bar { background: rgba(3, 7, 18, 0.9); border-bottom: 1px solid var(--border-dark); padding: 8px 5%; font-size: 11px; display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-weight: 600; letter-spacing: 1px; }
+        .live-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; display: inline-block; margin-right: 6px; box-shadow: 0 0 10px var(--green); }
+
+        header { position: sticky; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 16px 5%; background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-dark); z-index: 1000; }
         .logo-box { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--text-main); }
-        nav a { color: var(--text-muted); text-decoration: none; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-left: 20px; }
+        .logo-box img { width: 42px; height: 42px; border-radius: 10px; border: 1px solid var(--cyan); }
+        nav { display: flex; gap: 20px; }
+        nav a { color: var(--text-muted); text-decoration: none; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
         nav a:hover, nav a.active { color: var(--cyan); }
 
-        .container { padding: 60px 5%; max-width: 800px; margin: 0 auto; }
-        .contact-box { background: var(--card-dark); border: 1px solid var(--border-dark); padding: 40px; border-radius: 20px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--cyan); }
-        .form-group input, .form-group textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border-dark); background: rgba(0,0,0,0.4); color: white; }
-        .btn-grad { background: linear-gradient(135deg, var(--purple), var(--cyan)); color: white; padding: 12px 30px; border: none; border-radius: 25px; font-weight: 700; cursor: pointer; }
+        .btn { padding: 10px 22px; border-radius: 30px; border: none; font-weight: 700; cursor: pointer; text-decoration: none; font-size: 12px; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-grad { background: linear-gradient(135deg, var(--purple), var(--cyan)); color: white; }
+        .btn-outline { border: 1px solid var(--border-dark); color: var(--text-main); background: rgba(255,255,255,0.03); }
 
-        footer { padding: 30px 5%; border-top: 1px solid var(--border-dark); text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 60px; }
+        /* Hero Section */
+        .hero { display: flex; flex-wrap: wrap; padding: 60px 5%; align-items: center; gap: 40px; min-height: 80vh; }
+        .hero-left { flex: 1.1; min-width: 320px; }
+        .badge { display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(168, 85, 247, 0.15); border: 1px solid var(--purple); color: var(--purple); font-size: 11px; font-weight: 700; margin-bottom: 20px; }
+        .hero-left h1 { font-size: 48px; margin-bottom: 20px; line-height: 1.15; }
+        .hero-left h1 span { background: linear-gradient(135deg, var(--purple), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-left p { color: var(--text-muted); line-height: 1.8; margin-bottom: 30px; font-size: 15px; }
+
+        /* Image Slider / Carousel */
+        .hero-right { flex: 1; min-width: 320px; }
+        .slider-box { width: 100%; height: 340px; border-radius: 20px; overflow: hidden; position: relative; border: 1px solid var(--border-dark); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .slide { width: 100%; height: 100%; position: absolute; opacity: 0; transition: opacity 0.8s ease-in-out; display: flex; flex-direction: column; justify-content: flex-end; padding: 25px; background-size: cover; background-position: center; }
+        .slide.active { opacity: 1; }
+        
+        .slide-1 { background-image: linear-gradient(to top, rgba(2,6,23,0.9), transparent), url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80'); }
+        .slide-2 { background-image: linear-gradient(to top, rgba(2,6,23,0.9), transparent), url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80'); }
+        .slide-3 { background-image: linear-gradient(to top, rgba(2,6,23,0.9), transparent), url('https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1000&q=80'); }
+
+        .slide-info h4 { color: var(--cyan); font-size: 18px; margin-bottom: 5px; }
+        .slide-info p { color: #f8fafc; font-size: 13px; }
+
+        .dots { position: absolute; bottom: 15px; right: 20px; display: flex; gap: 8px; z-index: 10; }
+        .dot-btn { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.3); border: none; cursor: pointer; }
+        .dot-btn.active { background: var(--cyan); width: 24px; border-radius: 10px; }
+
+        /* Sections */
+        .section-header { text-align: center; margin: 60px 0 40px 0; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 0 5% 60px 5%; }
+        .service-card { background: var(--card-dark); border: 1px solid var(--border-dark); padding: 30px; border-radius: 16px; backdrop-filter: blur(10px); }
+        
+        footer { padding: 30px 5%; border-top: 1px solid var(--border-dark); text-align: center; font-size: 12px; color: var(--text-muted); }
     </style>
 </head>
 <body>
+
+    <div class="top-status-bar">
+        <div><span class="live-dot"></span>SYSTEM STATUS: 100% OPERATIONAL | ACTIVE NODES: 850+</div>
+        <div>HQ: SURAT, GUJARAT, INDIA</div>
+    </div>
+
     <header>
         <a href="index.html" class="logo-box">
-            <h3 style="font-size: 18px; font-weight: 800;">AETHER TECH</h3>
+            <img src="assets/logo.png" alt="AETHER TECH Logo">
+            <div>
+                <h3 style="font-size: 18px; font-weight: 800;">AETHER TECH</h3>
+                <span style="font-size: 9px; color: var(--cyan); font-weight: 700;">ENTERPRISE PLATFORM</span>
+            </div>
         </a>
         <nav>
-            <a href="index.html">Home</a>
+            <a href="index.html" class="active">Home</a>
             <a href="services.html">Services</a>
             <a href="about.html">About Us</a>
-            <a href="contact.html" class="active">Contact</a>
+            <a href="contact.html">Contact</a>
         </nav>
+        <div style="display:flex; align-items:center; gap:10px;">
+            <button class="btn btn-outline" id="themeBtn">☀️ Light</button>
+            <a href="https://wa.me/919925527617" target="_blank" class="btn btn-grad">WhatsApp ↗</a>
+        </div>
     </header>
 
-    <div class="container">
-        <h1 style="font-size: 36px; text-align: center; margin-bottom: 30px; color: var(--cyan);">Get In Touch</h1>
-        
-        <div class="contact-box">
-            <form onsubmit="event.preventDefault(); alert('Message sent successfully!');">
-                <div class="form-group">
-                    <label>Your Name</label>
-                    <input type="text" placeholder="Enter full name" required>
+    <section class="hero">
+        <div class="hero-left">
+            <span class="badge">FULL-STACK ENTERPRISE CAPABILITIES</span>
+            <h1>Engineering <span>Tomorrow’s</span> Digital Products</h1>
+            <p>Modern web applications, AI integration pipelines, custom software design, and specialized coaching solutions engineered for scale.</p>
+            <div style="display:flex; gap:15px; flex-wrap:wrap;">
+                <a href="services.html" class="btn btn-grad">Explore Services 🚀</a>
+                <a href="contact.html" class="btn btn-outline">Get In Touch ↗</a>
+            </div>
+        </div>
+        <div class="hero-right">
+            <!-- Animated Top Image Slider -->
+            <div class="slider-box">
+                <div class="slide slide-1 active">
+                    <div class="slide-info">
+                        <h4>01 / AI Automation Engine</h4>
+                        <p>Automated workflow systems & Telegram/WhatsApp integrations.</p>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" placeholder="name@example.com" required>
+                <div class="slide slide-2">
+                    <div class="slide-info">
+                        <h4>02 / Web & Dashboard Architecture</h4>
+                        <p>High-performance enterprise control panels and web applications.</p>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Message</label>
-                    <textarea rows="5" placeholder="Write your query here..." required></textarea>
+                <div class="slide slide-3">
+                    <div class="slide-info">
+                        <h4>03 / Academic Coaching Infrastructure</h4>
+                        <p>Custom learning tools, test engines, and student tracking systems.</p>
+                    </div>
                 </div>
-                <button type="submit" class="btn-grad">Send Message 🚀</button>
-            </form>
-            
-            <hr style="margin: 30px 0; border-color: var(--border-dark);">
-            <p style="font-size: 14px; color: var(--text-muted);">Direct WhatsApp: <strong>+91 99255 27617</strong></p>
-            <p style="font-size: 14px; color: var(--text-muted);">Instagram: <strong>@just_silent.hues</strong></p>
+                <div class="dots">
+                    <button class="dot-btn active" onclick="setSlide(0)"></button>
+                    <button class="dot-btn" onclick="setSlide(1)"></button>
+                    <button class="dot-btn" onclick="setSlide(2)"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-header">
+        <h2>Core Services Overview</h2>
+    </div>
+
+    <div class="services-grid">
+        <div class="service-card">
+            <h3 style="color:var(--cyan); margin-bottom:10px;">🌐 Web Development</h3>
+            <p style="color:var(--text-muted); font-size:14px; line-height:1.6;">Ultra-responsive modern web portals with smooth animations and custom dashboards.</p>
+        </div>
+        <div class="service-card">
+            <h3 style="color:var(--cyan); margin-bottom:10px;">🤖 AI Solutions</h3>
+            <p style="color:var(--text-muted); font-size:14px; line-height:1.6;">Automated customer support bots, Telegram webhooks, and AI workflow tools.</p>
+        </div>
+        <div class="service-card">
+            <h3 style="color:var(--cyan); margin-bottom:10px;">📚 Coaching Services</h3>
+            <p style="color:var(--text-muted); font-size:14px; line-height:1.6;">Structured academic curriculum, exam practice sheets, and tech mentorship.</p>
         </div>
     </div>
 
     <footer>
-        <p>© 2026 Aether Tech Corporation. All Rights Reserved.</p>
+        <p>© 2026 Aether Tech Corporation. All Rights Reserved. Surat Headquarters.</p>
     </footer>
+
+    <script>
+        // Light / Dark Theme Switch
+        const themeBtn = document.getElementById('themeBtn');
+        themeBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('light');
+            themeBtn.textContent = document.documentElement.classList.contains('light') ? '🌙 Dark' : '☀️ Light';
+        });
+
+        // Image Slider Functionality
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot-btn');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            let next = (currentSlide + 1) % slides.length;
+            showSlide(next);
+        }
+
+        function setSlide(index) {
+            showSlide(index);
+        }
+
+        // Automatic Slide Transition Every 4 Seconds
+        setInterval(nextSlide, 4000);
+    </script>
 </body>
 </html>
