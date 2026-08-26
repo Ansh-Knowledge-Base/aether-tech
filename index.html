@@ -1,610 +1,3612 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AETHER TECH | Next-Gen Enterprise Software & AI Infrastructure Solutions</title>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Cinzel:wght@500;600;700;800;900&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-dark: #020617;
-            --bg-darker: #01040d;
-            --card-dark: rgba(15, 23, 42, 0.75);
-            --card-hover: rgba(30, 41, 59, 0.85);
-            --border-dark: rgba(255, 255, 255, 0.1);
-            --border-highlight: rgba(6, 182, 212, 0.4);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --text-dim: #64748b;
-            --cyan: #06b6d4;
-            --cyan-glow: rgba(6, 182, 212, 0.35);
-            --purple: #a855f7;
-            --purple-glow: rgba(168, 85, 247, 0.35);
-            --blue: #3b82f6;
-            --green: #22c55e;
-            --amber: #f59e0b;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .light {
-            --bg-dark: #f8fafc;
-            --bg-darker: #f1f5f9;
-            --card-dark: rgba(255, 255, 255, 0.9);
-            --card-hover: rgba(241, 245, 249, 1);
-            --border-dark: rgba(0, 0, 0, 0.1);
-            --border-highlight: rgba(6, 182, 212, 0.6);
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --text-dim: #94a3b8;
-        }
+<title>AETHER TECH | Digital Engineering & AI Solutions</title>
 
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Plus Jakarta Sans', sans-serif; transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
-        html { scroll-behavior: smooth; }
-        body { background: var(--bg-dark); color: var(--text-main); overflow-x: hidden; position: relative; }
-        h1, h2, h3, h4, h5 { font-family: 'Cinzel', serif; }
+<meta name="description"
+content="Aether Tech delivers modern web applications, AI automation, UI/UX systems, cloud solutions and technology platforms.">
 
-        #bgCanvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
+<meta name="theme-color" content="#07111f">
 
-        /* Top Status Bar */
-        .top-status-bar { background: rgba(3, 7, 18, 0.95); border-bottom: 1px solid var(--border-dark); padding: 8px 5%; font-size: 11px; display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-weight: 600; letter-spacing: 1px; z-index: 1001; position: relative; }
-        .live-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; display: inline-block; margin-right: 6px; box-shadow: 0 0 10px var(--green); animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        /* Header Navigation */
-        header { position: sticky; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 16px 5%; background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-dark); z-index: 1000; }
-        .logo-box { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--text-main); }
-        .logo-box img { width: 44px; height: 44px; border-radius: 10px; border: 1px solid var(--cyan); object-fit: cover; box-shadow: 0 0 15px var(--cyan-glow); }
-        nav { display: flex; gap: 24px; align-items: center; }
-        nav a { color: var(--text-muted); text-decoration: none; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; transition: all 0.2s ease; }
-        nav a:hover, nav a.active { color: var(--cyan); text-shadow: 0 0 10px var(--cyan-glow); }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        .btn { padding: 12px 26px; border-radius: 30px; border: none; font-weight: 700; cursor: pointer; text-decoration: none; font-size: 12px; display: inline-flex; align-items: center; gap: 8px; letter-spacing: 0.5px; transition: all 0.3s ease; }
-        .btn-grad { background: linear-gradient(135deg, var(--purple), var(--cyan)); color: white; box-shadow: 0 0 20px var(--purple-glow); }
-        .btn-grad:hover { transform: translateY(-2px); box-shadow: 0 0 30px var(--cyan-glow); }
-        .btn-outline { border: 1px solid var(--border-dark); color: var(--text-main); background: rgba(255,255,255,0.03); }
-        .btn-outline:hover { border-color: var(--cyan); background: rgba(6, 182, 212, 0.15); transform: translateY(-2px); }
+<style>
 
-        /* Ticker */
-        .ticker { background: linear-gradient(90deg, #7c3aed, #0891b2, #2563eb); padding: 12px 0; overflow: hidden; white-space: nowrap; border-bottom: 1px solid var(--border-dark); }
-        .ticker-text { display: inline-block; animation: moveTicker 30s linear infinite; font-size: 11px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: white; }
-        @keyframes moveTicker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+:root{
+    --bg:#050912;
+    --bg-soft:#09111f;
+    --card:rgba(14,24,40,.72);
+    --card-solid:#0c1727;
 
-        /* Hero Section */
-        .hero { display: flex; flex-wrap: wrap; padding: 80px 5%; align-items: center; gap: 50px; min-height: 88vh; position: relative; }
-        .hero-left { flex: 1.2; min-width: 320px; }
-        .badge { display: inline-block; padding: 6px 16px; border-radius: 20px; background: rgba(168, 85, 247, 0.12); border: 1px solid var(--purple); color: var(--purple); font-size: 11px; font-weight: 700; margin-bottom: 24px; letter-spacing: 2px; }
-        .hero-left h1 { font-size: 56px; margin-bottom: 24px; line-height: 1.12; font-weight: 900; }
-        .hero-left h1 span { background: linear-gradient(135deg, var(--purple), var(--cyan), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-left p { color: var(--text-muted); line-height: 1.8; margin-bottom: 36px; font-size: 16px; max-width: 620px; }
+    --text:#f5f7fb;
+    --muted:#94a3b8;
+    --dim:#64748b;
 
-        /* Animated Image Slider (Linked to assets/) */
-        .hero-right { flex: 1; min-width: 320px; }
-        .slider-box { width: 100%; height: 420px; border-radius: 24px; overflow: hidden; position: relative; border: 1px solid var(--border-highlight); box-shadow: 0 25px 60px rgba(0,0,0,0.8); }
-        .slide { width: 100%; height: 100%; position: absolute; opacity: 0; transition: opacity 0.8s ease-in-out; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; background-size: cover; background-position: center; }
-        .slide.active { opacity: 1; }
-        
-        .slide-1 { background-image: linear-gradient(to top, rgba(2,6,23,0.95), rgba(2,6,23,0.2)), url('assets/servers.jpg'); }
-        .slide-2 { background-image: linear-gradient(to top, rgba(2,6,23,0.95), rgba(2,6,23,0.2)), url('assets/lab.jpg'); }
-        .slide-3 { background-image: linear-gradient(to top, rgba(2,6,23,0.95), rgba(2,6,23,0.2)), url('assets/ui.jpg'); }
-        .slide-4 { background-image: linear-gradient(to top, rgba(2,6,23,0.95), rgba(2,6,23,0.2)), url('assets/team.jpg'); }
+    --primary:#22d3ee;
+    --secondary:#6366f1;
+    --accent:#a855f7;
 
-        .slide-info h4 { color: var(--cyan); font-size: 20px; margin-bottom: 6px; font-weight: 700; }
-        .slide-info p { color: #f8fafc; font-size: 13px; opacity: 0.9; line-height: 1.5; }
+    --border:rgba(255,255,255,.09);
+    --border-hover:rgba(34,211,238,.45);
 
-        .dots { position: absolute; bottom: 20px; right: 25px; display: flex; gap: 10px; z-index: 10; }
-        .dot-btn { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.3); border: none; cursor: pointer; transition: all 0.3s ease; }
-        .dot-btn.active { background: var(--cyan); width: 28px; border-radius: 10px; box-shadow: 0 0 10px var(--cyan-glow); }
+    --shadow:0 25px 70px rgba(0,0,0,.35);
 
-        /* Common Section Layouts */
-        section { padding: 100px 5%; border-top: 1px solid var(--border-dark); position: relative; }
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 { font-size: 40px; margin-bottom: 14px; font-weight: 800; }
-        .section-header p { color: var(--text-muted); font-size: 16px; max-width: 650px; margin: 0 auto; line-height: 1.7; }
+    --radius:22px;
+}
 
-        /* Stats Grid */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; padding: 0 5% 80px 5%; }
-        .stat-card { background: var(--card-dark); border: 1px solid var(--border-dark); padding: 32px 24px; border-radius: 20px; text-align: center; backdrop-filter: blur(12px); }
-        .stat-card:hover { border-color: var(--cyan); transform: translateY(-5px); }
-        .stat-card h3 { font-size: 42px; color: var(--cyan); margin-bottom: 8px; font-weight: 800; text-shadow: 0 0 20px var(--cyan-glow); }
-        .stat-card p { font-size: 12px; color: var(--text-muted); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.light{
+    --bg:#f7f9fc;
+    --bg-soft:#eef3f8;
+    --card:rgba(255,255,255,.82);
+    --card-solid:#ffffff;
 
-        /* Services Grid */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .service-card { background: var(--card-dark); border: 1px solid var(--border-dark); padding: 40px 30px; border-radius: 24px; backdrop-filter: blur(10px); position: relative; overflow: hidden; }
-        .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--cyan), var(--purple)); }
-        .service-card:hover { border-color: var(--cyan); transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        .service-icon { font-size: 36px; margin-bottom: 20px; display: inline-block; }
-        .service-card h3 { font-size: 22px; color: var(--text-main); margin-bottom: 12px; font-weight: 700; }
-        .service-card p { color: var(--text-muted); font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
-        .service-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-        .tag { font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 12px; background: rgba(255,255,255,0.05); color: var(--cyan); border: 1px solid rgba(6,182,212,0.2); }
+    --text:#0f172a;
+    --muted:#475569;
+    --dim:#64748b;
 
-        /* Facilities & Infrastructure Showcase */
-        .infra-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
-        .infra-card { background: var(--card-dark); border: 1px solid var(--border-dark); border-radius: 24px; overflow: hidden; backdrop-filter: blur(10px); }
-        .infra-card:hover { border-color: var(--cyan); transform: translateY(-5px); }
-        .infra-card img { width: 100%; height: 250px; object-fit: cover; border-bottom: 1px solid var(--border-dark); }
-        .infra-card-body { padding: 30px; }
-        .infra-card-body h4 { font-size: 20px; color: var(--cyan); margin-bottom: 10px; font-weight: 700; }
-        .infra-card-body p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+    --border:rgba(15,23,42,.09);
+    --border-hover:rgba(14,165,233,.45);
 
-        /* Interactive Cost Calculator */
-        .calc-section { background: rgba(15, 23, 42, 0.4); }
-        .calc-box { background: var(--card-dark); border: 1px solid var(--border-highlight); border-radius: 28px; padding: 50px; max-width: 850px; margin: 0 auto; backdrop-filter: blur(20px); box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
-        .calc-option { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--border-dark); }
-        .calc-option label { font-size: 16px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 12px; }
-        .calc-option input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--cyan); cursor: pointer; }
-        .total-price { font-size: 38px; color: var(--cyan); font-weight: 800; text-align: center; margin-top: 35px; text-shadow: 0 0 20px var(--cyan-glow); }
+    --shadow:0 20px 50px rgba(15,23,42,.10);
+}
 
-        /* Code Terminal Section */
-        .terminal-box { background: #080d1a; border: 1px solid var(--border-dark); border-radius: 16px; overflow: hidden; font-family: 'Fira Code', monospace; max-width: 900px; margin: 0 auto; box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
-        .terminal-header { background: #0f172a; padding: 12px 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border-dark); }
-        .term-dot { width: 12px; height: 12px; border-radius: 50%; }
-        .term-red { background: #ef4444; } .term-yellow { background: #f59e0b; } .term-green { background: #10b981; }
-        .terminal-title { margin-left: 10px; font-size: 11px; color: var(--text-muted); letter-spacing: 1px; }
-        .terminal-body { padding: 25px; color: #a5f3fc; font-size: 13px; line-height: 1.8; overflow-x: auto; }
-        .term-keyword { color: var(--purple); font-weight: bold; }
-        .term-string { color: #86efac; }
-        .term-comment { color: var(--text-dim); font-style: italic; }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        /* FAQ Section */
-        .faq-container { max-width: 850px; margin: 0 auto; }
-        .faq-item { background: var(--card-dark); border: 1px solid var(--border-dark); border-radius: 16px; margin-bottom: 16px; overflow: hidden; }
-        .faq-question { padding: 22px 28px; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 16px; }
-        .faq-question:hover { color: var(--cyan); }
-        .faq-answer { padding: 0 28px 24px 28px; color: var(--text-muted); font-size: 14px; line-height: 1.7; display: none; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 10px; padding-top: 15px; }
-        .faq-item.active .faq-answer { display: block; }
+html{
+    scroll-behavior:smooth;
+}
 
-        /* Social Media Section */
-        .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 40px; }
-        .social-btn { padding: 16px 32px; border-radius: 16px; border: 1px solid var(--border-dark); color: var(--text-main); text-decoration: none; font-weight: 700; font-size: 14px; background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); display: flex; align-items: center; gap: 12px; transition: all 0.3s; }
-        .social-btn:hover { background: var(--cyan); color: #000; border-color: var(--cyan); transform: translateY(-4px); box-shadow: 0 10px 25px var(--cyan-glow); }
+body{
+    background:
+        radial-gradient(circle at 10% 10%, rgba(99,102,241,.12), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(34,211,238,.10), transparent 30%),
+        var(--bg);
 
-        /* Footer */
-        footer { padding: 60px 5% 30px 5%; border-top: 1px solid var(--border-dark); background: rgba(2, 6, 23, 0.98); font-size: 13px; color: var(--text-muted); }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 45px; margin-bottom: 50px; }
-        .footer-col h4 { color: var(--text-main); margin-bottom: 20px; font-size: 16px; font-weight: 700; letter-spacing: 1px; }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 12px; }
-        .footer-col ul li a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-        .footer-col ul li a:hover { color: var(--cyan); }
-        .footer-bottom { text-align: center; border-top: 1px solid var(--border-dark); padding-top: 30px; font-size: 12px; color: var(--text-dim); }
-    </style>
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+    transition:.3s ease;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-2;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+
+    background-size:50px 50px;
+
+    mask-image:linear-gradient(to bottom, black, transparent 85%);
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font-family:inherit;
+}
+
+img{
+    display:block;
+    max-width:100%;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+    height:38px;
+    padding:0 5%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    border-bottom:1px solid var(--border);
+
+    background:rgba(4,9,18,.72);
+    backdrop-filter:blur(20px);
+
+    color:var(--muted);
+
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.7px;
+
+    position:relative;
+    z-index:1000;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.status-dot{
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:0 0 12px #22c55e;
+
+    animation:pulse 1.8s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:.5;transform:scale(.8)}
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:999;
+
+    min-height:78px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:14px 5%;
+
+    background:rgba(5,9,18,.72);
+    backdrop-filter:blur(22px);
+
+    border-bottom:1px solid var(--border);
+}
+
+.light header{
+    background:rgba(255,255,255,.75);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo img{
+    width:43px;
+    height:43px;
+
+    object-fit:cover;
+
+    border-radius:12px;
+
+    border:1px solid var(--border-hover);
+
+    box-shadow:
+        0 0 20px rgba(34,211,238,.18);
+}
+
+.logo-text strong{
+    display:block;
+
+    font-family:'Space Grotesk',sans-serif;
+
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:.5px;
+}
+
+.logo-text span{
+    display:block;
+
+    margin-top:2px;
+
+    color:var(--primary);
+
+    font-size:8px;
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+nav a{
+    position:relative;
+
+    color:var(--muted);
+
+    font-size:12px;
+    font-weight:700;
+
+    transition:.25s ease;
+}
+
+nav a::after{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:-8px;
+
+    width:0;
+    height:2px;
+
+    border-radius:10px;
+
+    background:linear-gradient(
+        90deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    transition:.25s ease;
+}
+
+nav a:hover,
+nav a.active{
+    color:var(--text);
+}
+
+nav a:hover::after,
+nav a.active::after{
+    width:100%;
+}
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    padding:12px 19px;
+
+    border-radius:12px;
+
+    border:1px solid transparent;
+
+    font-size:12px;
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.3s ease;
+}
+
+.btn-primary{
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--secondary),
+            var(--primary)
+        );
+
+    box-shadow:
+        0 10px 30px rgba(34,211,238,.13);
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 15px 35px rgba(34,211,238,.22);
+}
+
+.btn-outline{
+    color:var(--text);
+
+    background:rgba(255,255,255,.035);
+
+    border-color:var(--border);
+}
+
+.btn-outline:hover{
+    border-color:var(--border-hover);
+
+    background:rgba(34,211,238,.08);
+
+    transform:translateY(-3px);
+}
+
+.theme-btn{
+    width:40px;
+    height:40px;
+
+    border-radius:12px;
+
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,.04);
+
+    color:var(--text);
+
+    cursor:pointer;
+
+    transition:.3s ease;
+}
+
+.theme-btn:hover{
+    border-color:var(--border-hover);
+}
+
+.menu-btn{
+    display:none;
+
+    width:42px;
+    height:42px;
+
+    border:1px solid var(--border);
+    border-radius:12px;
+
+    background:rgba(255,255,255,.04);
+
+    color:var(--text);
+
+    font-size:20px;
+
+    cursor:pointer;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:calc(100vh - 116px);
+
+    max-width:1400px;
+
+    margin:auto;
+
+    padding:90px 5% 80px;
+
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+
+    align-items:center;
+
+    gap:65px;
+}
+
+.hero-content{
+    animation:heroIn .8s ease both;
+}
+
+@keyframes heroIn{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:8px 13px;
+
+    border-radius:100px;
+
+    border:1px solid rgba(34,211,238,.2);
+
+    background:rgba(34,211,238,.07);
+
+    color:var(--primary);
+
+    font-size:10px;
+    font-weight:800;
+
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+
+    margin-bottom:22px;
+}
+
+.eyebrow::before{
+    content:"";
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:var(--primary);
+
+    box-shadow:0 0 10px var(--primary);
+}
+
+.hero h1{
+    font-family:'Space Grotesk',sans-serif;
+
+    font-size:clamp(43px,5.5vw,76px);
+
+    line-height:1.02;
+
+    letter-spacing:-3px;
+
+    margin-bottom:24px;
+}
+
+.gradient-text{
+    background:
+        linear-gradient(
+            100deg,
+            var(--primary),
+            #818cf8,
+            var(--accent)
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+.hero-description{
+    max-width:650px;
+
+    color:var(--muted);
+
+    font-size:16px;
+
+    line-height:1.85;
+
+    margin-bottom:30px;
+}
+
+.hero-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+
+    margin-bottom:32px;
+}
+
+.hero-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.hero-tags span{
+    padding:7px 11px;
+
+    border-radius:8px;
+
+    background:rgba(255,255,255,.035);
+
+    border:1px solid var(--border);
+
+    color:var(--muted);
+
+    font-size:10px;
+    font-weight:700;
+}
+
+/* =========================
+   HERO SLIDER
+========================= */
+
+.hero-visual{
+    position:relative;
+}
+
+.slider{
+    height:510px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:28px;
+
+    border:1px solid var(--border);
+
+    background:#07101d;
+
+    box-shadow:var(--shadow);
+}
+
+.slide{
+    position:absolute;
+    inset:0;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:opacity .8s ease;
+}
+
+.slide.active{
+    opacity:1;
+    pointer-events:auto;
+}
+
+.slide img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+.slide::after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(3,8,18,.97),
+            rgba(3,8,18,.1) 60%,
+            rgba(3,8,18,.15)
+        );
+}
+
+.slide-content{
+    position:absolute;
+
+    z-index:2;
+
+    left:30px;
+    right:30px;
+    bottom:30px;
+}
+
+.slide-number{
+    color:var(--primary);
+
+    font-family:'Space Grotesk',sans-serif;
+
+    font-size:11px;
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+.slide-content h3{
+    font-family:'Space Grotesk',sans-serif;
+
+    font-size:27px;
+
+    margin:8px 0;
+
+    letter-spacing:-.5px;
+}
+
+.slide-content p{
+    color:#cbd5e1;
+
+    max-width:500px;
+
+    font-size:13px;
+
+    line-height:1.7;
+}
+
+.slider-controls{
+    position:absolute;
+
+    z-index:10;
+
+    right:25px;
+    bottom:27px;
+
+    display:flex;
+    gap:7px;
+}
+
+.slider-dot{
+    width:25px;
+    height:5px;
+
+    border:0;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.3);
+
+    cursor:pointer;
+
+    transition:.3s ease;
+}
+
+.slider-dot.active{
+    width:45px;
+
+    background:var(--primary);
+
+    box-shadow:0 0 15px rgba(34,211,238,.5);
+}
+
+.visual-badge{
+    position:absolute;
+
+    z-index:20;
+
+    top:-15px;
+    right:-15px;
+
+    width:105px;
+    height:105px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(99,102,241,.95),
+            rgba(34,211,238,.95)
+        );
+
+    border:5px solid var(--bg);
+
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+
+    color:white;
+}
+
+.visual-badge strong{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:22px;
+}
+
+.visual-badge span{
+    font-size:8px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+/* =========================
+   TRUST STRIP
+========================= */
+
+.trust-strip{
+    max-width:1300px;
+
+    margin:0 auto;
+
+    padding:0 5% 70px;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:15px;
+}
+
+.trust-card{
+    padding:22px;
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    background:var(--card);
+
+    backdrop-filter:blur(15px);
+
+    transition:.3s ease;
+}
+
+.trust-card:hover{
+    transform:translateY(-4px);
+
+    border-color:var(--border-hover);
+}
+
+.trust-card span{
+    display:block;
+
+    color:var(--primary);
+
+    font-family:'Space Grotesk',sans-serif;
+
+    font-size:13px;
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    margin-bottom:7px;
+}
+
+.trust-card strong{
+    font-size:14px;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+section{
+    padding:105px 5%;
+
+    border-top:1px solid var(--border);
+}
+
+.section-container{
+    max-width:1300px;
+
+    margin:auto;
+}
+
+.section-heading{
+    max-width:720px;
+
+    margin:0 auto 55px;
+
+    text-align:center;
+}
+
+.section-label{
+    display:inline-block;
+
+    color:var(--primary);
+
+    font-size:10px;
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    margin-bottom:13px;
+}
+
+.section-heading h2{
+    font-family:'Space Grotesk',sans-serif;
+
+    font-size:clamp(31px,4vw,48px);
+
+    line-height:1.1;
+
+    letter-spacing:-1.5px;
+
+    margin-bottom:15px;
+}
+
+.section-heading p{
+    color:var(--muted);
+
+    font-size:14px;
+
+    line-height:1.8;
+}
+
+/* =========================
+   SERVICES
+========================= */
+
+.services-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.service-card{
+    position:relative;
+
+    padding:30px;
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.015)
+        );
+
+    backdrop-filter:blur(16px);
+
+    overflow:hidden;
+
+    transition:.35s ease;
+}
+
+.service-card::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--primary),
+            var(--secondary),
+            var(--accent)
+        );
+
+    transform:scaleX(0);
+
+    transform-origin:left;
+
+    transition:.4s ease;
+}
+
+.service-card:hover{
+    transform:translateY(-7px);
+
+    border-color:var(--border-hover);
+
+    box-shadow:var(--shadow);
+}
+
+.service-card:hover::before{
+    transform:scaleX(1);
+}
+
+.service-number{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:43px;
+    height:43px;
+
+    margin-bottom:22px;
+
+    border-radius:13px;
+
+    background:rgba(34,211,238,.08);
+
+    border:1px solid rgba(34,211,238,.15);
+
+    color:var(--primary);
+
+    font-family:'Space Grotesk',sans-serif;
+
+    font-weight:800;
+
+    font-size:12px;
+}
+
+.service-card h3{
+    font-family:'Space Grotesk',sans-serif;
+
+    font-size:20px;
+
+    margin-bottom:12px;
+}
+
+.service-card p{
+    color:var(--muted);
+
+    font-size:13px;
+
+    line-height:1.75;
+
+    margin-bottom:20px;
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.tags span{
+    padding:5px 9px;
+
+    border-radius:7px;
+
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,.03);
+
+    color:var(--dim);
+
+    font-size:9px;
+    font-weight:800;
+}
+
+/* =========================
+   SHOWCASE
+========================= */
+
+.showcase{
+    background:
+        linear-gradient(
+            180deg,
+            transparent,
+            rgba(34,211,238,.025),
+            transparent
+        );
+}
+
+.showcase-grid{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:25px;
+}
+
+.showcase-card{
+    position:relative;
+
+    min-height:360px;
+
+    overflow:hidden;
+
+    border-radius:24px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    transition:.35s ease;
+}
+
+.showcase-card:hover{
+    transform:translateY(-5px);
+
+    border-color:var(--border-hover);
+
+    box-shadow:var(--shadow);
+}
+
+.showcase-card img{
+    width:100%;
+    height:100%;
+
+    min-height:360px;
+
+    object-fit:cover;
+
+    transition:transform .7s ease;
+}
+
+.showcase-card:hover img{
+    transform:scale(1.05);
+}
+
+.showcase-overlay{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    align-items:flex-end;
+
+    padding:30px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(2,7,15,.95),
+            rgba(2,7,15,.05) 75%
+        );
+}
+
+.showcase-overlay h3{
+    font-family:'Space Grotesk',sans-serif;
+
+    font-size:22px;
+
+    margin-bottom:7px;
+}
+
+.showcase-overlay p{
+    color:#cbd5e1;
+
+    font-size:12px;
+
+    line-height:1.6;
+}
+
+/* =========================
+   WHY US
+========================= */
+
+.why-grid{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:50px;
+
+    align-items:center;
+}
+
+.why-image{
+    position:relative;
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    border:1px solid var(--border);
+
+    min-height:500px;
+}
+
+.why-image img{
+    width:100%;
+    height:100%;
+
+    min-height:500px;
+
+    object-fit:cover;
+}
+
+.why-image::after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(2,7,15,.8),
+            transparent 70%
+        );
+}
+
+.why-content .section-label{
+    margin-bottom:12px;
+}
+
+.why-content h2{
+    font-family:'Space Grotesk',sans-serif;
+
+    font-size:42px;
+
+    line-height:1.1;
+
+    letter-spacing:-1.5px;
+
+    margin-bottom:18px;
+}
+
+.why-content > p{
+    color:var(--muted);
+
+    line-height:1.8;
+
+    font-size:14px;
+
+    margin-bottom:30px;
+}
+
+.features{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
+}
+
+.feature{
+    padding:18px;
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    background:rgba(255,255,255,.025);
+}
+
+.feature strong{
+    display:block;
+
+    font-size:13px;
+
+    margin-bottom:6px;
+}
+
+.feature span{
+    color:var(--muted);
+
+    font-size:11px;
+
+    line-height:1.6;
+}
+
+/* =========================
+   PROCESS
+========================= */
+
+.process-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px;
+}
+
+.process-card{
+    position:relative;
+
+    padding:28px 22px;
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    background:var(--card);
+
+    text-align:center;
+}
+
+.process-number{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:48px;
+    height:48px;
+
+    margin:0 auto 18px;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--secondary),
+            var(--primary)
+        );
+
+    color:white;
+
+    font-family:'Space Grotesk',sans-serif;
+
+    font-weight:800;
+}
+
+.process-card h3{
+    font-family:'Space Grotesk',sans-serif;
+
+    font-size:17px;
+
+    margin-bottom:9px;
+}
+
+.process-card p{
+    color:var(--muted);
+
+    font-size:11px;
+
+    line-height:1.7;
+}
+
+/* =========================
+   ESTIMATOR
+========================= */
+
+.estimator{
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(99,102,241,.12),
+            transparent 50%
+        );
+}
+
+.calculator{
+    max-width:850px;
+
+    margin:auto;
+
+    padding:40px;
+
+    border:1px solid var(--border-hover);
+
+    border-radius:26px;
+
+    background:var(--card);
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:var(--shadow);
+}
+
+.calc-row{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    padding:19px 0;
+
+    border-bottom:1px solid var(--border);
+}
+
+.calc-row:last-of-type{
+    border-bottom:0;
+}
+
+.calc-label{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    font-size:13px;
+    font-weight:600;
+
+    cursor:pointer;
+}
+
+.calc-label input{
+    width:19px;
+    height:19px;
+
+    accent-color:var(--primary);
+
+    cursor:pointer;
+}
+
+.calc-price{
+    color:var(--primary);
+
+    white-space:nowrap;
+
+    font-size:13px;
+    font-weight:800;
+}
+
+.total{
+    margin-top:25px;
+
+    padding:22px;
+
+    text-align:center;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(99,102,241,.12),
+            rgba(34,211,238,.08)
+        );
+
+    border:1px solid var(--border);
+
+    color:var(--muted);
+
+    font-size:12px;
+    font-weight:700;
+}
+
+.total strong{
+    display:block;
+
+    margin-top:7px;
+
+    color:var(--primary);
+
+    font-family:'Space Grotesk',sans-serif;
+
+    font-size:34px;
+}
+
+/* =========================
+   FAQ
+========================= */
+
+.faq{
+    max-width:850px;
+
+    margin:auto;
+}
+
+.faq-item{
+    margin-bottom:12px;
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    background:var(--card);
+}
+
+.faq-question{
+    width:100%;
+
+    padding:20px 22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:20px;
+
+    background:none;
+    border:0;
+
+    color:var(--text);
+
+    text-align:left;
+
+    font-size:13px;
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+.faq-question span{
+    color:var(--primary);
+
+    font-size:20px;
+
+    transition:.3s ease;
+}
+
+.faq-item.active .faq-question span{
+    transform:rotate(45deg);
+}
+
+.faq-answer{
+    max-height:0;
+
+    overflow:hidden;
+
+    padding:0 22px;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    line-height:1.8;
+
+    transition:max-height .35s ease,
+               padding .35s ease;
+}
+
+.faq-item.active .faq-answer{
+    max-height:300px;
+
+    padding:0 22px 20px;
+}
+
+/* =========================
+   CONTACT CTA
+========================= */
+
+.contact-box{
+    max-width:1100px;
+
+    margin:auto;
+
+    padding:55px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:28px;
+
+    border:1px solid var(--border-hover);
+
+    background:
+        radial-gradient(
+            circle at 80% 10%,
+            rgba(34,211,238,.14),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(99,102,241,.15),
+            transparent 35%
+        ),
+        var(--card);
+}
+
+.contact-box::before{
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    right:-100px;
+    top:-100px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(34,211,238,.2);
+}
+
+.contact-box h2{
+    font-family:'Space Grotesk',sans-serif;
+
+    font-size:clamp(30px,4vw,48px);
+
+    letter-spacing:-1.5px;
+
+    margin-bottom:15px;
+}
+
+.contact-box p{
+    max-width:650px;
+
+    color:var(--muted);
+
+    line-height:1.8;
+
+    font-size:14px;
+
+    margin-bottom:25px;
+}
+
+.contact-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    padding:65px 5% 25px;
+
+    border-top:1px solid var(--border);
+
+    background:rgba(2,7,15,.65);
+}
+
+.footer-grid{
+    max-width:1300px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        1.5fr 1fr 1fr 1fr;
+
+    gap:45px;
+
+    padding-bottom:45px;
+}
+
+.footer-brand p{
+    max-width:350px;
+
+    margin-top:15px;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    line-height:1.8;
+}
+
+.footer-col h4{
+    margin-bottom:17px;
+
+    font-family:'Space Grotesk',sans-serif;
+
+    font-size:14px;
+}
+
+.footer-col a{
+    display:block;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    margin-bottom:11px;
+
+    transition:.2s ease;
+}
+
+.footer-col a:hover{
+    color:var(--primary);
+
+    transform:translateX(3px);
+}
+
+.footer-bottom{
+    max-width:1300px;
+
+    margin:auto;
+
+    padding-top:25px;
+
+    border-top:1px solid var(--border);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    color:var(--dim);
+
+    font-size:10px;
+}
+
+/* =========================
+   BACK TO TOP
+========================= */
+
+.back-top{
+    position:fixed;
+
+    right:22px;
+    bottom:22px;
+
+    width:45px;
+    height:45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:13px;
+
+    border:1px solid var(--border);
+
+    background:rgba(8,16,29,.85);
+
+    backdrop-filter:blur(12px);
+
+    color:var(--primary);
+
+    cursor:pointer;
+
+    opacity:0;
+    visibility:hidden;
+
+    transform:translateY(10px);
+
+    transition:.3s ease;
+
+    z-index:500;
+}
+
+.back-top.show{
+    opacity:1;
+    visibility:visible;
+
+    transform:translateY(0);
+}
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+.reveal{
+    opacity:0;
+
+    transform:translateY(25px);
+
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
+}
+
+.reveal.visible{
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+    nav{
+        gap:16px;
+    }
+
+    .hero{
+        gap:35px;
+    }
+
+    .services-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .footer-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:850px){
+
+    .topbar{
+        display:none;
+    }
+
+    header{
+        top:0;
+    }
+
+    nav{
+        position:absolute;
+
+        top:76px;
+        left:5%;
+        right:5%;
+
+        display:none;
+        flex-direction:column;
+        align-items:stretch;
+
+        padding:18px;
+
+        border:1px solid var(--border);
+
+        border-radius:18px;
+
+        background:
+            rgba(7,14,26,.96);
+
+        backdrop-filter:blur(25px);
+
+        box-shadow:var(--shadow);
+    }
+
+    .light nav{
+        background:rgba(255,255,255,.96);
+    }
+
+    nav.open{
+        display:flex;
+    }
+
+    nav a{
+        padding:12px;
+    }
+
+    nav a::after{
+        display:none;
+    }
+
+    .header-actions .btn{
+        display:none;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+
+        min-height:auto;
+
+        padding-top:65px;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+
+    .hero-visual{
+        max-width:750px;
+
+        width:100%;
+
+        margin:auto;
+    }
+
+    .slider{
+        height:450px;
+    }
+
+    .trust-strip{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .why-grid{
+        grid-template-columns:1fr;
+    }
+
+    .process-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    section{
+        padding:75px 5%;
+    }
+
+    .hero{
+        padding:50px 5% 65px;
+    }
+
+    .hero h1{
+        font-size:43px;
+
+        line-height:1.04;
+    }
+
+    .hero-description{
+        font-size:14px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .hero-buttons .btn{
+        width:100%;
+    }
+
+    .slider{
+        height:390px;
+
+        border-radius:20px;
+    }
+
+    .slide-content{
+        left:20px;
+        right:20px;
+        bottom:20px;
+    }
+
+    .slide-content h3{
+        font-size:21px;
+    }
+
+    .visual-badge{
+        width:80px;
+        height:80px;
+
+        right:-7px;
+        top:-8px;
+    }
+
+    .visual-badge strong{
+        font-size:17px;
+    }
+
+    .trust-strip{
+        grid-template-columns:1fr;
+
+        padding-bottom:50px;
+    }
+
+    .services-grid{
+        grid-template-columns:1fr;
+    }
+
+    .showcase-grid{
+        grid-template-columns:1fr;
+    }
+
+    .showcase-card,
+    .showcase-card img{
+        min-height:300px;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .process-grid{
+        grid-template-columns:1fr;
+    }
+
+    .calculator{
+        padding:25px 18px;
+    }
+
+    .calc-row{
+        align-items:flex-start;
+    }
+
+    .calc-label{
+        font-size:12px;
+    }
+
+    .contact-box{
+        padding:32px 24px;
+    }
+
+    .contact-actions{
+        flex-direction:column;
+    }
+
+    .contact-actions .btn{
+        width:100%;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+        text-align:center;
+    }
+
+}
+
+</style>
 </head>
+
 <body>
 
-    <canvas id="bgCanvas"></canvas>
+<!-- =========================
+     TOP BAR
+========================= -->
 
-    <!-- Top Operational Status Bar -->
-    <div class="top-status-bar">
-        <div><span class="live-dot"></span>SYSTEM STATUS: 100% OPERATIONAL | ACTIVE CLUSTER NODES: 850+</div>
-        <div>SURAT OPERATIONS HQ | GUJARAT, INDIA</div>
+<div class="topbar">
+
+    <div class="status">
+        <span class="status-dot"></span>
+        DIGITAL SYSTEMS • AI • WEB ENGINEERING
     </div>
 
-    <!-- Header Navigation -->
-    <header>
-        <a href="index.html" class="logo-box">
-            <img src="assets/logo.png" alt="Aether Tech Official Logo">
-            <div>
-                <h3 style="font-size: 18px; font-weight: 800; letter-spacing: 1px;">AETHER TECH</h3>
-                <span style="font-size: 9px; color: var(--cyan); letter-spacing: 2px; font-weight: 700;">ENTERPRISE PLATFORM</span>
-            </div>
+    <div>
+        SURAT • GUJARAT • INDIA
+    </div>
+
+</div>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <a href="#home" class="logo">
+
+        <img src="assets/logo.png"
+             alt="Aether Tech Logo">
+
+        <div class="logo-text">
+            <strong>AETHER TECH</strong>
+            <span>ENTERPRISE DIGITAL SYSTEMS</span>
+        </div>
+
+    </a>
+
+
+    <nav id="mainNav">
+
+        <a href="#home" class="active">Home</a>
+
+        <a href="#services">Services</a>
+
+        <a href="#showcase">Showcase</a>
+
+        <a href="#process">Process</a>
+
+        <a href="#estimator">Pricing</a>
+
+        <a href="#faq">FAQ</a>
+
+        <a href="#contact">Contact</a>
+
+    </nav>
+
+
+    <div class="header-actions">
+
+        <button
+            class="theme-btn"
+            id="themeBtn"
+            aria-label="Toggle theme">
+            ☼
+        </button>
+
+        <a
+            href="https://wa.me/919925527617"
+            target="_blank"
+            class="btn btn-primary">
+            WhatsApp ↗
         </a>
-        <nav>
-            <a href="index.html" class="active">Home</a>
-            <a href="services.html">Services</a>
-            <a href="about.html">About Us</a>
-            <a href="#infra">Infrastructure</a>
-            <a href="#estimator">Pricing</a>
-            <a href="#faq">FAQ</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-        <div style="display:flex; align-items:center; gap:12px;">
-            <button class="btn btn-outline" id="themeBtn" style="padding: 8px 16px;">☀️ Light</button>
-            <a href="https://wa.me/919925527617" target="_blank" class="btn btn-grad">WhatsApp ↗</a>
-        </div>
-    </header>
 
-    <!-- Moving Announcement Ticker -->
-    <div class="ticker">
-        <div class="ticker-text">
-            ✦ Web Application Engineering &nbsp;&bull;&nbsp; Artificial Intelligence Integrations &nbsp;&bull;&nbsp; Enterprise Cloud Networks &nbsp;&bull;&nbsp; Custom UI/UX Design &nbsp;&bull;&nbsp; Academic & Tech Coaching Frameworks &nbsp;&bull;&nbsp; High-Performance API Pipelines
-        </div>
-    </div>
-    <!-- Hero Section with 4-Slide Image Carousel -->
-    <section class="hero">
-        <div class="hero-left">
-            <span class="badge">ENTERPRISE SOFTWARE & AI INFRASTRUCTURE</span>
-            <h1>Engineering <span>Tomorrow’s</span> Digital Platforms</h1>
-            <p>Aether Tech builds scalable web systems, integrates high-performance artificial intelligence workflows, designs intuitive software interfaces, and delivers structured academic technology solutions.</p>
-            <div style="display:flex; gap:16px; flex-wrap:wrap;">
-                <a href="services.html" class="btn btn-grad">Explore Services 🚀</a>
-                <a href="contact.html" class="btn btn-outline">Schedule Consultation ↗</a>
-            </div>
-        </div>
-        <div class="hero-right">
-            <!-- 4-Slide Dynamic Image Slider -->
-            <div class="slider-box">
-                <div class="slide slide-1 active">
-                    <div class="slide-info">
-                        <h4>01 / High-Speed Cloud Server Nodes</h4>
-                        <p>Enterprise cloud backend & database cluster deployment.</p>
-                    </div>
-                </div>
-                <div class="slide slide-2">
-                    <div class="slide-info">
-                        <h4>02 / AI & Research Laboratory</h4>
-                        <p>Automated bot workflows, webhooks & machine learning models.</p>
-                    </div>
-                </div>
-                <div class="slide slide-3">
-                    <div class="slide-info">
-                        <h4>03 / Modern UI/UX Engineering</h4>
-                        <p>Enterprise SaaS dashboards & responsive Web App design.</p>
-                    </div>
-                </div>
-                <div class="slide slide-4">
-                    <div class="slide-info">
-                        <h4>04 / Development & Support Operations</h4>
-                        <p>Dedicated developer support & custom software maintenance.</p>
-                    </div>
-                </div>
-                <div class="dots">
-                    <button class="dot-btn active" onclick="setSlide(0)"></button>
-                    <button class="dot-btn" onclick="setSlide(1)"></button>
-                    <button class="dot-btn" onclick="setSlide(2)"></button>
-                    <button class="dot-btn" onclick="setSlide(3)"></button>
-                </div>
-            </div>
-        </div>
-    </section>
+        <button
+            class="menu-btn"
+            id="menuBtn"
+            aria-label="Open menu">
+            ☰
+        </button>
 
-    <!-- Live Performance Metrics -->
-    <div class="stats-grid">
-        <div class="stat-card">
-            <h3>1,240+</h3>
-            <p>Engineers & Specialists</p>
-        </div>
-        <div class="stat-card">
-            <h3>850+</h3>
-            <p>Active Enterprise Deployments</p>
-        </div>
-        <div class="stat-card">
-            <h3>99.998%</h3>
-            <p>Cluster Uptime Rate</p>
-        </div>
-        <div class="stat-card">
-            <h3>100%</h3>
-            <p>Client Satisfaction</p>
-        </div>
     </div>
 
-    <!-- Core Enterprise Services -->
-    <section id="services">
-        <div class="section-header">
-            <h2>Core Competencies</h2>
-            <p>Tailored technology capabilities built for ambitious modern organizations.</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">🌐</div>
-                <h3>Full-Stack Web Development</h3>
-                <p>Architecting lightning-fast responsive websites and web apps using scalable frontend frameworks and resilient backends.</p>
-                <div class="service-tags">
-                    <span class="tag">HTML5 / CSS3</span>
-                    <span class="tag">JavaScript</span>
-                    <span class="tag">React Node</span>
-                </div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🤖</div>
-                <h3>AI & Webhook Automation</h3>
-                <p>Deploying intelligent bots, automated workflows, custom APIs, and neural data pipelines to streamline processes.</p>
-                <div class="service-tags">
-                    <span class="tag">Telegram Bots</span>
-                    <span class="tag">Make.com</span>
-                    <span class="tag">Python</span>
-                </div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🎨</div>
-                <h3>UI/UX Software Design</h3>
-                <p>Creating beautiful, intuitive, and modern user interfaces optimized for maximum client conversion and readability.</p>
-                <div class="service-tags">
-                    <span class="tag">Figma</span>
-                    <span class="tag">Glassmorphism</span>
-                    <span class="tag">SaaS UI</span>
-                </div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🎓</div>
-                <h3>Academic & Coaching Platforms</h3>
-                <p>Developing structured study modules, evaluation templates, revision guides, and automated tracking ledgers.</p>
-                <div class="service-tags">
-                    <span class="tag">AnshKnowledgeBase</span>
-                    <span class="tag">EdTech</span>
-                    <span class="tag">Worksheets</span>
-                </div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">⚡</div>
-                <h3>Cloud Cluster Architecture</h3>
-                <p>Designing high-availability server setups, database management systems, and low-latency network proxy configurations.</p>
-                <div class="service-tags">
-                    <span class="tag">Cloud Server</span>
-                    <span class="tag">Proxy Setup</span>
-                    <span class="tag">Security</span>
-                </div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">📈</div>
-                <h3>Financial Ledgers & Tools</h3>
-                <p>Building automated expense tracking sheets, shift-based payroll logic, and financial data visualizers.</p>
-                <div class="service-tags">
-                    <span class="tag">Google Sheets API</span>
-                    <span class="tag">Payroll Logic</span>
-                    <span class="tag">Ledgers</span>
-                </div>
-            </div>
-        </div>
-    </section>
+</header>
 
-    <!-- Facilities & Physical Infrastructure Showcase (Using Assets Images) -->
-    <section id="infra" class="infra-section">
-        <div class="section-header">
-            <h2>Facilities & Corporate HQ</h2>
-            <p>Explore our office headquarters and development operations based out of Surat, Gujarat.</p>
+
+<!-- =========================
+     HERO
+========================= -->
+
+<main id="home">
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            Enterprise Software & AI Infrastructure
         </div>
-        <div class="infra-grid">
-            <div class="infra-card">
-                <img src="assets/hq.jpg" alt="Aether Tech Corporate HQ">
-                <div class="infra-card-body">
-                    <h4>Surat Corporate Headquarters</h4>
-                    <p>Our main operations hub located in Surat, housing our management and client execution teams.</p>
+
+
+        <h1>
+            Engineering
+            <span class="gradient-text">
+                Tomorrow's
+            </span>
+            Digital Platforms.
+        </h1>
+
+
+        <p class="hero-description">
+            Aether Tech builds modern web applications,
+            intelligent automation workflows, high-performance
+            interfaces and structured technology solutions
+            designed for ambitious businesses and organizations.
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                href="#services"
+                class="btn btn-primary">
+                Explore Services →
+            </a>
+
+            <a
+                href="#contact"
+                class="btn btn-outline">
+                Start a Project
+            </a>
+
+        </div>
+
+
+        <div class="hero-tags">
+
+            <span>Web Development</span>
+            <span>AI Automation</span>
+            <span>UI/UX</span>
+            <span>Cloud Systems</span>
+            <span>EdTech</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- HERO IMAGE SLIDER -->
+
+    <div class="hero-visual">
+
+        <div class="visual-badge">
+            <strong>01</strong>
+            <span>TECH CORE</span>
+        </div>
+
+
+        <div class="slider" id="slider">
+
+
+            <!-- SERVER IMAGE -->
+
+            <div class="slide active">
+
+                <img
+                    src="assets/servers.jpg"
+                    alt="High performance server infrastructure">
+
+                <div class="slide-content">
+
+                    <div class="slide-number">
+                        01 / INFRASTRUCTURE
+                    </div>
+
+                    <h3>
+                        High-Performance Server Systems
+                    </h3>
+
+                    <p>
+                        Scalable infrastructure concepts
+                        designed for reliable digital platforms,
+                        applications and backend operations.
+                    </p>
+
                 </div>
+
             </div>
-            <div class="infra-card">
-                <img src="assets/room.jpg" alt="Development & R&D Studio">
-                <div class="infra-card-body">
-                    <h4>Development & R&D Studio</h4>
-                    <p>High-tech studio environment engineered specifically for full-stack software development and testing.</p>
+
+
+            <!-- LAB IMAGE -->
+
+            <div class="slide">
+
+                <img
+                    src="assets/lab.jpg"
+                    alt="Technology and AI laboratory">
+
+                <div class="slide-content">
+
+                    <div class="slide-number">
+                        02 / AI & RESEARCH
+                    </div>
+
+                    <h3>
+                        AI Automation & Research
+                    </h3>
+
+                    <p>
+                        Intelligent workflows, automation,
+                        APIs and technology-driven solutions
+                        for modern business operations.
+                    </p>
+
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Code Terminal Display -->
-    <section>
-        <div class="section-header">
-            <h2>System Architecture Standard</h2>
-            <p>Clean, modular, and enterprise-grade code execution environment.</p>
-        </div>
-        <div class="terminal-box">
-            <div class="terminal-header">
-                <div class="term-dot term-red"></div>
-                <div class="term-dot term-yellow"></div>
-                <div class="term-dot term-green"></div>
-                <span class="terminal-title">aether-tech-cluster-init.js — Node.js Environment</span>
             </div>
-            <div class="terminal-body">
-                <span class="term-comment">// Initializing Aether Tech Master Enterprise Node</span><br>
-                <span class="term-keyword">const</span> AetherCluster = <span class="term-keyword">require</span>(<span class="term-string">'@aether/core-cluster'</span>);<br>
-                <span class="term-keyword">const</span> SuratNode = <span class="term-keyword">new</span> AetherCluster({ region: <span class="term-string">'IN-WEST-SURAT'</span>, status: <span class="term-string">'ONLINE'</span> });<br><br>
-                SuratNode.connectDatabase({ assetsFolder: <span class="term-string">'/assets'</span>, totalNodes: 850 });<br>
-                SuratNode.on(<span class="term-string">'ready'</span>, () => {<br>
-                &nbsp;&nbsp;console.log(<span class="term-string">'[SUCCESS] All 7 assets images loaded: logo, servers, lab, ui, team, hq, room.'</span>);<br>
-                &nbsp;&nbsp;console.log(<span class="term-string">'[SUCCESS] Aether Tech Enterprise Engine is running smoothly.'</span>);<br>
-                });
-            </div>
-        </div>
-    </section>
-    <!-- Interactive Cost Estimator -->
-    <section class="calc-section" id="estimator">
-        <div class="section-header">
-            <h2>Interactive Cost Estimator</h2>
-            <p>Select your required services below to calculate your estimated investment.</p>
-        </div>
-        <div class="calc-box">
-            <div class="calc-option">
-                <label for="opt1"><input type="checkbox" id="opt1" value="15000" onchange="calculateCost()"> Full-Stack Web Application Development</label>
-                <span style="color:var(--cyan); font-weight:700;">₹15,000</span>
-            </div>
-            <div class="calc-option">
-                <label for="opt2"><input type="checkbox" id="opt2" value="25000" onchange="calculateCost()"> Custom AI Bot & Webhook Workflow Setup</label>
-                <span style="color:var(--cyan); font-weight:700;">₹25,000</span>
-            </div>
-            <div class="calc-option">
-                <label for="opt3"><input type="checkbox" id="opt3" value="30000" onchange="calculateCost()"> SaaS Dashboard UI/UX Design System</label>
-                <span style="color:var(--cyan); font-weight:700;">₹30,000</span>
-            </div>
-            <div class="calc-option">
-                <label for="opt4"><input type="checkbox" id="opt4" value="20000" onchange="calculateCost()"> AnshKnowledgeBase Academic Platform License</label>
-                <span style="color:var(--cyan); font-weight:700;">₹20,000</span>
-            </div>
-            <div class="calc-option">
-                <label for="opt5"><input type="checkbox" id="opt5" value="10000" onchange="calculateCost()"> Cloud Server Maintenance & Annual Support</label>
-                <span style="color:var(--cyan); font-weight:700;">₹10,000</span>
-            </div>
-            <div class="total-price" id="totalDisplay">Estimated Valuation: ₹0</div>
-            <div style="text-align: center; margin-top: 30px;">
-                <a href="https://wa.me/919925527617" target="_blank" class="btn btn-grad">Lock In Quotation On WhatsApp ↗</a>
-            </div>
-        </div>
-    </section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="faq-section">
-        <div class="section-header">
-            <h2>Frequently Asked Questions</h2>
-            <p>Get instant answers to commonly asked questions about our technology services.</p>
-        </div>
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">What core services does Aether Tech provide? <span>+</span></div>
-                <div class="faq-answer">We build modern responsive websites, custom AI integrations, Telegram automation bots, UI/UX SaaS designs, financial tracking systems, and specialized academic tutoring platforms.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Are all assets images locally hosted? <span>+</span></div>
-                <div class="faq-answer">Yes, all project graphics including logo.png, servers.jpg, lab.jpg, ui.jpg, team.jpg, hq.jpg, and room.jpg are hosted directly inside your local assets directory.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">How long does project delivery take? <span>+</span></div>
-                <div class="faq-answer">Standard corporate websites are delivered in 3 to 7 days, while custom software platforms and automated AI workflows take 2 to 4 weeks.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Can I get technical support post-launch? <span>+</span></div>
-                <div class="faq-answer">Yes, we provide ongoing maintenance, cloud server management, and technical updates for all our enterprise deployments.</div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Social Links Section -->
-    <section class="social-section">
-        <div class="section-header">
-            <h2>Connect With Us</h2>
-            <p>Reach out to our leadership team directly via official communication lines.</p>
-        </div>
-        <div class="social-grid">
-            <a href="https://instagram.com/just_silent.hues" target="_blank" class="social-btn">📸 Instagram (@just_silent.hues)</a>
-            <a href="https://wa.me/919925527617" target="_blank" class="social-btn">💬 WhatsApp (+91 99255 27617)</a>
-            <a href="https://t.me/" target="_blank" class="social-btn">✈️ Telegram Channel</a>
-            <a href="https://youtube.com/" target="_blank" class="social-btn">▶️ YouTube Channel</a>
-        </div>
-    </section>
+            <!-- UI IMAGE -->
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4 style="color:var(--cyan);">AETHER TECH</h4>
-                <p style="font-size:13px; line-height:1.7;">Next-generation enterprise digital ecosystems, software automation systems, and academic coaching frameworks engineered for scale.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Navigation</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Solutions</h4>
-                <ul>
-                    <li><a href="#services">Web Development</a></li>
-                    <li><a href="#services">AI Automation</a></li>
-                    <li><a href="#infra">Surat HQ</a></li>
-                    <li><a href="#estimator">Cost Estimator</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Direct Reach</h4>
-                <p style="font-size:13px; margin-bottom:8px;">WhatsApp: +91 99255 27617</p>
-                <p style="font-size:13px;">Instagram: @just_silent.hues</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 Aether Tech Corporation. All Rights Reserved. Surat Operations Headquarters.</p>
-        </div>
-    </footer>
+            <div class="slide">
 
-    <!-- Interactive Scripts -->
-    <script>
-        // Theme Switcher Logic
-        const themeBtn = document.getElementById('themeBtn');
-        themeBtn.addEventListener('click', () => {
-            document.documentElement.classList.toggle('light');
-            themeBtn.textContent = document.documentElement.classList.contains('light') ? '🌙 Dark' : '☀️ Light';
+                <img
+                    src="assets/ui.jpg"
+                    alt="Modern user interface design">
+
+                <div class="slide-content">
+
+                    <div class="slide-number">
+                        03 / UI ENGINEERING
+                    </div>
+
+                    <h3>
+                        Modern UI / UX Systems
+                    </h3>
+
+                    <p>
+                        Clean, responsive and conversion-focused
+                        interfaces built for websites,
+                        dashboards and digital products.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- TEAM IMAGE -->
+
+            <div class="slide">
+
+                <img
+                    src="assets/team.jpg"
+                    alt="Technology development team">
+
+                <div class="slide-content">
+
+                    <div class="slide-number">
+                        04 / DEVELOPMENT
+                    </div>
+
+                    <h3>
+                        Development & Support
+                    </h3>
+
+                    <p>
+                        Structured development workflows,
+                        maintenance and continuous technical
+                        improvement for digital projects.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="slider-controls">
+
+                <button
+                    class="slider-dot active"
+                    onclick="showSlide(0)"
+                    aria-label="Slide 1">
+                </button>
+
+                <button
+                    class="slider-dot"
+                    onclick="showSlide(1)"
+                    aria-label="Slide 2">
+                </button>
+
+                <button
+                    class="slider-dot"
+                    onclick="showSlide(2)"
+                    aria-label="Slide 3">
+                </button>
+
+                <button
+                    class="slider-dot"
+                    onclick="showSlide(3)"
+                    aria-label="Slide 4">
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     TRUST / VALUE STRIP
+========================= -->
+
+<div class="trust-strip reveal">
+
+    <div class="trust-card">
+        <span>01</span>
+        <strong>Full-Stack Development</strong>
+    </div>
+
+    <div class="trust-card">
+        <span>02</span>
+        <strong>AI & Automation</strong>
+    </div>
+
+    <div class="trust-card">
+        <span>03</span>
+        <strong>Modern UI / UX</strong>
+    </div>
+
+    <div class="trust-card">
+        <span>04</span>
+        <strong>Technical Support</strong>
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SERVICES
+========================= -->
+
+<section id="services">
+
+<div class="section-container">
+
+    <div class="section-heading reveal">
+
+        <span class="section-label">
+            Capabilities
+        </span>
+
+        <h2>
+            Technology built around
+            real business needs.
+        </h2>
+
+        <p>
+            From websites and web applications to automation,
+            interfaces and technology platforms, our solutions
+            are designed to be practical, scalable and easy to use.
+        </p>
+
+    </div>
+
+
+    <div class="services-grid">
+
+
+        <div class="service-card reveal">
+
+            <div class="service-number">01</div>
+
+            <h3>
+                Full-Stack Web Development
+            </h3>
+
+            <p>
+                Responsive websites and web applications
+                built with clean frontend architecture and
+                scalable backend systems.
+            </p>
+
+            <div class="tags">
+                <span>HTML5</span>
+                <span>CSS3</span>
+                <span>JavaScript</span>
+                <span>React</span>
+                <span>Node</span>
+            </div>
+
+        </div>
+
+
+        <div class="service-card reveal">
+
+            <div class="service-number">02</div>
+
+            <h3>
+                AI & Webhook Automation
+            </h3>
+
+            <p>
+                Automated workflows, bots, API integrations
+                and intelligent systems that reduce repetitive
+                work and improve digital operations.
+            </p>
+
+            <div class="tags">
+                <span>Python</span>
+                <span>APIs</span>
+                <span>Webhooks</span>
+                <span>Bots</span>
+                <span>Automation</span>
+            </div>
+
+        </div>
+
+
+        <div class="service-card reveal">
+
+            <div class="service-number">03</div>
+
+            <h3>
+                UI / UX Engineering
+            </h3>
+
+            <p>
+                Premium user interfaces with clear navigation,
+                responsive layouts, modern visual systems and
+                strong usability.
+            </p>
+
+            <div class="tags">
+                <span>Figma</span>
+                <span>UI Systems</span>
+                <span>SaaS</span>
+                <span>Responsive</span>
+            </div>
+
+        </div>
+
+
+        <div class="service-card reveal">
+
+            <div class="service-number">04</div>
+
+            <h3>
+                Academic Technology
+            </h3>
+
+            <p>
+                Structured academic platforms, learning modules,
+                worksheets, evaluation systems and technology
+                solutions for education.
+            </p>
+
+            <div class="tags">
+                <span>EdTech</span>
+                <span>Learning</span>
+                <span>Worksheets</span>
+                <span>Tracking</span>
+            </div>
+
+        </div>
+
+
+        <div class="service-card reveal">
+
+            <div class="service-number">05</div>
+
+            <h3>
+                Cloud & Infrastructure
+            </h3>
+
+            <p>
+                Technology infrastructure planning, backend
+                architecture, server management and performance
+                focused digital systems.
+            </p>
+
+            <div class="tags">
+                <span>Cloud</span>
+                <span>Servers</span>
+                <span>Security</span>
+                <span>Backend</span>
+            </div>
+
+        </div>
+
+
+        <div class="service-card reveal">
+
+            <div class="service-number">06</div>
+
+            <h3>
+                Business Tools & Ledgers
+            </h3>
+
+            <p>
+                Digital tools for tracking, structured data,
+                financial workflows, spreadsheets and internal
+                business operations.
+            </p>
+
+            <div class="tags">
+                <span>Google Sheets</span>
+                <span>Automation</span>
+                <span>Data</span>
+                <span>Dashboards</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     SHOWCASE
+========================= -->
+
+<section id="showcase" class="showcase">
+
+<div class="section-container">
+
+    <div class="section-heading reveal">
+
+        <span class="section-label">
+            Visual Showcase
+        </span>
+
+        <h2>
+            Built for modern
+            digital environments.
+        </h2>
+
+        <p>
+            A visual look at the technology environments,
+            development spaces and infrastructure represented
+            across the Aether Tech platform.
+        </p>
+
+    </div>
+
+
+    <div class="showcase-grid">
+
+
+        <div class="showcase-card reveal">
+
+            <img
+                src="assets/hq.jpg"
+                alt="Aether Tech headquarters"
+                loading="lazy">
+
+            <div class="showcase-overlay">
+
+                <div>
+
+                    <h3>
+                        Corporate Headquarters
+                    </h3>
+
+                    <p>
+                        Central operations and client execution
+                        environment.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="showcase-card reveal">
+
+            <img
+                src="assets/room.jpg"
+                alt="Development and research studio"
+                loading="lazy">
+
+            <div class="showcase-overlay">
+
+                <div>
+
+                    <h3>
+                        Development & R&D Studio
+                    </h3>
+
+                    <p>
+                        A focused environment for development,
+                        testing and technical workflows.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     WHY AETHER
+========================= -->
+
+<section>
+
+<div class="section-container">
+
+    <div class="why-grid">
+
+        <div class="why-image reveal">
+
+            <img
+                src="assets/team.jpg"
+                alt="Aether Tech development team"
+                loading="lazy">
+
+        </div>
+
+
+        <div class="why-content reveal">
+
+            <span class="section-label">
+                Why Aether Tech
+            </span>
+
+            <h2>
+                Technology that looks
+                premium and works reliably.
+            </h2>
+
+            <p>
+                Every digital experience should be easy to
+                understand, visually strong and technically
+                structured. Our approach combines design,
+                development and automation into one workflow.
+            </p>
+
+
+            <div class="features">
+
+                <div class="feature">
+                    <strong>Clean Architecture</strong>
+                    <span>
+                        Structured and maintainable development
+                        for long-term improvements.
+                    </span>
+                </div>
+
+                <div class="feature">
+                    <strong>Responsive by Design</strong>
+                    <span>
+                        Interfaces designed for desktop,
+                        tablet and mobile users.
+                    </span>
+                </div>
+
+                <div class="feature">
+                    <strong>Automation Ready</strong>
+                    <span>
+                        APIs, workflows and automation can be
+                        integrated into digital systems.
+                    </span>
+                </div>
+
+                <div class="feature">
+                    <strong>Client Focused</strong>
+                    <span>
+                        Clear interfaces and practical solutions
+                        designed around actual requirements.
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     PROCESS
+========================= -->
+
+<section id="process">
+
+<div class="section-container">
+
+    <div class="section-heading reveal">
+
+        <span class="section-label">
+            Our Process
+        </span>
+
+        <h2>
+            From idea to digital product.
+        </h2>
+
+        <p>
+            A simple and transparent workflow keeps every
+            project organized from initial discussion to launch.
+        </p>
+
+    </div>
+
+
+    <div class="process-grid">
+
+        <div class="process-card reveal">
+
+            <div class="process-number">
+                01
+            </div>
+
+            <h3>
+                Discover
+            </h3>
+
+            <p>
+                Understand the requirement, goals and
+                expected outcome.
+            </p>
+
+        </div>
+
+
+        <div class="process-card reveal">
+
+            <div class="process-number">
+                02
+            </div>
+
+            <h3>
+                Design
+            </h3>
+
+            <p>
+                Create the visual direction, structure and
+                user experience.
+            </p>
+
+        </div>
+
+
+        <div class="process-card reveal">
+
+            <div class="process-number">
+                03
+            </div>
+
+            <h3>
+                Develop
+            </h3>
+
+            <p>
+                Build the frontend, backend and required
+                integrations.
+            </p>
+
+        </div>
+
+
+        <div class="process-card reveal">
+
+            <div class="process-number">
+                04
+            </div>
+
+            <h3>
+                Launch
+            </h3>
+
+            <p>
+                Test, optimize and prepare the final digital
+                experience for deployment.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ESTIMATOR
+========================= -->
+
+<section id="estimator" class="estimator">
+
+<div class="section-container">
+
+    <div class="section-heading reveal">
+
+        <span class="section-label">
+            Interactive Estimator
+        </span>
+
+        <h2>
+            Build your required solution.
+        </h2>
+
+        <p>
+            Select the services you need and instantly view
+            the estimated investment.
+        </p>
+
+    </div>
+
+
+    <div class="calculator reveal">
+
+
+        <div class="calc-row">
+
+            <label class="calc-label">
+
+                <input
+                    type="checkbox"
+                    value="15000"
+                    class="service-check">
+
+                Full-Stack Web Application
+
+            </label>
+
+            <span class="calc-price">
+                ₹15,000
+            </span>
+
+        </div>
+
+
+        <div class="calc-row">
+
+            <label class="calc-label">
+
+                <input
+                    type="checkbox"
+                    value="25000"
+                    class="service-check">
+
+                Custom AI Bot & Automation
+
+            </label>
+
+            <span class="calc-price">
+                ₹25,000
+            </span>
+
+        </div>
+
+
+        <div class="calc-row">
+
+            <label class="calc-label">
+
+                <input
+                    type="checkbox"
+                    value="30000"
+                    class="service-check">
+
+                SaaS Dashboard UI / UX
+
+            </label>
+
+            <span class="calc-price">
+                ₹30,000
+            </span>
+
+        </div>
+
+
+        <div class="calc-row">
+
+            <label class="calc-label">
+
+                <input
+                    type="checkbox"
+                    value="20000"
+                    class="service-check">
+
+                Academic Platform
+
+            </label>
+
+            <span class="calc-price">
+                ₹20,000
+            </span>
+
+        </div>
+
+
+        <div class="calc-row">
+
+            <label class="calc-label">
+
+                <input
+                    type="checkbox"
+                    value="10000"
+                    class="service-check">
+
+                Cloud Maintenance & Support
+
+            </label>
+
+            <span class="calc-price">
+                ₹10,000
+            </span>
+
+        </div>
+
+
+        <div class="total">
+
+            Estimated Investment
+
+            <strong id="total">
+                ₹0
+            </strong>
+
+        </div>
+
+
+        <div style="text-align:center;margin-top:25px;">
+
+            <a
+                href="https://wa.me/919925527617"
+                target="_blank"
+                class="btn btn-primary">
+
+                Discuss This Requirement ↗
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FAQ
+========================= -->
+
+<section id="faq">
+
+<div class="section-container">
+
+    <div class="section-heading reveal">
+
+        <span class="section-label">
+            FAQ
+        </span>
+
+        <h2>
+            Frequently asked questions.
+        </h2>
+
+        <p>
+            Quick answers to common questions about our
+            digital solutions and workflow.
+        </p>
+
+    </div>
+
+
+    <div class="faq reveal">
+
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                What services does Aether Tech provide?
+
+                <span>+</span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                Aether Tech focuses on modern websites,
+                web applications, AI automation, UI/UX,
+                academic technology platforms, cloud
+                infrastructure and business tools.
+
+            </div>
+
+        </div>
+
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                Are the website images locally hosted?
+
+                <span>+</span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                Yes. The visual assets used by this website
+                are referenced from the local assets folder,
+                including logo.png, servers.jpg, lab.jpg,
+                ui.jpg, team.jpg, hq.jpg and room.jpg.
+
+            </div>
+
+        </div>
+
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                Is the website mobile responsive?
+
+                <span>+</span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                Yes. The layout automatically adapts for
+                desktop, tablet and mobile screen sizes,
+                including a dedicated mobile navigation menu.
+
+            </div>
+
+        </div>
+
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                Can additional features be integrated later?
+
+                <span>+</span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                Yes. The structure is designed so additional
+                pages, APIs, dashboards, automation workflows,
+                forms and backend functionality can be added
+                later.
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section id="contact">
+
+<div class="section-container">
+
+    <div class="contact-box reveal">
+
+        <span class="section-label">
+            Start a Conversation
+        </span>
+
+        <h2>
+            Have a project in mind?
+        </h2>
+
+        <p>
+            Let's discuss your requirement and find the right
+            digital solution for your business, organization
+            or technology project.
+        </p>
+
+
+        <div class="contact-actions">
+
+            <a
+                href="https://wa.me/919925527617"
+                target="_blank"
+                class="btn btn-primary">
+
+                Chat on WhatsApp ↗
+
+            </a>
+
+
+            <a
+                href="https://instagram.com/just_silent.hues"
+                target="_blank"
+                class="btn btn-outline">
+
+                Instagram ↗
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<div class="footer-grid">
+
+
+    <div class="footer-brand">
+
+        <a href="#home" class="logo">
+
+            <img
+                src="assets/logo.png"
+                alt="Aether Tech Logo">
+
+            <div class="logo-text">
+
+                <strong>
+                    AETHER TECH
+                </strong>
+
+                <span>
+                    DIGITAL ENGINEERING
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <p>
+            Next-generation digital solutions combining
+            web engineering, automation, interface design
+            and technology-driven systems.
+        </p>
+
+    </div>
+
+
+    <div class="footer-col">
+
+        <h4>
+            Navigation
+        </h4>
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#services">
+            Services
+        </a>
+
+        <a href="#showcase">
+            Showcase
+        </a>
+
+        <a href="#process">
+            Process
+        </a>
+
+    </div>
+
+
+    <div class="footer-col">
+
+        <h4>
+            Solutions
+        </h4>
+
+        <a href="#services">
+            Web Development
+        </a>
+
+        <a href="#services">
+            AI Automation
+        </a>
+
+        <a href="#services">
+            UI / UX
+        </a>
+
+        <a href="#estimator">
+            Pricing
+        </a>
+
+    </div>
+
+
+    <div class="footer-col">
+
+        <h4>
+            Connect
+        </h4>
+
+        <a
+            href="https://wa.me/919925527617"
+            target="_blank">
+
+            WhatsApp
+        </a>
+
+        <a
+            href="https://instagram.com/just_silent.hues"
+            target="_blank">
+
+            Instagram
+        </a>
+
+        <a href="#contact">
+            Start a Project
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<div class="footer-bottom">
+
+    <span>
+        © 2026 Aether Tech. All Rights Reserved.
+    </span>
+
+    <span>
+        Surat, Gujarat, India
+    </span>
+
+</div>
+
+</footer>
+
+
+<!-- BACK TO TOP -->
+
+<button
+    class="back-top"
+    id="backTop"
+    aria-label="Back to top">
+
+    ↑
+
+</button>
+
+
+<script>
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+const menuBtn = document.getElementById("menuBtn");
+const mainNav = document.getElementById("mainNav");
+
+menuBtn.addEventListener("click", () => {
+
+    mainNav.classList.toggle("open");
+
+    menuBtn.textContent =
+        mainNav.classList.contains("open")
+        ? "×"
+        : "☰";
+
+});
+
+
+document.querySelectorAll("#mainNav a").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        mainNav.classList.remove("open");
+
+        menuBtn.textContent = "☰";
+
+    });
+
+});
+
+
+/* =========================
+   THEME SWITCHER
+========================= */
+
+const themeBtn =
+    document.getElementById("themeBtn");
+
+themeBtn.addEventListener("click", () => {
+
+    document.documentElement.classList.toggle("light");
+
+    const light =
+        document.documentElement.classList.contains("light");
+
+    themeBtn.textContent =
+        light ? "☾" : "☼";
+
+    localStorage.setItem(
+        "aether-theme",
+        light ? "light" : "dark"
+    );
+
+});
+
+
+/* LOAD SAVED THEME */
+
+if(
+    localStorage.getItem("aether-theme")
+    === "light"
+){
+
+    document.documentElement.classList.add("light");
+
+    themeBtn.textContent = "☾";
+
+}
+
+
+/* =========================
+   HERO SLIDER
+========================= */
+
+const slides =
+    document.querySelectorAll(".slide");
+
+const dots =
+    document.querySelectorAll(".slider-dot");
+
+let currentSlide = 0;
+
+let sliderTimer;
+
+
+function showSlide(index){
+
+    slides.forEach(slide => {
+
+        slide.classList.remove("active");
+
+    });
+
+    dots.forEach(dot => {
+
+        dot.classList.remove("active");
+
+    });
+
+
+    slides[index].classList.add("active");
+
+    dots[index].classList.add("active");
+
+    currentSlide = index;
+
+}
+
+
+function nextSlide(){
+
+    currentSlide =
+        (currentSlide + 1) % slides.length;
+
+    showSlide(currentSlide);
+
+}
+
+
+function startSlider(){
+
+    clearInterval(sliderTimer);
+
+    sliderTimer =
+        setInterval(nextSlide,5000);
+
+}
+
+
+startSlider();
+
+
+const slider =
+    document.getElementById("slider");
+
+
+slider.addEventListener(
+    "mouseenter",
+    () => clearInterval(sliderTimer)
+);
+
+
+slider.addEventListener(
+    "mouseleave",
+    startSlider
+);
+
+
+/* =========================
+   TOUCH SWIPE
+========================= */
+
+let touchStartX = 0;
+
+let touchEndX = 0;
+
+
+slider.addEventListener(
+    "touchstart",
+    event => {
+
+        touchStartX =
+            event.changedTouches[0].screenX;
+
+    },
+    {passive:true}
+);
+
+
+slider.addEventListener(
+    "touchend",
+    event => {
+
+        touchEndX =
+            event.changedTouches[0].screenX;
+
+        const difference =
+            touchStartX - touchEndX;
+
+
+        if(Math.abs(difference) > 50){
+
+            if(difference > 0){
+
+                nextSlide();
+
+            }else{
+
+                currentSlide =
+                    (currentSlide - 1 + slides.length)
+                    % slides.length;
+
+                showSlide(currentSlide);
+
+            }
+
+        }
+
+    },
+    {passive:true}
+);
+
+
+/* =========================
+   PRICING CALCULATOR
+========================= */
+
+const checkboxes =
+    document.querySelectorAll(".service-check");
+
+const total =
+    document.getElementById("total");
+
+
+function calculateTotal(){
+
+    let amount = 0;
+
+
+    checkboxes.forEach(box => {
+
+        if(box.checked){
+
+            amount +=
+                Number(box.value);
+
+        }
+
+    });
+
+
+    total.textContent =
+        "₹" + amount.toLocaleString("en-IN");
+
+}
+
+
+checkboxes.forEach(box => {
+
+    box.addEventListener(
+        "change",
+        calculateTotal
+    );
+
+});
+
+
+/* =========================
+   FAQ
+========================= */
+
+const faqItems =
+    document.querySelectorAll(".faq-item");
+
+
+faqItems.forEach(item => {
+
+    const question =
+        item.querySelector(".faq-question");
+
+
+    question.addEventListener("click", () => {
+
+        const alreadyOpen =
+            item.classList.contains("active");
+
+
+        faqItems.forEach(other => {
+
+            other.classList.remove("active");
+
         });
 
-        // FAQ Toggle
-        function toggleFaq(element) {
-            const item = element.parentElement;
-            item.classList.toggle('active');
+
+        if(!alreadyOpen){
+
+            item.classList.add("active");
+
         }
 
-        // Price Estimator Logic
-        function calculateCost() {
-            let total = 0;
-            const checkboxes = document.querySelectorAll('.calc-box input[type="checkbox"]');
-            checkboxes.forEach(cb => {
-                if(cb.checked) total += parseInt(cb.value);
+    });
+
+});
+
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+const revealElements =
+    document.querySelectorAll(".reveal");
+
+
+const revealObserver =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if(entry.isIntersecting){
+
+                    entry.target.classList.add("visible");
+
+                    revealObserver.unobserve(
+                        entry.target
+                    );
+
+                }
+
             });
-            document.getElementById('totalDisplay').innerText = "Estimated Valuation: ₹" + total.toLocaleString('en-IN');
+
+        },
+        {
+            threshold:.12
         }
+    );
 
-        // Image Carousel Logic
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot-btn');
-        let currentSlide = 0;
 
-        function showSlide(index) {
-            slides.forEach(s => s.classList.remove('active'));
-            dots.forEach(d => d.classList.remove('active'));
-            
-            slides[index].classList.add('active');
-            dots[index].classList.add('active');
-            currentSlide = index;
-        }
+revealElements.forEach(element => {
 
-        function nextSlide() {
-            let next = (currentSlide + 1) % slides.length;
-            showSlide(next);
-        }
+    revealObserver.observe(element);
 
-        function setSlide(index) {
-            showSlide(index);
-        }
+});
 
-        setInterval(nextSlide, 4000);
 
-        // Canvas Particle Background Animation
-        const canvas = document.getElementById('bgCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+/* =========================
+   ACTIVE NAVIGATION
+========================= */
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+const sections =
+    document.querySelectorAll("main section[id]");
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2.5 + 0.5;
-                this.speedX = Math.random() * 0.6 - 0.3;
-                this.speedY = Math.random() * 0.6 - 0.3;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(6, 182, 212, 0.4)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
+const navLinks =
+    document.querySelectorAll("nav a");
 
-        for (let i = 0; i < 60; i++) {
-            particles.push(new Particle());
-        }
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
+const navObserver =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if(entry.isIntersecting){
+
+                    navLinks.forEach(link => {
+
+                        link.classList.remove("active");
+
+                        if(
+                            link.getAttribute("href")
+                            === "#" + entry.target.id
+                        ){
+
+                            link.classList.add("active");
+
+                        }
+
+                    });
+
+                }
+
             });
-            requestAnimationFrame(animateParticles);
+
+        },
+        {
+            rootMargin:"-35% 0px -55% 0px"
         }
-        animateParticles();
-    </script>
+    );
+
+
+sections.forEach(section => {
+
+    navObserver.observe(section);
+
+});
+
+
+/* =========================
+   BACK TO TOP
+========================= */
+
+const backTop =
+    document.getElementById("backTop");
+
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        if(window.scrollY > 600){
+
+            backTop.classList.add("show");
+
+        }else{
+
+            backTop.classList.remove("show");
+
+        }
+
+    }
+);
+
+
+backTop.addEventListener(
+    "click",
+    () => {
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    }
+);
+
+</script>
+
 </body>
 </html>
