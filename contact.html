@@ -1,1 +1,2294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Contact Us | AETHER TECH</title>
+
+<meta name="description"
+content="Contact AETHER TECH for web development, AI automation, UI/UX design, cloud infrastructure and digital technology solutions.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+   ROOT
+========================= */
+
+:root{
+    --bg:#020617;
+    --bg2:#07111f;
+    --card:rgba(15,23,42,.78);
+    --border:rgba(255,255,255,.09);
+
+    --text:#f8fafc;
+    --muted:#94a3b8;
+
+    --cyan:#06b6d4;
+    --blue:#3b82f6;
+    --purple:#a855f7;
+
+    --green:#22c55e;
+
+    --shadow:0 25px 70px rgba(0,0,0,.35);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Plus Jakarta Sans",sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%,rgba(59,130,246,.12),transparent 30%),
+        radial-gradient(circle at 90% 20%,rgba(168,85,247,.10),transparent 30%),
+        var(--bg);
+
+    color:var(--text);
+    line-height:1.6;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-2;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+
+    background-size:50px 50px;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.top-bar{
+    padding:8px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:#01040c;
+    border-bottom:1px solid var(--border);
+
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:1px;
+    color:var(--muted);
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.status-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 12px var(--green);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:999;
+
+    min-height:76px;
+    padding:13px 5%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:25px;
+
+    background:rgba(2,6,23,.78);
+    backdrop-filter:blur(22px);
+
+    border-bottom:1px solid var(--border);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+}
+
+.logo img{
+    width:44px;
+    height:44px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+    border:1px solid var(--cyan);
+
+    box-shadow:0 0 20px rgba(6,182,212,.25);
+}
+
+.logo-title{
+    font-size:17px;
+    font-weight:800;
+    letter-spacing:1px;
+    color:white;
+}
+
+.logo-sub{
+    display:block;
+
+    color:var(--cyan);
+
+    font-size:7px;
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+nav a{
+    position:relative;
+
+    color:var(--muted);
+
+    text-decoration:none;
+
+    font-size:10px;
+    font-weight:800;
+
+    letter-spacing:1px;
+    text-transform:uppercase;
+
+    transition:.3s;
+}
+
+nav a::after{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:-9px;
+
+    width:0;
+    height:2px;
+
+    background:linear-gradient(
+        90deg,
+        var(--purple),
+        var(--cyan)
+    );
+
+    transition:.3s;
+}
+
+nav a:hover,
+nav a.active{
+    color:var(--cyan);
+}
+
+nav a:hover::after,
+nav a.active::after{
+    width:100%;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:11px 18px;
+
+    border-radius:11px;
+
+    font-size:10px;
+    font-weight:800;
+
+    text-decoration:none;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.btn-primary{
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            var(--cyan)
+        );
+
+    box-shadow:
+        0 0 25px rgba(168,85,247,.25);
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 0 35px rgba(6,182,212,.35);
+}
+
+.btn-outline{
+    color:var(--text);
+
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,.03);
+}
+
+.btn-outline:hover{
+    border-color:var(--cyan);
+    transform:translateY(-3px);
+}
+
+.menu-btn{
+    display:none;
+
+    width:42px;
+    height:42px;
+
+    border-radius:10px;
+
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,.03);
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+}
+
+
+/* =========================
+   TICKER
+========================= */
+
+.ticker{
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7c3aed,
+            #0891b2,
+            #2563eb
+        );
+}
+
+.ticker-content{
+    padding:9px 0;
+
+    text-align:center;
+
+    color:white;
+
+    font-size:8px;
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    padding:90px 5% 75px;
+
+    text-align:center;
+
+    border-bottom:1px solid var(--border);
+}
+
+.badge{
+    display:inline-flex;
+
+    padding:7px 14px;
+
+    border-radius:30px;
+
+    color:var(--cyan);
+
+    background:rgba(6,182,212,.07);
+
+    border:1px solid rgba(6,182,212,.35);
+
+    font-size:9px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+.hero h1{
+    max-width:900px;
+
+    margin:20px auto;
+
+    font-family:"Cinzel",serif;
+
+    font-size:clamp(42px,6vw,68px);
+
+    line-height:1.05;
+}
+
+.gradient{
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            var(--cyan),
+            var(--blue)
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+.hero p{
+    max-width:700px;
+
+    margin:auto;
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    line-height:1.9;
+}
+
+
+/* =========================
+   MAIN CONTACT SECTION
+========================= */
+
+.contact-section{
+    padding:80px 5%;
+}
+
+.contact-wrapper{
+    max-width:1180px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:.75fr 1.25fr;
+
+    gap:25px;
+}
+
+
+/* =========================
+   INFO CARDS
+========================= */
+
+.contact-info{
+    display:grid;
+    gap:15px;
+}
+
+.info-card{
+    padding:25px;
+
+    border-radius:19px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    backdrop-filter:blur(15px);
+
+    transition:.3s;
+}
+
+.info-card:hover{
+    transform:translateY(-5px);
+
+    border-color:var(--cyan);
+
+    box-shadow:var(--shadow);
+}
+
+.info-icon{
+    width:45px;
+    height:45px;
+
+    display:grid;
+    place-items:center;
+
+    margin-bottom:15px;
+
+    border-radius:12px;
+
+    background:rgba(6,182,212,.08);
+
+    border:1px solid rgba(6,182,212,.2);
+
+    color:var(--cyan);
+
+    font-size:13px;
+    font-weight:800;
+}
+
+.info-label{
+    color:var(--purple);
+
+    font-size:8px;
+
+    font-weight:800;
+
+    letter-spacing:1.5px;
+}
+
+.info-card h3{
+    margin:4px 0 7px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:19px;
+}
+
+.info-card p{
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:1.8;
+}
+
+.info-card a{
+    display:inline-block;
+
+    margin-top:7px;
+
+    color:var(--cyan);
+
+    font-size:10px;
+
+    font-weight:800;
+
+    text-decoration:none;
+}
+
+.info-card a:hover{
+    text-decoration:underline;
+}
+
+
+/* =========================
+   FORM CARD
+========================= */
+
+.form-card{
+    padding:32px;
+
+    border-radius:22px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:var(--shadow);
+}
+
+.form-label{
+    color:var(--cyan);
+
+    font-size:8px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+.form-card h2{
+    margin:7px 0 8px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:31px;
+}
+
+.form-description{
+    color:var(--muted);
+
+    font-size:10px;
+
+    margin-bottom:25px;
+}
+
+.form-grid{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
+}
+
+.field{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:7px;
+}
+
+.field.full{
+    grid-column:1/-1;
+}
+
+.field label{
+    color:var(--muted);
+
+    font-size:9px;
+
+    font-weight:800;
+
+    letter-spacing:.7px;
+}
+
+.field input,
+.field select,
+.field textarea{
+
+    width:100%;
+
+    padding:13px 14px;
+
+    border-radius:10px;
+
+    border:1px solid var(--border);
+
+    outline:none;
+
+    background:rgba(255,255,255,.035);
+
+    color:white;
+
+    font-size:10px;
+
+    transition:.25s;
+}
+
+.field input::placeholder,
+.field textarea::placeholder{
+    color:#64748b;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+    border-color:var(--cyan);
+
+    box-shadow:
+        0 0 0 3px rgba(6,182,212,.08);
+}
+
+.field select option{
+    background:#0f172a;
+    color:white;
+}
+
+.field textarea{
+    min-height:135px;
+
+    resize:vertical;
+}
+
+.form-bottom{
+    margin-top:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.form-note{
+    max-width:430px;
+
+    color:#64748b;
+
+    font-size:8px;
+
+    line-height:1.6;
+}
+
+.form-note strong{
+    color:var(--cyan);
+}
+
+
+/* =========================
+   CONTACT CHANNELS
+========================= */
+
+.channels-section{
+    padding:80px 5%;
+
+    border-top:1px solid var(--border);
+}
+
+.section-heading{
+    max-width:700px;
+
+    margin:0 auto 40px;
+
+    text-align:center;
+}
+
+.section-heading span{
+    color:var(--cyan);
+
+    font-size:8px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+.section-heading h2{
+    margin:8px 0 10px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:35px;
+}
+
+.section-heading p{
+    color:var(--muted);
+
+    font-size:11px;
+
+    line-height:1.8;
+}
+
+.channels-grid{
+    max-width:1180px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:16px;
+}
+
+.channel-card{
+    padding:28px;
+
+    border-radius:18px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    transition:.3s;
+}
+
+.channel-card:hover{
+    transform:translateY(-5px);
+
+    border-color:var(--cyan);
+}
+
+.channel-card h3{
+    margin:10px 0 6px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:18px;
+}
+
+.channel-card p{
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:1.7;
+
+    margin-bottom:15px;
+}
+
+.channel-card a{
+    color:var(--cyan);
+
+    font-size:9px;
+
+    font-weight:800;
+
+    letter-spacing:.8px;
+}
+
+
+/* =========================
+   LOCATION
+========================= */
+
+.location-section{
+    padding:80px 5%;
+
+    border-top:1px solid var(--border);
+}
+
+.location-wrapper{
+    max-width:1180px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:22px;
+}
+
+.location-image{
+    min-height:340px;
+
+    border-radius:22px;
+
+    border:1px solid var(--border);
+
+    overflow:hidden;
+
+    position:relative;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(2,6,23,.95),
+            rgba(2,6,23,.05)
+        ),
+        url("assets/hq.jpg") center/cover;
+}
+
+.location-content{
+    position:absolute;
+
+    left:27px;
+    right:27px;
+    bottom:25px;
+}
+
+.location-content small{
+    color:var(--cyan);
+
+    font-size:8px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+.location-content h3{
+    margin:5px 0;
+
+    font-family:"Cinzel",serif;
+
+    font-size:25px;
+}
+
+.location-content p{
+    color:#cbd5e1;
+
+    font-size:10px;
+}
+
+.availability{
+    padding:30px;
+
+    border-radius:22px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+}
+
+.availability h3{
+    margin:8px 0 17px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:22px;
+}
+
+.availability-row{
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    padding:13px 0;
+
+    border-bottom:1px solid var(--border);
+
+    font-size:10px;
+}
+
+.availability-row:last-child{
+    border-bottom:0;
+}
+
+.availability-row span:first-child{
+    color:var(--muted);
+}
+
+.availability-row span:last-child{
+    color:var(--cyan);
+
+    font-weight:800;
+
+    text-align:right;
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.cta-section{
+    padding:75px 5%;
+}
+
+.cta{
+    max-width:1180px;
+
+    margin:auto;
+
+    padding:45px;
+
+    border-radius:24px;
+
+    border:1px solid rgba(6,182,212,.3);
+
+    background:
+        radial-gradient(
+            circle at 85% 10%,
+            rgba(6,182,212,.13),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(168,85,247,.13),
+            transparent 30%
+        ),
+        var(--card);
+}
+
+.cta h2{
+    margin:7px 0 10px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:42px;
+}
+
+.cta p{
+    max-width:700px;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    margin-bottom:20px;
+}
+
+.cta-buttons{
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    padding:55px 5% 25px;
+
+    border-top:1px solid var(--border);
+
+    background:#01040c;
+}
+
+.footer-grid{
+    max-width:1180px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:1.5fr 1fr 1fr 1fr;
+
+    gap:30px;
+
+    padding-bottom:35px;
+}
+
+.footer-column h4{
+    margin-bottom:14px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:13px;
+}
+
+.footer-column p,
+.footer-column a{
+    display:block;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:1.8;
+
+    margin-bottom:8px;
+
+    text-decoration:none;
+}
+
+.footer-column a:hover{
+    color:var(--cyan);
+}
+
+.footer-bottom{
+    max-width:1180px;
+
+    margin:auto;
+
+    padding-top:20px;
+
+    border-top:1px solid var(--border);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    color:#64748b;
+
+    font-size:9px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+    nav{
+        gap:14px;
+    }
+
+    .contact-wrapper{
+        grid-template-columns:1fr;
+    }
+
+    .channels-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:820px){
+
+    .top-bar{
+        display:none;
+    }
+
+    .header-actions .btn{
+        display:none;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    nav{
+
+        position:absolute;
+
+        top:73px;
+
+        left:5%;
+        right:5%;
+
+        display:none;
+
+        flex-direction:column;
+
+        gap:0;
+
+        padding:12px;
+
+        border-radius:16px;
+
+        border:1px solid var(--border);
+
+        background:rgba(2,6,23,.97);
+
+        backdrop-filter:blur(20px);
+    }
+
+    nav.open{
+        display:flex;
+    }
+
+    nav a{
+        padding:12px 10px;
+    }
+
+    nav a::after{
+        display:none;
+    }
+
+    .location-wrapper{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:560px){
+
+    .logo-title{
+        font-size:14px;
+    }
+
+    .logo img{
+        width:40px;
+        height:40px;
+    }
+
+    .hero{
+        padding:60px 5%;
+    }
+
+    .hero h1{
+        font-size:43px;
+    }
+
+    .hero p{
+        font-size:11px;
+    }
+
+    .contact-section,
+    .channels-section,
+    .location-section{
+        padding:60px 5%;
+    }
+
+    .form-card{
+        padding:23px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .field.full{
+        grid-column:auto;
+    }
+
+    .form-bottom{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .form-bottom .btn{
+        width:100%;
+    }
+
+    .channels-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section-heading h2{
+        font-size:29px;
+    }
+
+    .cta{
+        padding:30px 23px;
+    }
+
+    .cta h2{
+        font-size:30px;
+    }
+
+    .cta-buttons{
+        flex-direction:column;
+    }
+
+    .cta-buttons .btn{
+        width:100%;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+
+        text-align:center;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     TOP STATUS BAR
+========================= -->
+
+<div class="top-bar">
+
+    <div class="status">
+        <span class="status-dot"></span>
+        SYSTEM STATUS: 100% OPERATIONAL
+    </div>
+
+    <div>
+        SURAT OPERATIONS HQ • GUJARAT, INDIA
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <a href="index.html" class="logo">
+
+        <img
+            src="assets/logo.png"
+            alt="AETHER TECH Logo"
+        >
+
+        <div>
+
+            <div class="logo-title">
+                AETHER TECH
+            </div>
+
+            <span class="logo-sub">
+                ENTERPRISE PLATFORM
+            </span>
+
+        </div>
+
+    </a>
+
+
+    <nav id="mainNav">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="services.html">
+            Services
+        </a>
+
+        <a href="about.html">
+            About Us
+        </a>
+
+        <a href="infrastructure.html">
+            Infrastructure
+        </a>
+
+        <a href="pricing.html">
+            Pricing
+        </a>
+
+        <a href="faq.html">
+            FAQ
+        </a>
+
+        <a href="contact.html" class="active">
+            Contact
+        </a>
+
+    </nav>
+
+
+    <div class="header-actions">
+
+        <a
+            href="https://wa.me/919925527617"
+            target="_blank"
+            class="btn btn-primary"
+        >
+            WhatsApp ↗
+        </a>
+
+        <button
+            class="menu-btn"
+            id="menuBtn"
+        >
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     TICKER
+========================= -->
+
+<div class="ticker">
+
+    <div class="ticker-content">
+
+        ✦ AETHER TECH • PROJECT ENQUIRIES • WEB DEVELOPMENT • AI AUTOMATION • UI / UX • CLOUD INFRASTRUCTURE • DIGITAL BUSINESS TOOLS ✦
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <span class="badge">
+        LET'S CONNECT
+    </span>
+
+    <h1>
+
+        Let's build something
+        <span class="gradient">
+            remarkable.
+        </span>
+
+    </h1>
+
+    <p>
+
+        Have a project, business requirement or technology idea?
+        Tell us what you need and start a direct conversation with
+        AETHER TECH.
+
+    </p>
+
+</section>
+
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section class="contact-section">
+
+<div class="contact-wrapper">
+
+
+    <!-- LEFT -->
+
+    <div class="contact-info">
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                WA
+            </div>
+
+            <span class="info-label">
+                FASTEST CHANNEL
+            </span>
+
+            <h3>
+                WhatsApp
+            </h3>
+
+            <p>
+                For quick enquiries, project discussions
+                and direct communication.
+            </p>
+
+            <a
+                href="https://wa.me/919925527617"
+                target="_blank"
+            >
+                +91 99255 27617 →
+            </a>
+
+        </div>
+
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                @
+            </div>
+
+            <span class="info-label">
+                SOCIAL CHANNEL
+            </span>
+
+            <h3>
+                Instagram
+            </h3>
+
+            <p>
+                Connect with AETHER TECH through
+                our social media presence.
+            </p>
+
+            <a
+                href="https://instagram.com/just_silent.hues"
+                target="_blank"
+            >
+                @just_silent.hues →
+            </a>
+
+        </div>
+
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                HQ
+            </div>
+
+            <span class="info-label">
+                OPERATIONS
+            </span>
+
+            <h3>
+                Surat, Gujarat
+            </h3>
+
+            <p>
+                AETHER TECH operates from
+                Surat, Gujarat, India.
+            </p>
+
+        </div>
+
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                ✓
+            </div>
+
+            <span class="info-label">
+                PROJECT ENQUIRIES
+            </span>
+
+            <h3>
+                Ready to discuss?
+            </h3>
+
+            <p>
+                Share your project scope, requirements,
+                expected features and timeline through
+                the enquiry form.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- RIGHT FORM -->
+
+    <div class="form-card">
+
+        <span class="form-label">
+            PROJECT ENQUIRY
+        </span>
+
+        <h2>
+            Tell us about your project.
+        </h2>
+
+        <p class="form-description">
+            Fill in the details below and your enquiry
+            will be prepared for WhatsApp.
+        </p>
+
+
+        <form id="contactForm">
+
+
+            <div class="form-grid">
+
+
+                <div class="field">
+
+                    <label>
+                        FULL NAME *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Your name"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="field">
+
+                    <label>
+                        PHONE / WHATSAPP *
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="+91 XXXXX XXXXX"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="field">
+
+                    <label>
+                        EMAIL
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="you@example.com"
+                    >
+
+                </div>
+
+
+
+                <div class="field">
+
+                    <label>
+                        SERVICE REQUIRED *
+                    </label>
+
+                    <select id="service" required>
+
+                        <option value="">
+                            Select a service
+                        </option>
+
+                        <option>
+                            Web Development
+                        </option>
+
+                        <option>
+                            AI & Automation
+                        </option>
+
+                        <option>
+                            UI / UX Design
+                        </option>
+
+                        <option>
+                            Cloud Infrastructure
+                        </option>
+
+                        <option>
+                            Academic Technology
+                        </option>
+
+                        <option>
+                            Digital Business Tools
+                        </option>
+
+                        <option>
+                            Custom Technology Solution
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="field">
+
+                    <label>
+                        PROJECT SCALE
+                    </label>
+
+                    <select id="scale">
+
+                        <option value="">
+                            Select option
+                        </option>
+
+                        <option>
+                            Small / Starter
+                        </option>
+
+                        <option>
+                            Business Project
+                        </option>
+
+                        <option>
+                            Enterprise Project
+                        </option>
+
+                        <option>
+                            Not Decided Yet
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="field">
+
+                    <label>
+                        EXPECTED TIMELINE
+                    </label>
+
+                    <select id="timeline">
+
+                        <option value="">
+                            Select timeline
+                        </option>
+
+                        <option>
+                            Urgent
+                        </option>
+
+                        <option>
+                            1–2 Weeks
+                        </option>
+
+                        <option>
+                            1 Month
+                        </option>
+
+                        <option>
+                            1–3 Months
+                        </option>
+
+                        <option>
+                            Flexible
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="field full">
+
+                    <label>
+                        PROJECT DETAILS *
+                    </label>
+
+                    <textarea
+                        id="message"
+                        placeholder="Tell us what you want to build, the features you need and any important requirements..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-bottom">
+
+                <div class="form-note">
+
+                    <strong>Privacy note:</strong>
+                    Do not share passwords, OTPs,
+                    payment PINs or confidential credentials.
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Send Enquiry via WhatsApp ↗
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     CHANNELS
+========================= -->
+
+<section class="channels-section">
+
+    <div class="section-heading">
+
+        <span>
+            DIRECT CHANNELS
+        </span>
+
+        <h2>
+            Choose how you want to connect.
+        </h2>
+
+        <p>
+            For the fastest response, WhatsApp is recommended
+            for project enquiries and requirement discussions.
+        </p>
+
+    </div>
+
+
+
+    <div class="channels-grid">
+
+
+        <div class="channel-card">
+
+            <div class="info-icon">
+                WA
+            </div>
+
+            <h3>
+                WhatsApp
+            </h3>
+
+            <p>
+                Direct project communication and
+                quick requirement discussions.
+            </p>
+
+            <a
+                href="https://wa.me/919925527617"
+                target="_blank"
+            >
+                OPEN WHATSAPP →
+            </a>
+
+        </div>
+
+
+
+        <div class="channel-card">
+
+            <div class="info-icon">
+                @
+            </div>
+
+            <h3>
+                Instagram
+            </h3>
+
+            <p>
+                Connect with AETHER TECH through
+                our social presence.
+            </p>
+
+            <a
+                href="https://instagram.com/just_silent.hues"
+                target="_blank"
+            >
+                OPEN INSTAGRAM →
+            </a>
+
+        </div>
+
+
+
+        <div class="channel-card">
+
+            <div class="info-icon">
+                ↗
+            </div>
+
+            <h3>
+                Project Brief
+            </h3>
+
+            <p>
+                Send a structured project enquiry
+                using the form above.
+            </p>
+
+            <a href="#contactForm">
+                START ENQUIRY →
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     LOCATION
+========================= -->
+
+<section class="location-section">
+
+<div class="location-wrapper">
+
+
+    <div class="location-image">
+
+        <div class="location-content">
+
+            <small>
+                OPERATIONS HEADQUARTERS
+            </small>
+
+            <h3>
+                Surat, Gujarat
+            </h3>
+
+            <p>
+                AETHER TECH • Gujarat, India
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="availability">
+
+        <span class="form-label">
+            AVAILABILITY
+        </span>
+
+        <h3>
+            Operations & Communication
+        </h3>
+
+
+        <div class="availability-row">
+
+            <span>
+                Location
+            </span>
+
+            <span>
+                Surat, Gujarat
+            </span>
+
+        </div>
+
+
+        <div class="availability-row">
+
+            <span>
+                Country
+            </span>
+
+            <span>
+                India
+            </span>
+
+        </div>
+
+
+        <div class="availability-row">
+
+            <span>
+                Primary Channel
+            </span>
+
+            <span>
+                WhatsApp
+            </span>
+
+        </div>
+
+
+        <div class="availability-row">
+
+            <span>
+                Project Discussion
+            </span>
+
+            <span>
+                By Enquiry
+            </span>
+
+        </div>
+
+
+        <div class="availability-row">
+
+            <span>
+                System Status
+            </span>
+
+            <span>
+                ● Operational
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section class="cta-section">
+
+<div class="cta">
+
+    <span class="form-label">
+        EXPLORE AETHER TECH
+    </span>
+
+    <h2>
+        Not ready to contact yet?
+    </h2>
+
+    <p>
+        Explore our services, infrastructure, pricing
+        and frequently asked questions before starting
+        your project discussion.
+    </p>
+
+
+    <div class="cta-buttons">
+
+        <a
+            href="services.html"
+            class="btn btn-primary"
+        >
+            Explore Services →
+        </a>
+
+        <a
+            href="pricing.html"
+            class="btn btn-outline"
+        >
+            View Pricing ↗
+        </a>
+
+        <a
+            href="faq.html"
+            class="btn btn-outline"
+        >
+            Read FAQ ↗
+        </a>
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<div class="footer-grid">
+
+
+    <div class="footer-column">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+
+            <img
+                src="assets/logo.png"
+                alt="AETHER TECH Logo"
+            >
+
+            <div>
+
+                <div class="logo-title">
+                    AETHER TECH
+                </div>
+
+                <span class="logo-sub">
+                    ENTERPRISE PLATFORM
+                </span>
+
+            </div>
+
+        </a>
+
+        <p style="margin-top:14px;">
+
+            Next-generation enterprise digital ecosystems,
+            software automation systems and academic
+            technology frameworks.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="footer-column">
+
+        <h4>
+            Navigation
+        </h4>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="services.html">
+            Services
+        </a>
+
+        <a href="about.html">
+            About Us
+        </a>
+
+        <a href="infrastructure.html">
+            Infrastructure
+        </a>
+
+        <a href="pricing.html">
+            Pricing
+        </a>
+
+        <a href="faq.html">
+            FAQ
+        </a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+    </div>
+
+
+
+    <div class="footer-column">
+
+        <h4>
+            Solutions
+        </h4>
+
+        <a href="services.html">
+            Web Development
+        </a>
+
+        <a href="services.html">
+            AI Automation
+        </a>
+
+        <a href="services.html">
+            UI / UX Design
+        </a>
+
+        <a href="services.html">
+            Academic Technology
+        </a>
+
+        <a href="infrastructure.html">
+            Cloud Infrastructure
+        </a>
+
+    </div>
+
+
+
+    <div class="footer-column">
+
+        <h4>
+            Direct Reach
+        </h4>
+
+        <a
+            href="https://wa.me/919925527617"
+            target="_blank"
+        >
+            WhatsApp: +91 99255 27617
+        </a>
+
+        <a
+            href="https://instagram.com/just_silent.hues"
+            target="_blank"
+        >
+            Instagram: @just_silent.hues
+        </a>
+
+        <a href="#contactForm">
+            Start a Project
+        </a>
+
+    </div>
+
+
+</div>
+
+
+
+<div class="footer-bottom">
+
+    <span>
+        © 2026 AETHER TECH. All Rights Reserved.
+    </span>
+
+    <span>
+        Surat Operations Headquarters • Gujarat, India
+    </span>
+
+</div>
+
+</footer>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+/* MOBILE MENU */
+
+const menuBtn =
+document.getElementById("menuBtn");
+
+const mainNav =
+document.getElementById("mainNav");
+
+menuBtn.addEventListener("click",function(){
+
+    mainNav.classList.toggle("open");
+
+    if(mainNav.classList.contains("open")){
+
+        menuBtn.textContent="×";
+
+    }else{
+
+        menuBtn.textContent="☰";
+
+    }
+
+});
+
+
+/* CLOSE MENU AFTER CLICK */
+
+document
+.querySelectorAll("#mainNav a")
+.forEach(function(link){
+
+    link.addEventListener("click",function(){
+
+        mainNav.classList.remove("open");
+
+        menuBtn.textContent="☰";
+
+    });
+
+});
+
+
+
+/* WHATSAPP CONTACT FORM */
+
+document
+.getElementById("contactForm")
+.addEventListener("submit",function(event){
+
+    event.preventDefault();
+
+
+    const name =
+    document.getElementById("name").value.trim();
+
+    const phone =
+    document.getElementById("phone").value.trim();
+
+    const email =
+    document.getElementById("email").value.trim();
+
+    const service =
+    document.getElementById("service").value;
+
+    const scale =
+    document.getElementById("scale").value || "Not specified";
+
+    const timeline =
+    document.getElementById("timeline").value || "Not specified";
+
+    const message =
+    document.getElementById("message").value.trim();
+
+
+    const whatsappMessage =
+
+`Hello AETHER TECH,
+
+*New Project Enquiry*
+
+Name: ${name}
+
+Phone / WhatsApp: ${phone}
+
+Email: ${email || "Not provided"}
+
+Service Required: ${service}
+
+Project Scale: ${scale}
+
+Expected Timeline: ${timeline}
+
+Project Details:
+${message}`;
+
+
+    const whatsappURL =
+
+    "https://wa.me/919925527617?text=" +
+    encodeURIComponent(whatsappMessage);
+
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+});
+
+
+</script>
+
+
+</body>
+</html>
